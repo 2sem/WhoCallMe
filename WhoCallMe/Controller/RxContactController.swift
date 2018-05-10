@@ -44,7 +44,7 @@ class RxContactController : NSObject{
         //let andPredicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [predicate, NSPredicate.init(format: "imageDataAvailable == true")]);
         
         print("Contacts Default Container ID[\(containerID)]");
-        return Observable<[CNContact]>.create { (observer) -> Disposable in
+        return Observable<[CNContact]>.create { [unowned self](observer) -> Disposable in
             do{
                 let contacts = try self.contactStore.unifiedContacts(matching: predicate, keysToFetch: keysToFetch);
                 //contacts.last?.imageDataAvailable
