@@ -1,0 +1,54 @@
+/* 
+  Messages.strings
+  WhoCallMe
+
+  Created by 영준 이 on 2016. 3. 19..
+  Copyright © 2016년 leesam. All rights reserved.
+*/
+STATUS_BAK_DATA="Bakcup source data";
+STATUS_FIND_BAK_DATA="Find source data";
+STATUS_CHECK_BAK_DATA="Check source data";
+STATUS_CREATE_IMAGE="Create ringing image";
+STATUS_CREATE_INDEX="Create search keyword";
+STATUS_SAVE_CONTACT="Save contact data";
+STATUS_SAVE_DATA="Save data";
+
+STATUS_PROCESSED="Contacts processed";
+
+STATUS_CONVERTING="Converting";
+STATUS_CONVERTED="Converted";
+
+STATUS_RESTORING="Restoring";
+STATUS_RESTORED="Restored";
+
+STATUS_CLEARING="Clearing";
+STATUS_CLEARED="Cleared";
+
+STATUS_STOPPED="Stopped";
+
+WARN="Warning";
+
+WARN_CLEAR_PHOTOS_MSG="Clear photos for your all contacts";
+WARN_CLEAR_PHOTOS_CLEAR="Clear";
+
+WARN_RESTORE_CONTACTS_MSG="Restore all contacts to before converting";
+WARN_RESTORE_CONTACTS_RESTORE="Restore";
+
+ERR_NO_BAK_CONTACTS="No contact is backed up";
+
+CANCEL="Cancel";
+
+ERROR="Error";
+
+OK="OK";
+
+STOP="Stop";
+
+MSG_PLEASE_ALLOW_APP_CONTACTS="Please allow the app to access your contacts through the Settings";
+
+SETTINGS="Settings";
+
+Notification="Notification";
+
+"Converting has been completed"="Converting has been completed";
+

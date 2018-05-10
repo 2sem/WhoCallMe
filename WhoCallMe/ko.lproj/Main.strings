@@ -1,0 +1,78 @@
+/* Class = "UILabel"; text = "Organization Name"; ObjectID = "0Ye-7D-8Oy"; */
+"0Ye-7D-8Oy.text" = "조직 명";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "8Kz-vd-mBI"; */
+"8Kz-vd-mBI.text" = "Label";
+
+/* Class = "UILabel"; text = "Converted"; ObjectID = "nNJ-9l-3wI"; */
+"nNJ-9l-3wI.text" = "변환됨";
+
+/* Class = "UILabel"; text = "Department Name"; ObjectID = "Fcf-6d-mOh"; */
+"Fcf-6d-mOh.text" = "부서 명";
+
+/* Class = "UILabel"; text = "Job Title"; ObjectID = "Gg5-Em-6cL"; */
+"Gg5-Em-6cL.text" = "직책 명";
+
+/* Class = "UIButton"; normalTitle = "Convert"; ObjectID = "HNT-3K-nl2"; */
+"HNT-3K-nl2.normalTitle" = "변환";
+
+/* Class = "UIButton"; title = "Stop"; ObjectID = "HNT-3K-nl2"; */
+"HNT-3K-nl2.title" = "중지";
+
+/* Class = "UITextField"; text = "01022066032"; ObjectID = "HST-hJ-3iP"; */
+"HST-hJ-3iP.text" = "01022066032";
+
+/* Class = "UILabel"; text = "Mobile Phone"; ObjectID = "JR1-5l-cFY"; */
+"JR1-5l-cFY.text" = "휴대전화";
+
+/* Class = "UILabel"; text = "Home Management"; ObjectID = "L5u-8U-5wm"; */
+"L5u-8U-5wm.text" = "Home Management";
+
+/* Class = "UILabel"; text = "Test Name 123456789012345678901234567890"; ObjectID = "Lgh-T2-kWA"; */
+"Lgh-T2-kWA.text" = "Test Name 123456789012345678901234567890";
+
+/* Class = "UILabel"; text = "Department : "; ObjectID = "M8g-I9-OZ6"; */
+"M8g-I9-OZ6.text" = "부서 : ";
+
+/* Class = "UINavigationItem"; title = "Preview"; ObjectID = "W00-cF-Tqi"; */
+"W00-cF-Tqi.title" = "미리보기";
+
+/* Class = "UIButton"; normalTitle = "Selective"; ObjectID = "ZdL-Vf-bis"; */
+"ZdL-Vf-bis.normalTitle" = "선택한 연락처 변환";
+
+/* Class = "UIButton"; normalTitle = "Preview"; ObjectID = "c8Y-Nw-s1m"; */
+"c8Y-Nw-s1m.normalTitle" = "미리보기";
+
+/* Class = "UILabel"; text = "Target"; ObjectID = "eJ5-XZ-25S"; */
+"eJ5-XZ-25S.text" = "Target";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "g3E-wf-UYK"; */
+"g3E-wf-UYK.text" = "Label";
+
+/* Class = "UILabel"; text = "JobTitle : "; ObjectID = "iHP-Im-rQf"; */
+"iHP-Im-rQf.text" = "직 책 : ";
+
+/* Class = "UILabel"; text = "Thumbnail Photo"; ObjectID = "mX1-y6-GjA"; */
+"mX1-y6-GjA.text" = "작은사진";
+
+/* Class = "UILabel"; text = "Home"; ObjectID = "n0B-qv-kG7"; */
+"n0B-qv-kG7.text" = "Home";
+
+/* Class = "UILabel"; text = "Oganization : "; ObjectID = "qmN-ic-3IX"; */
+"qmN-ic-3IX.text" = "조 직 : ";
+
+/* Class = "UILabel"; text = "Master"; ObjectID = "sbx-J1-8K5"; */
+"sbx-J1-8K5.text" = "Master";
+
+/* Class = "UILabel"; normalTitle = "Clear All Photos"; ObjectID = "zavZ-Tr-0IL"; */
+"avZ-Tr-0IL.text" = "모든 사진 삭제";
+
+/* Class = "UILabel"; text = "Restore Contacts"; ObjectID = "vWe-6x-orI"; */
+"vWe-6x-orI.text" = "연락처 복원";
+
+/* Class = "UILabel"; text = "Deny"; ObjectID = "RuX-TH-xuP"; */
+"RuX-TH-xuP.text" = "거절";
+
+/* Class = "UILabel"; text = "Response"; ObjectID = "WQy-rQ-SCa"; */
+"WQy-rQ-SCa.text" = "응답";
+

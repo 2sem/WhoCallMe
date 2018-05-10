@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MainViewController.applyToTemplate(ContactTemplateViewController, contact : CNContact, needBackup : Bool, needSync : Bool) -&gt; OriginalContract?:MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "originalContact?.imageData">
+            </PersistentString>
+            <PersistentString
+               value = "UIImage(data: contact.imageData!).size">
+            </PersistentString>
+            <PersistentString
+               value = "contact.imageData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContactTemplateViewController.useThumbNail.didset:ContactTemplateViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "img_background">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainViewController.viewDidLoad() -&gt; ():MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.googleBannerView.adUnitID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContactTemplateViewController.useThumbNail.setter:ContactTemplateViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.img_background?.image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LSCircleProgressView.draw(_:):LSCircleProgressView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ctx.boundingBoxOfClipPath">
+            </PersistentString>
+            <PersistentString
+               value = "self.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "specialized MainViewController.(generate([CNContact]) -&gt; ()).(closure #3):MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "target?.imageData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainViewController.generateIndex(CNMutableContact, original : OriginalContract?) -&gt; ():MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "original?.generatedNickname">
+            </PersistentString>
+            <PersistentString
+               value = "original?.nickname">
+            </PersistentString>
+            <PersistentString
+               value = "&quot;\(original?.nickname)&quot;">
+            </PersistentString>
+            <PersistentString
+               value = "contact.nickname">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

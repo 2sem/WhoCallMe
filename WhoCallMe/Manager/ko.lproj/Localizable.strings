@@ -1,0 +1,53 @@
+/* 
+  Messages.strings
+  WhoCallMe
+
+  Created by 영준 이 on 2016. 3. 19..
+  Copyright © 2016년 leesam. All rights reserved.
+*/
+STATUS_BAK_DATA="원본 백업 중...";
+STATUS_FIND_BAK_DATA="원본 찾는 중...";
+STATUS_CHECK_BAK_DATA="원본 확인 중...";
+STATUS_CREATE_IMAGE="이미지 생성 중...";
+STATUS_CREATE_INDEX="초성 검색 키워드 생성 중 ...";
+STATUS_SAVE_CONTACT="연락처 저장 중...";
+STATUS_SAVE_DATA="데이터 저장 중...";
+
+STATUS_PROCESSED="연락처가 처리됨";
+
+STATUS_CONVERTING="변환 중";
+STATUS_CONVERTED="변환됨";
+
+STATUS_RESTORING="복구 중";
+STATUS_RESTORED="복구됨";
+
+STATUS_CLEARING="삭제 중";
+STATUS_CLEARED="삭제됨";
+
+STATUS_STOPPED="중단됨";
+
+WARN="경고";
+
+WARN_CLEAR_PHOTOS_MSG="모든 연락처의 사진을 삭제합니다.";
+WARN_CLEAR_PHOTOS_CLEAR="삭제 진행";
+
+WARN_RESTORE_CONTACTS_MSG="변환전 상태로 복원합니다.";
+WARN_RESTORE_CONTACTS_RESTORE="복원";
+
+ERR_NO_BAK_CONTACTS="백업된 연락처가 없습니다.";
+
+CANCEL="취소";
+
+ERROR="오류";
+
+OK="확인";
+
+STOP="중지";
+
+MSG_PLEASE_ALLOW_APP_CONTACTS="설정에서 앱의 연락처 접근을 허용해 주세요";
+
+SETTINGS="설정";
+
+Notification="알림";
+
+"Converting has been completed"="변환이 완료되었습니다";

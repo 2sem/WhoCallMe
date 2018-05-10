@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  WhoCallMe
+
+  Created by 영준 이 on 2016. 4. 19..
+  Copyright © 2016년 leesam. All rights reserved.
+*/
+CFBundleDisplayName = "누군지다알아";
+CFBundleName = "누군지다알아";
+NSContactsUsageDescription = "변환을 위해 연락처 접근이 필요합니다";

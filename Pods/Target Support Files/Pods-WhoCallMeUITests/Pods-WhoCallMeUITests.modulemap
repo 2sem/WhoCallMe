@@ -1,0 +1,6 @@
+framework module Pods_WhoCallMeUITests {
+  umbrella header "Pods-WhoCallMeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
