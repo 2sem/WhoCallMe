@@ -13,7 +13,7 @@ class BaseOptionCell: UITableViewCell {
     var optionValue : Bool{
         get{
             var value = false;
-            DispatchQueue.main.syncInMain {
+            DispatchQueue.main.syncInMain { [unowned self] in
                 value = self.optionValueSwitch.isOn;
             }
             

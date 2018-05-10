@@ -28,7 +28,6 @@
 		2C3D5DBD1C93090900BF2B5F /* ContactTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D5DBC1C93090900BF2B5F /* ContactTemplateViewController.swift */; };
 		2C3E215B1E9F067B00A493F5 /* Y2K.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 2C3E215A1E9F067B00A493F5 /* Y2K.PNG */; };
 		2C3E215D1E9F0DCA00A493F5 /* Icons8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3E215C1E9F0DCA00A493F5 /* Icons8.png */; };
-		2C4D1E0D1C992B1000BDE34E /* LS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D1E0C1C992B1000BDE34E /* LS.swift */; };
 		2C4E48831C9136E900CC4BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4E48821C9136E900CC4BA5 /* AppDelegate.swift */; };
 		2C4E48881C9136E900CC4BA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4E48861C9136E900CC4BA5 /* Main.storyboard */; };
 		2C4E488B1C9136E900CC4BA5 /* WhoCallMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C4E48891C9136E900CC4BA5 /* WhoCallMe.xcdatamodeld */; };
@@ -117,7 +116,6 @@
 		2C3D5DBC1C93090900BF2B5F /* ContactTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTemplateViewController.swift; sourceTree = "<group>"; };
 		2C3E215A1E9F067B00A493F5 /* Y2K.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Y2K.PNG; sourceTree = "<group>"; };
 		2C3E215C1E9F0DCA00A493F5 /* Icons8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icons8.png; sourceTree = "<group>"; };
-		2C4D1E0C1C992B1000BDE34E /* LS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LS.swift; sourceTree = "<group>"; };
 		2C4E487F1C9136E900CC4BA5 /* WhoCallMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhoCallMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4E48821C9136E900CC4BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C4E48871C9136E900CC4BA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -396,7 +394,6 @@
 			isa = PBXGroup;
 			children = (
 				2C20BD5A1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift */,
-				2C4D1E0C1C992B1000BDE34E /* LS.swift */,
 				2C8DD9A21CC1CDC20063BB92 /* LSCircleProgressView.swift */,
 				2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */,
 				2C07E4F41E234DF500CDFC32 /* GADBannerView+.swift */,
@@ -675,7 +672,6 @@
 				2C4E48B61C913B7400CC4BA5 /* MainViewController.swift in Sources */,
 				2C649D5C1C9418EC005C26A3 /* BaseOptionCell.swift in Sources */,
 				2C649D491C93C078005C26A3 /* ContactDeptCell.swift in Sources */,
-				2C4D1E0D1C992B1000BDE34E /* LS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstialManagerDeleg
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext();
+        //self.saveContext();
     }
     
     // MARK: GADInterstialManagerDelegate
@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstialManagerDeleg
         return urls.last!
     }()
 
-    lazy var managedObjectModel: NSManagedObjectModel = {
+    /*lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = Bundle.main.url(forResource: "WhoCallMe", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
@@ -164,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstialManagerDeleg
                 abort()
             }
         }
-    }
+    }*/
 
 }
 

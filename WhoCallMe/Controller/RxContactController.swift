@@ -40,11 +40,14 @@ class RxContactController : NSObject{
     func requestContacts(_ keysToFetch: [CNKeyDescriptor], identifiers: [String]? = nil) -> Observable<[CNContact]>{
         let containerID = self.contactStore.defaultContainerIdentifier();
         let predicate = identifiers != nil ? CNContact.predicateForContacts(withIdentifiers: identifiers!) : CNContact.predicateForContactsInContainer(withIdentifier: containerID);
+        print("contacts predicate => \(predicate)");
+        //let andPredicate = NSCompoundPredicate.init(andPredicateWithSubpredicates: [predicate, NSPredicate.init(format: "imageDataAvailable == true")]);
         
         print("Contacts Default Container ID[\(containerID)]");
         return Observable<[CNContact]>.create { (observer) -> Disposable in
             do{
                 let contacts = try self.contactStore.unifiedContacts(matching: predicate, keysToFetch: keysToFetch);
+                //contacts.last?.imageDataAvailable
                 observer.onNext(contacts);
                 observer.onCompleted();
             }catch let error{

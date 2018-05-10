@@ -103,6 +103,8 @@ class GADInterstialManager : NSObject, GADInterstitialDelegate{
         }
         
         print("create new full ad");
+        
+        self.fullAd?.delegate = nil;
         self.fullAd = GADInterstitial(adUnitID: self.unitId);
         self.fullAd?.delegate = self;
         let req = GADRequest();

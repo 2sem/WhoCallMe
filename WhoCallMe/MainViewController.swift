@@ -24,19 +24,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var constraint_bottomBanner_Bottom : NSLayoutConstraint!;
     var constraint_bottomBanner_Top : NSLayoutConstraint!;
     
-    let WhoCallMeSearchTagBegin = "<WhoCallMe>";
-    let WhoCallMeSearchTagEnd = "</WhoCallMe>";
-    func getWhoCallMeSearchTagRange(_ text : String) -> Range<String.Index>?{
-        var value : Range<String.Index>?;
-        
-        guard let rangeBegin = text.range(of: WhoCallMeSearchTagBegin),
-            let rangeEnd = text.range(of: WhoCallMeSearchTagEnd, options: .backwards) else{
-            return value;
-        }
-        value = (rangeBegin.lowerBound ..< rangeEnd.upperBound);
-
-        return value;
-    }
+    let WhoCallMeSearchTag = "WhoCallMe";
+    #if DEBUG
+    let enableAds = false;
+    #else
+    let enableAds = true;
+    #endif
     
     enum OptionIndex : Int{
         case thumnail = 0
@@ -179,9 +172,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactImageDataKey as CNKeyDescriptor];
                 
                 return RxContactController.shared.requestContacts(keysToFetch);
-            }).flatMap{ [unowned self]contacts in
+            }).observeOn(MainScheduler.instance)
+            .flatMap{ [unowned self]contacts in
                 return self.askClearPhotos(contacts);
-            }
+            }.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap({ [unowned self](contacts) -> Observable<CNContact> in
                 self.mode.onNext(.clearAll);
                 self.setProcessing(true);
@@ -242,9 +236,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let identifiers = self.modelController.loadContacts().map{ $0.id! };
                 
                 return RxContactController.shared.requestContacts(keysToFetch, identifiers: identifiers);
-            }).flatMap{ [unowned self]contacts in
+            }).observeOn(MainScheduler.instance)
+            .flatMap{ [unowned self]contacts in
                 return self.askRestore(contacts)
-            }
+            }.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap({ [unowned self](contacts) -> Observable<CNContact> in
                 self.mode.onNext(.restoreAll);
                 self.setProcessing(true);
@@ -271,8 +266,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }, onError: { [unowned self](error) in
                 print("load contacts error[\(error)]");
                 self.openContactsSettings();
-            }, onCompleted: {
+            }, onCompleted: { [unowned self] in
                 self.setState(.completed);
+                self.modelController.reset();
                 
                 self.showFullAD();
             })
@@ -297,7 +293,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var googleFullAD : GADInterstitial?;
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //Create constraint to hide bottom banner
         self.constraint_bottomBanner_Top = self.bannerView.topAnchor.constraint(equalTo: self.view.bottomAnchor);
         self.showBanner(visible: false);
@@ -309,7 +305,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //google Bottom AD - leak?
         let req = GADRequest();
-        self.bannerView.load(req);
+        if self.enableAds{
+            self.bannerView.load(req);
+        }
         
         //makes transparent navigation
         self.navigationController?.navigationBar.shadowImage = UIImage();
@@ -472,7 +470,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }, onCompleted: { [unowned self] in
                 print("converting all has been completed");
                 self.setState(.completed);
-
+                self.modelController.reset();
+                
                 guard !self.isConvertingOne else{
                     self.showAlert(title: "Notification".localized(), msg: "Converting has been completed".localized(), actions: [UIAlertAction.init(title: "OK".localized(), style: .default, handler: nil)], style: .alert);
                     return;
@@ -523,7 +522,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     fileprivate func showFullAD(){
-        GADInterstialManager.shared?.show(true);
+        if self.enableAds{
+            GADInterstialManager.shared?.show(true);
+        }
     }
     
     /**
@@ -645,6 +646,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.updateStep(.saveContact);
         value = RxContactController.shared.save(target);
         self.modelController.saveChanges();
+        self.modelController.reset();
         
         self.updateStep(.saveData);
         return value;
@@ -779,7 +781,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             let note = contact.note;
             //Gets position for choSeongs
-            let range = self.getWhoCallMeSearchTagRange(note);
+            let range = note.range(byTag: self.WhoCallMeSearchTag);
             var originalNoteHigh = "";
             var originalNoteLow = "";
             
@@ -796,7 +798,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             //Inserts cho-seongs into memo by wrapping tag
-            contact.note = ("\(originalNoteHigh)\(WhoCallMeSearchTagBegin)\n\(choSeongs)\n\(WhoCallMeSearchTagEnd)\n\(originalNoteLow)");
+            contact.note = ("\(originalNoteHigh)\n\(choSeongs.wrap(byTag: WhoCallMeSearchTag))\n\(originalNoteLow)");
             
             print("choSeongs[\(choSeongs)]");
         }
@@ -830,7 +832,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // MARK: Restores note(memo)
         let note = contact.note;
         //Gets position for choSeongs
-        let range = self.getWhoCallMeSearchTagRange(note);
+        let range = note.range(byTag: self.WhoCallMeSearchTag);
         var originalNoteHigh = "";
         var originalNoteLow = "";
         
@@ -1185,11 +1187,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else{
             Observable<CNContact>.just(contact)
                 .delay(0.1, scheduler: MainScheduler.instance)
-                .flatMapLatest{ self.convert($0) }
+                .flatMapLatest({ [unowned self](contact) -> Observable<Bool> in
+                    return self.convert(contact);
+                })
                 .asDriver(onErrorJustReturn: false)
-                .drive(onNext: { (contact) in
+                .drive(onNext: { [unowned self](contact) in
                     self.setState(.completed);
-                }, onCompleted: {
+                }, onCompleted: { [unowned self] in
                     self.btn_Gen_Select.isUserInteractionEnabled = true;
                 }).disposed(by: self.convertOneBag);
         }
