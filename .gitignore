@@ -1,6 +1,5 @@
 *.xlsx
 # Created by https://www.gitignore.io/api/xcode,swift,cocoapods
-relatedstocks/relatedstocks.plist
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
 
