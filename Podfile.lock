@@ -36,7 +36,8 @@ PODS:
   - KakaoOpenSDK/KakaoOpenSDK (1.8.0)
   - KakaoOpenSDK/KakaoS2 (1.8.0):
     - KakaoOpenSDK/KakaoCommon
-  - LSExtensions (0.0.6)
+  - LSCircleProgressView (0.0.2)
+  - LSExtensions (0.0.7)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -50,12 +51,13 @@ DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - KakaoOpenSDK
-  - LSExtensions (from `~/Projects/leesam/pods/LSExtensions/src/LSExtensions`)
+  - LSCircleProgressView
+  - LSExtensions
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -63,13 +65,11 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
     - GoogleToolboxForMac
     - KakaoOpenSDK
+    - LSCircleProgressView
+    - LSExtensions
     - nanopb
     - RxCocoa
     - RxSwift
-
-EXTERNAL SOURCES:
-  LSExtensions:
-    :path: "~/Projects/leesam/pods/LSExtensions/src/LSExtensions"
 
 SPEC CHECKSUMS:
   Firebase: 4bd804448ab2596794698773d41520a0af101e65
@@ -79,11 +79,12 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 7404f68120ae8682afeb5af001fbf4aad731c78e
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   KakaoOpenSDK: 85dd9e9e4c33d71e5f09e32ca16a114177b8bf44
-  LSExtensions: 49b410e9b87dbfbfbbb5d4b8995758d9d7cb8702
+  LSCircleProgressView: 8631c4fc2cc1218b7d43e31bf337ebe189730718
+  LSExtensions: 06c2c8489dfd399f860241a693448a5322840fb5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
 
-PODFILE CHECKSUM: 98320766cc44e8ef1320d69f21b10c53186d7b6c
+PODFILE CHECKSUM: b9e15bc437fb8bb8f89f87eaf0eb572a0420737c
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

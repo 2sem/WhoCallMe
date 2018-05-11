@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../../leesam/pods/LSExtensions/src/LSExtensions/LSExtensions.xcodeproj">
+      location = "group:../../../../leesam/pods/LSCircleProgressView/src/LSCircleProgressView/LSCircleProgressView.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:WhoCallMe.xcodeproj">

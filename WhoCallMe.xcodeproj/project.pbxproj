@@ -61,7 +61,6 @@
 		2C8DD99D1CC1C2C40063BB92 /* circle_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8DD99C1CC1C2C40063BB92 /* circle_bg.png */; };
 		2C8DD99F1CC1C2C90063BB92 /* circle_btn_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8DD99E1CC1C2C90063BB92 /* circle_btn_normal.png */; };
 		2C8DD9A11CC1C2CF0063BB92 /* circle_btn_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8DD9A01CC1C2CF0063BB92 /* circle_btn_pressed.png */; };
-		2C8DD9A31CC1CDC20063BB92 /* LSCircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DD9A21CC1CDC20063BB92 /* LSCircleProgressView.swift */; };
 		2C8F18EB1CC0C08300A11FAA /* btn_convert_select_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18EA1CC0C08300A11FAA /* btn_convert_select_normal.png */; };
 		2C8F18ED1CC0C08B00A11FAA /* btn_convert_select_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18EC1CC0C08B00A11FAA /* btn_convert_select_pressed.png */; };
 		2C8F18EF1CC0C0AF00A11FAA /* icon_convert_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18EE1CC0C0AF00A11FAA /* icon_convert_select.png */; };
@@ -158,7 +157,7 @@
 		2C8DD99C1CC1C2C40063BB92 /* circle_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_bg.png; sourceTree = "<group>"; };
 		2C8DD99E1CC1C2C90063BB92 /* circle_btn_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_btn_normal.png; sourceTree = "<group>"; };
 		2C8DD9A01CC1C2CF0063BB92 /* circle_btn_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_btn_pressed.png; sourceTree = "<group>"; };
-		2C8DD9A21CC1CDC20063BB92 /* LSCircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSCircleProgressView.swift; sourceTree = "<group>"; };
+		2C8DD9A21CC1CDC20063BB92 /* LSCircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LSCircleProgressView.swift; path = ../../LSCircleProgressView/LSCircleProgressView/LSCircleProgressView.swift; sourceTree = "<group>"; };
 		2C8F18EA1CC0C08300A11FAA /* btn_convert_select_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_convert_select_normal.png; sourceTree = "<group>"; };
 		2C8F18EC1CC0C08B00A11FAA /* btn_convert_select_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_convert_select_pressed.png; sourceTree = "<group>"; };
 		2C8F18EE1CC0C0AF00A11FAA /* icon_convert_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_convert_select.png; sourceTree = "<group>"; };
@@ -652,7 +651,6 @@
 				2C5F8A141C959AD800D8639F /* WCMDataController.swift in Sources */,
 				2C649D5E1C941B69005C26A3 /* OptionPhotoCell.swift in Sources */,
 				2C20BD5B1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift in Sources */,
-				2C8DD9A31CC1CDC20063BB92 /* LSCircleProgressView.swift in Sources */,
 				2C4E48831C9136E900CC4BA5 /* AppDelegate.swift in Sources */,
 				2C649D621C941BB5005C26A3 /* OptionDeptCell.swift in Sources */,
 				2C20BD511F89EC9100CCC5A8 /* WCDefaults.swift in Sources */,

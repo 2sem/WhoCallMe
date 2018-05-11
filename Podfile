@@ -10,8 +10,10 @@ target 'WhoCallMe' do
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
   pod 'KakaoOpenSDK'
-  #pod 'LSExtensions', :path => '~/Projects/leesam/pods/LSExtensions/src/LSExtensions'
   pod 'LSExtensions'
+  #, :path => '~/Projects/leesam/pods/LSExtensions/src/LSExtensions'
+  pod 'LSCircleProgressView'
+  #, :path => '~/Projects/leesam/pods/LSCircleProgressView/src/LSCircleProgressView'
   pod 'RxSwift', '~> 4.0'
   pod 'RxCocoa', '~> 4.0'
   

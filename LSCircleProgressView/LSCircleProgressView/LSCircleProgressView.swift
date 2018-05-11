@@ -9,6 +9,9 @@
 import UIKit
 import CoreGraphics
 
+/**
+     The Circled or Arced ProgressView
+ */
 @IBDesignable
 class LSCircleProgressView: UIView {
 
@@ -30,12 +33,9 @@ class LSCircleProgressView: UIView {
         }
     }
     
-    var padding: Float = 0.0{
-        didSet{
-            
-        }
-    }
-    
+    /**
+        Color for the Progressed Bar
+     */
     @IBInspectable
     var progressTintColor: UIColor! = UIColor.blue{
         didSet{
@@ -43,6 +43,9 @@ class LSCircleProgressView: UIView {
         }
     }
     
+    /**
+        Color for the Progress Track
+    */
     @IBInspectable
     var trackTintColor: UIColor! = UIColor.clear{
         didSet{
@@ -50,6 +53,9 @@ class LSCircleProgressView: UIView {
         }
     }
     
+    /**
+        Width of Progress Bar
+    */
     @IBInspectable
     var barWidth: CGFloat = 20{
         didSet{
@@ -63,13 +69,13 @@ class LSCircleProgressView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
-        
-        /*for view in self.subviews{
-            view.removeFromSuperview();
-        }*/
     }
     
     static let maxAngle : Double = 360.0;
+    
+    /**
+        Start Angle of Progress Bar
+    */
     @IBInspectable
     var startAngle : Double = -90{
         didSet{
@@ -90,6 +96,9 @@ class LSCircleProgressView: UIView {
         }
     }
 
+    /**
+         End Angle of Progress Bar
+     */
     @IBInspectable
     var endAngle : Double = -90 + maxAngle{
         didSet{
@@ -114,6 +123,10 @@ class LSCircleProgressView: UIView {
         case right = 1
         case left = -1
     }
+    
+    /**
+        Direction of Progress Bar
+    */
     var direction : Direction = .right{
         didSet{
             self.setNeedsDisplay();
@@ -137,15 +150,6 @@ class LSCircleProgressView: UIView {
         
         let center = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2);
         
-        //creates track
-        /*ctx.beginPath();
-        ctx.move(to: CGPoint(x: center.x, y: center.y));
-        ctx.addArc(center: center, radius: self.frame.width / 2, startAngle: CGFloat(startRadian), endAngle: CGFloat(endRadian), clockwise: false);
-        
-        ctx.setFillColor(self.trackTintColor.cgColor);
-        ctx.fillPath();
-        ctx.closePath();*/
-        
         // MARK: draw with clipping
         //draw progress
         //ctx.beginPath();
@@ -158,8 +162,6 @@ class LSCircleProgressView: UIView {
         //ctx.addRect(ctx.boundingBoxOfClipPath);
         ctx.clip(using: .evenOdd);
         
-        //ctx.move(to: CGPoint(x: center.x, y: center.y));
-        //ctx.addArc(center: center, radius: self.frame.width / 2, startAngle: CGFloat(startRadian), endAngle: CGFloat(progRadian), clockwise: false);
         let color = self.progressTintColor == nil ? self.tintColor : self.progressTintColor;
         color?.setFill();
         ctx.fill(ctx.boundingBoxOfClipPath);
