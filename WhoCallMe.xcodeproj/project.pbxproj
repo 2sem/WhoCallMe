@@ -157,7 +157,6 @@
 		2C8DD99C1CC1C2C40063BB92 /* circle_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_bg.png; sourceTree = "<group>"; };
 		2C8DD99E1CC1C2C90063BB92 /* circle_btn_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_btn_normal.png; sourceTree = "<group>"; };
 		2C8DD9A01CC1C2CF0063BB92 /* circle_btn_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_btn_pressed.png; sourceTree = "<group>"; };
-		2C8DD9A21CC1CDC20063BB92 /* LSCircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LSCircleProgressView.swift; path = ../../LSCircleProgressView/LSCircleProgressView/LSCircleProgressView.swift; sourceTree = "<group>"; };
 		2C8F18EA1CC0C08300A11FAA /* btn_convert_select_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_convert_select_normal.png; sourceTree = "<group>"; };
 		2C8F18EC1CC0C08B00A11FAA /* btn_convert_select_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_convert_select_pressed.png; sourceTree = "<group>"; };
 		2C8F18EE1CC0C0AF00A11FAA /* icon_convert_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_convert_select.png; sourceTree = "<group>"; };
@@ -393,7 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				2C20BD5A1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift */,
-				2C8DD9A21CC1CDC20063BB92 /* LSCircleProgressView.swift */,
 				2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */,
 				2C07E4F41E234DF500CDFC32 /* GADBannerView+.swift */,
 				2C20BD541F89F08600CCC5A8 /* GADInterstialManager.swift */,
@@ -601,6 +599,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WhoCallMe/Pods-WhoCallMe-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/LSCircleProgressView/LSCircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/LSExtensions/LSExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -609,6 +608,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSCircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",

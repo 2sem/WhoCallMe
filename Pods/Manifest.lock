@@ -36,7 +36,7 @@ PODS:
   - KakaoOpenSDK/KakaoOpenSDK (1.8.0)
   - KakaoOpenSDK/KakaoS2 (1.8.0):
     - KakaoOpenSDK/KakaoCommon
-  - LSCircleProgressView (0.0.2)
+  - LSCircleProgressView (0.0.4)
   - LSExtensions (0.0.7)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -79,7 +79,7 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 7404f68120ae8682afeb5af001fbf4aad731c78e
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   KakaoOpenSDK: 85dd9e9e4c33d71e5f09e32ca16a114177b8bf44
-  LSCircleProgressView: 8631c4fc2cc1218b7d43e31bf337ebe189730718
+  LSCircleProgressView: bed89f5c3e7b29f4791c258c4f0721b2bdd8058c
   LSExtensions: 06c2c8489dfd399f860241a693448a5322840fb5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a

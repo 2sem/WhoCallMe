@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import LSCircleProgressView
 
 extension Reactive where Base: LSCircleProgressView {
     /// Bindable sink for `enabled` property.
