@@ -16,7 +16,7 @@ extension Reactive where Base: LSCircleProgressView {
     var progress: Binder<Float> {
         return Binder(self.base) { control, value in
             print("binding progress => \(value)");
-            control.progress = value
+            control.progress = 1.0;
         }
     }
 }

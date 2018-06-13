@@ -55,10 +55,37 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly, nullable) KOUserMeAccount *account;
 /*!
+ * @property nickname
+ * @abstract 사용자의 닉네임
+ * @discussion properties에서 "nickname" 값을 가져옵니다.<br>
+ *             초기 값은 개발자사이트의 사용자 관리 > 앱 연동 설정에 따라 카카오톡 또는 카카오스토리에 설정된 닉네임으로 저장되며 이후 해당 프로필 정보와 동기화되지 않습니다.
+ *             카카오톡이나 카카오스토리의 최신 프로필 정보를 가져오려면 talkProfileTaskWithCompletionHandler:, storyProfileTaskWithCompletionHandler: 를 이용해주세요.
+ * @seealso properties
+ */
+@property (readonly, nullable) NSString *nickname;
+/*!
+ * @property profileImageURL
+ * @abstract 원본 프로필 이미지 URL
+ * @discussion properties에 있는 "profile_image" 값을 이용하여 생성된 NSURL 인스턴스를 제공합니다.<br>
+ *             초기 값은 개발자사이트의 사용자 관리 > 앱 연동 설정에 따라 카카오톡 또는 카카오스토리에 설정된 프로필 이미지 URL로 저장되며 이후 해당 프로필 정보와 동기화되지 않습니다.
+ *             카카오톡이나 카카오스토리의 최신 프로필 정보를 가져오려면 talkProfileTaskWithCompletionHandler:, storyProfileTaskWithCompletionHandler: 를 이용해주세요.
+ * @seealso properties
+ */
+@property (readonly, nullable) NSURL *profileImageURL;
+/*!
+ * @property thumbnailImageURL
+ * @abstract 썸네일 이미지 URL
+ * @discussion properties에 있는 "thumbnail_image" 값을 이용하여 생성된 NSURL 인스턴스를 제공합니다.<br>
+ *             초기 값은 개발자사이트의 사용자 관리 > 앱 연동 설정에 따라 카카오톡 또는 카카오스토리에 설정된 썸네일 이미지 URL로 저장되며 이후 해당 프로필 정보와 동기화되지 않습니다.
+ *             카카오톡이나 카카오스토리의 최신 프로필 정보를 가져오려면 talkProfileTaskWithCompletionHandler:, storyProfileTaskWithCompletionHandler: 를 이용해주세요.
+ * @seealso properties
+ */
+@property (readonly, nullable) NSURL *thumbnailImageURL;
+/*!
  * @property properties
  * @abstract 앱 별로 제공되는 사용자 정보 데이터베이스
  * @discussion 사용자에 대해 추가 정보를 저장할 수 있도록 데이터베이스를 제공합니다.<br>
- *             개발자사이트의 사용자 관리 > 앱 연동 설정 상태에 따라 카카오톡 또는 카카오스토리에 있는 닉네임과 프로필 이미지 정보를 앱 연결 시점에 복사하여 초기값으로 제공합니다.<br>
+ *             개발자사이트의 사용자 관리 > 앱 연동 설정에 따라 카카오톡 또는 카카오스토리에 있는 닉네임과 프로필 이미지 정보를 앱 연결 시점에 복사하여 초기값으로 제공되며 이후 해당 프로필 정보와 동기화되지 않습니다.<br>
  *             1. nickname : 카카오톡 또는 카카오스토리에 설정된 닉네임<br>
  *             2. profile_image : 프로필 이미지 URL 문자열<br>
  *             3. thumbnail_image : 썸네일 사이즈의 프로필 이미지 URL 문자열
@@ -76,6 +103,44 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+
+/*!
+ * @abstract KOUserAgeRange 연령대 정보
+ * @constant KOUserAgeRangeNull 연령대 값이 없음
+ * @constant KOUserAgeRangeType15 15세~19세
+ * @constant KOUserAgeRangeType20 20세~29세
+ * @constant KOUserAgeRangeType30 30세~39세
+ * @constant KOUserAgeRangeType40 40세~49세
+ * @constant KOUserAgeRangeType50 50세~59세
+ * @constant KOUserAgeRangeType60 60세~69세
+ * @constant KOUserAgeRangeType70 70세~79세
+ * @constant KOUserAgeRangeType80 80세~89세
+ * @constant KOUserAgeRangeType90 90세 이상
+ */
+typedef NS_ENUM(NSUInteger, KOUserAgeRange) {
+    KOUserAgeRangeNull,
+    KOUserAgeRangeType15,
+    KOUserAgeRangeType20,
+    KOUserAgeRangeType30,
+    KOUserAgeRangeType40,
+    KOUserAgeRangeType50,
+    KOUserAgeRangeType60,
+    KOUserAgeRangeType70,
+    KOUserAgeRangeType80,
+    KOUserAgeRangeType90,
+};
+
+/*!
+ * @abstract KOUserGender 성별 정보
+ * @constant KOUserGenderNull 성별 값이 없음
+ * @constant KOUserGenderMale 남자
+ * @constant KOUserGenderFemale 여자
+ */
+typedef NS_ENUM(NSUInteger, KOUserGender) {
+    KOUserGenderNull,
+    KOUserGenderMale,
+    KOUserGenderFemale,
+};
 
 /*!
  * @class KOUserMeAccount
@@ -114,14 +179,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*!
- * @property isKakaoTalkUser
+ * @property isKakaotalkUser
  * @abstract 카카오톡 서비스 가입 여부
- * @discussion 제휴를 통해 권한이 부여된 특정 앱에서만 획득할 수 있습니다. 제휴되어 있지 않은 경우 nil이 반환됩니다.<br>
+ * @discussion 제휴를 통해 권한이 부여된 특정 앱에서만 획득할 수 있습니다. 제휴되어 있지 않은 경우 null이 반환됩니다.<br>
  *             카카오톡 카카오계정 설정에 연결되어 있는 카카오계정은 true가 반환됩니다.<br>
  *             사용자에게 동의를 받지 않았을 경우 null이 반환되며 KOSession의 updateScopes 메소드를 이용하여 사용자로부터 카카오톡 가입 여부에 대한 동의를 받을 수 있습니다.<br>
  *             카카오톡 서비스 가입 여부 scope ID는 "is_kakaotalk_user"입니다.
  */
-@property (readonly) KOOptionalBoolean isKakaoTalkUser;
+@property (readonly) KOOptionalBoolean isKakaotalkUser;
 
 
 
@@ -136,7 +201,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @property hasPhoneNumber
  * @abstract 전화번호 보유 여부
- * @discussion 제휴를 통해 권한이 부여된 특정 앱에서만 획득할 수 있습니다. 제휴되어 있지 않은 경우 nil이 반환됩니다.<br>
+ * @discussion 제휴를 통해 권한이 부여된 특정 앱에서만 획득할 수 있습니다. 제휴되어 있지 않은 경우 null이 반환됩니다.<br>
  *             phoneNumber가 nil이고 hasPhoneNumber가 true이면 KOSession의 updateScopes 메소드를 이용하여 사용자로부터 전화번호 제공에 대한 동의를 받을 수 있습니다.<br>
  *             전화번호 제공동의 scope ID는 "phone_number"입니다.
  * @seealso phoneNumber
@@ -147,14 +212,106 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @property displayID
- * @abstract 디스플레이용으로 제공되는 마스킹 처리된 email 또는 phoneNumber
- * @discussion 제휴를 통해 권한이 부여된 특정 앱에서만 획득할 수 있습니다.
+ * @abstract 카카오계정의 대표 정보. 이메일 또는 전화번호
+ * @discussion 제휴를 통해 권한이 부여된 특정 앱에서만 획득할 수 있습니다. 계정 상태에 이상이 생긴 경우 텍스트 일부가 마스킹 처리되어 반환됩니다.
  * @seealso email
  * @seealso phoneNumber
  */
 @property (readonly, nullable) NSString *displayID;
 
 
+
+/*!
+ * @property ageRange
+ * @abstract 사용자의 연령대 정보
+ * @discussion 카카오계정에 등록된 사용자의 생일 정보를 기반으로 제공됩니다.<br>
+ *             카카오톡 더보기 > 설정 > 개인/보안 > 카카오계정 메뉴로 들어가거나 https://accounts.kakao.com 에 접속하여 정보를 등록할 수 있습니다.
+ * @seealso hasAgeRange
+ */
+@property (readonly) KOUserAgeRange ageRange;
+/*!
+ * @property hasAgeRange
+ * @abstract 카카오계정의 연령대 보유 여부
+ * @discussion birthday가 nil이고 hasBirthday이 true이면 KOSession의 updateScopes 메소드를 이용하여 사용자로부터 연령대 제공에 대한 동의를 받을 수 있습니다.<br>
+ *             연령대 제공동의 scope ID는 "age_range"입니다.
+ * @seealso ageRange
+ */
+@property (readonly) KOOptionalBoolean hasAgeRange;
+/*!
+ * @property birthday
+ * @abstract 사용자의 생일
+ * @discussion 카카오계정에 등록된 사용자의 생일 정보를 기반으로 제공됩니다. (MMDD형식)<br>
+ *             카카오톡 더보기 > 설정 > 개인/보안 > 카카오계정 메뉴로 들어가거나 https://accounts.kakao.com 에 접속하여 정보를 등록할 수 있습니다.
+ * @seealso hasBirthday
+ */
+@property (readonly, nullable) NSString *birthday;
+/*!
+ * @property hasBirthday
+ * @abstract 카카오계정의 생일 보유 여부
+ * @discussion birthday가 nil이고 hasBirthday이 true이면 KOSession의 updateScopes 메소드를 이용하여 사용자로부터 생일 제공에 대한 동의를 받을 수 있습니다.<br>
+ *             생일 제공동의 scope ID는 "birthday"입니다.
+ * @seealso birthday
+ */
+@property (readonly) KOOptionalBoolean hasBirthday;
+/*!
+ * @property gender
+ * @abstract 사용자 카카오계정의 성별
+ * @discussion 카카오계정에 등록된 사용자의 성별 정보가 제공됩니다.<br>
+ *             카카오톡 더보기 > 설정 > 개인/보안 > 카카오계정 메뉴로 들어가거나 https://accounts.kakao.com 에 접속하여 정보를 등록할 수 있습니다.
+ * @seealso hasGender
+ */
+@property (readonly) KOUserGender gender;
+/*!
+ * @property hasGender
+ * @abstract 카카오계정의 성별 보유 여부
+ * @discussion gender가 nil이고 hasGender이 true이면 KOSession의 updateScopes 메소드를 이용하여 사용자로부터 성별 제공에 대한 동의를 받을 수 있습니다.<br>
+ *             생일 제공동의 scope ID는 "gender"입니다.
+ * @seealso gender
+ */
+@property (readonly) KOOptionalBoolean hasGender;
+
+/*!
+ * @method needsScopeAccountEmail
+ * @abstract 이메일을 가져오기 위한 사용자 동의 "account_email" 필요 여부
+ * @seealso email
+ * @seealso updateScopes:completionHandler:
+ */
+- (BOOL)needsScopeAccountEmail;
+/*!
+ * @method needsScopePhoneNumber
+ * @abstract 전화번호를 가져오기 위한 사용자 동의 "phone_number" 필요 여부
+ * @seealso phoneNumber
+ * @seealso updateScopes:completionHandler:
+ */
+- (BOOL)needsScopePhoneNumber;
+/*!
+ * @method needsScopeAgeRange
+ * @abstract 연령대 정보를 가져오기 위한 사용자 동의 "age_range" 필요 여부
+ * @seealso ageRange
+ * @seealso updateScopes:completionHandler:
+ */
+- (BOOL)needsScopeAgeRange;
+/*!
+ * @method needsScopeBirthday
+ * @abstract 생일을 가져오기 위한 사용자 동의 "birthday" 필요 여부
+ * @seealso birthday
+ * @seealso updateScopes:completionHandler:
+ */
+- (BOOL)needsScopeBirthday;
+/*!
+ * @method needsScopeGender
+ * @abstract 성별을 가져오기 위한 사용자 동의 "gender" 필요 여부
+ * @seealso gender
+ * @seealso updateScopes:completionHandler:
+ */
+- (BOOL)needsScopeGender;
+/*!
+ * @method needsScopeIsKakaotalkUser
+ * @abstract 카카오톡 가입 여부를 가져오기 위한 사용자 동의 "is_kakaotalk_user" 필요 여부
+ * @seealso isKakaotalkUser
+ * @seealso updateScopes:completionHandler:
+ */
+- (BOOL)needsScopeIsKakaotalkUser;
 
 - (nonnull NSDictionary<NSString *, id> *)dictionary;
 + (instancetype)accountWithDictionary:(NSDictionary<NSString *, id> *)dictionary;

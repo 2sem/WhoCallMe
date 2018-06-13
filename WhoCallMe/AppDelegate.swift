@@ -30,10 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstialManagerDeleg
         self.fullAd?.delegate = self;
         self.fullAd?.canShowFirstTime = false;
         
-        if self.rewardAd?.canShow ?? false{
-            self.fullAd?.show();
-        }
-        
         return true
     }
 

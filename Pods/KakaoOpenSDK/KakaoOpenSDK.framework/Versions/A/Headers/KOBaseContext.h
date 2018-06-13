@@ -39,6 +39,24 @@ extern NSString* convertOrderingString(KOOrdering type);
 @interface KOBaseContext : NSObject
 
 /*!
+ @property secureResource
+ @abstract 프로필 이미지, 썸네일 등의 리소스 url을 https로 반환할지 여부.
+ */
+@property (nonatomic, readonly) BOOL secureResource;
+
+/*!
+ @property limit
+ @abstract 요청 시 제한하는 친구의 수.
+ */
+@property (nonatomic, readonly) NSInteger limit;
+
+/*!
+ @property ordering
+ @abstract 정렬 방법.
+ */
+@property (nonatomic, readonly) KOOrdering ordering;
+
+/*!
  @property totalCount
  @abstract 목록의 전체 수.
  */
@@ -62,7 +80,23 @@ extern NSString* convertOrderingString(KOOrdering type);
  */
 @property (nonatomic, readonly) BOOL hasMoreItems;
 
+/*!
+ @property contextID
+ @abstract 현재 요청에 대한 식별자
+ */
 @property (nonatomic, readonly) NSString *contextID;
+
++ (instancetype)context;
++ (instancetype)contextWithLimit:(NSInteger)limit
+                        ordering:(KOOrdering)ordering;
++ (instancetype)contextWithSecureResource:(BOOL)secureResource
+                                    limit:(NSInteger)limit
+                                 ordering:(KOOrdering)ordering;
+- (instancetype)initWithLimit:(NSInteger)limit
+                     ordering:(KOOrdering)ordering;
+- (instancetype)initWithSecureResource:(BOOL)secureResource
+                                 limit:(NSInteger)limit
+                              ordering:(KOOrdering)ordering;
 
 - (void)parseDictionary:(NSDictionary *)dictionary;
 

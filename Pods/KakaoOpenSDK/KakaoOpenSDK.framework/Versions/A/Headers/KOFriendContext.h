@@ -83,28 +83,10 @@ extern NSString* convertFriendOrderTypeString(KOFriendOrderType type);
 @property (nonatomic, readonly) KOFriendFilterType filterType;
 
 /*!
- @property secureResource
- @abstract 프로필 이미지, 썸네일 등의 리소스 url을 https로 반환할지 여부.
- */
-@property (nonatomic, readonly) BOOL secureResource;
-
-/*!
- @property limit
- @abstract 요청 시 제한하는 친구의 수.
- */
-@property (nonatomic, readonly) NSInteger limit;
-
-/*!
  @property orderType
  @abstract 친구 정렬 타입.
  */
 @property (nonatomic, readonly) KOFriendOrderType orderType;
-
-/*!
- @property ordering
- @abstract 정렬 방법.
- */
-@property (nonatomic, readonly) KOOrdering ordering;
 
 /*!
  친구 페이징 Context 를 생성한다.

@@ -138,12 +138,15 @@ typedef NS_ENUM(NSInteger, KOAgeAuthProperty) {
  * @discussion KOSessionTask에 있는 API 사용시 자동으로 Authroization 헤더에 현재 access token을 채워줍니다.<br>
  *             발급 받은 토큰은 NSUserDefaults에 저장되고 앱을 종료하고 다시 시작할 경우 세션이 초기화 될 때(ex. sharedSession 최초 호출) 로드됩니다.
  *             세션 초기화 시 저장된 토큰을 읽어오는데 성공하면 세션은 open 상태가 되며 일반적인 state 변경 상황과 동일하게 KOSessionDidChangeNotification 알림을 전달 받을 수 있습니다.<br><br>
+ *
  *             토큰을 좀 더 안전하게 저장하고 싶을 경우 .plist 파일에 KAKAO_SECURE_MODE를 YES로 설정하여 accessToken과 refreshToken을 암호화 할 수 있습니다.
  *             암호화 방식은 SDK 버전에 따라 다르게 제공될 수 있으며 최신 버전에 사용되고 있는 암호화 방식은 1.5.1 버전에서 마지막으로 수정되었습니다.
- *             KAKAO_SECURE_MODE 설정을 바꾸어서 앱을 배포하고 사용자의 기기에서 업데이트 했을 때 다음 케이스에 대해 마이그레이션을 지원합니다.<br>
- *              - 평문토큰 to 암호문토큰: KAKAO_SECURE_MODE를 사용하지 않다가 활성화시킨 상태로 업데이트한 경우 등<br>
- *              - 암호문토큰 to 평문토큰: KAKAO_SECURE_MODE를 YES로 사용하다가 NO로 변경한 경우 등<br>
- *              - (old)암호문토큰 to (new)암호문토큰: KAKAO_SECURE_MODE를 YES로 설정하고 변경하지 않았으나 오래된 버전의 SDK에서 최신(1.5.1이상) SDK로 업데이트한 경우<br>
+ *             KAKAO_SECURE_MODE 설정을 바꾸어서 앱을 배포하고 사용자의 기기에서 업데이트 했을 때 다음 케이스에 대해 마이그레이션을 지원합니다.<br><br>
+ *
+ *             - 평문토큰 to 암호문토큰: KAKAO_SECURE_MODE를 사용하지 않다가 활성화시킨 상태로 업데이트한 경우 등<br>
+ *             - 암호문토큰 to 평문토큰: KAKAO_SECURE_MODE를 YES로 사용하다가 NO로 변경한 경우 등<br>
+ *             - (old)암호문토큰 to (new)암호문토큰: KAKAO_SECURE_MODE를 YES로 설정하고 변경하지 않았으나 오래된 버전의 SDK에서 최신(1.5.1이상) SDK로 업데이트한 경우<br><br>
+ *
  *             위 케이스에는 앱을 업데이트하고 재시작해도 로그인이 유지되며 이외 케이스는 토큰을 읽어올 수 없으므로 세션이 닫힌 상태로 초기화됩니다.
  */
 @property(readonly) KOToken *token;
@@ -246,7 +249,8 @@ typedef NS_ENUM(NSInteger, KOAgeAuthProperty) {
 - (void)openWithCompletionHandler:(KOSessionCompletionHandler)completionHandler authTypes:(NSArray<NSNumber *> *)authTypes;
 
 /*!
- 현재 로그인된 사용자에게 새로운 scope이 필요할 경우 지정된 동의항목에 대한 동의창을 노출하고 사용자 동의를 유도합니다. 사용자가 동의 버튼을 누르면 해당 scope이 적용된 새로운 토큰으로 세션을 갱신합니다.
+ @method updateScopes:completionHandler:
+ @abstract 현재 로그인된 사용자에게 새로운 scope이 필요할 경우 지정된 동의항목에 대한 동의창을 노출하고 사용자 동의를 유도합니다. 사용자가 동의 버튼을 누르면 해당 scope이 적용된 새로운 토큰으로 세션을 갱신합니다.
  @param scopes 요청할 scope 목록
  @param completionHandler 요청 완료시 실행될 block. 오류 처리와 갱신 완료 작업을 수행한다.
  */

@@ -3,16 +3,24 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GLOBAL">
+         <PersistentStrings>
+            <PersistentString
+               value = "control._progress">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MainViewController.applyToTemplate(ContactTemplateViewController, contact : CNContact, needBackup : Bool, needSync : Bool) -&gt; OriginalContract?:MainViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "originalContact?.imageData">
+               value = "contact.imageData">
             </PersistentString>
             <PersistentString
                value = "UIImage(data: contact.imageData!).size">
             </PersistentString>
             <PersistentString
-               value = "contact.imageData">
+               value = "originalContact?.imageData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -52,14 +60,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "specialized MainViewController.(generate([CNContact]) -&gt; ()).(closure #3):MainViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "target?.imageData">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "MainViewController.generateIndex(CNMutableContact, original : OriginalContract?) -&gt; ():MainViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -73,6 +73,14 @@
             </PersistentString>
             <PersistentString
                value = "contact.nickname">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "specialized MainViewController.(generate([CNContact]) -&gt; ()).(closure #3):MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "target?.imageData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

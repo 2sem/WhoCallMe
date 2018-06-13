@@ -58,24 +58,6 @@ NSString* convertChatFilterString(KOChatFilters filters);
 @property (nonatomic, readonly) KOChatFilters chatFilters;
 
 /*!
- @property secureResource
- @abstract 프로필 이미지, 썸네일 등의 리소스 url을 https로 반환할지 여부.
- */
-@property (nonatomic, readonly) BOOL secureResource;
-
-/*!
- @property limit
- @abstract 요청 시 제한하는 채팅방의 수.
- */
-@property (nonatomic, readonly) NSInteger limit;
-
-/*!
- @property ordering
- @abstract 정렬 방법.
- */
-@property (nonatomic, readonly) KOOrdering ordering;
-
-/*!
  채팅방 페이징 Context 를 생성한다.
  @param chatFilters 챗리스트 필터링 옵션.
  @param limit 요청 시 제한하는 채팅방의 수. (채팅방은 30개 까지만 가져올 수 있습니다.)
