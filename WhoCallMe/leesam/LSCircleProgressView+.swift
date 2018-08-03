@@ -15,8 +15,8 @@ extension Reactive where Base: LSCircleProgressView {
     /// Bindable sink for `enabled` property.
     var progress: Binder<Float> {
         return Binder(self.base) { control, value in
-            print("binding progress => \(value)");
-            control.progress = 1.0;
+            print("binding progress => \(value) \(control)");
+            control.progress = value;
         }
     }
 }

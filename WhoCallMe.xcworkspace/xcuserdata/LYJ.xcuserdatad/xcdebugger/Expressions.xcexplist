@@ -6,7 +6,7 @@
          contextName = "GLOBAL">
          <PersistentStrings>
             <PersistentString
-               value = "control._progress">
+               value = "control.alpha">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

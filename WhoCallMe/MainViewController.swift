@@ -968,6 +968,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             default:
                 break;
         }
+        
+        _ = msg;
 //        self.lb_genStatus.text = msg;
     }
     
@@ -1202,6 +1204,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
         //self.mode.onNext(<#T##element: MainViewController.Mode##MainViewController.Mode#>)
+        self.state.onNext(.ready);
         self.modelController.reset();
     }
     
