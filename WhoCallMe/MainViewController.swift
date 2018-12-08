@@ -22,8 +22,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         static let OptionPhotoCell = "OptionPhotoCell";
     }
     
-    @IBOutlet var constraint_bottomBanner_Bottom : NSLayoutConstraint!;
-    var constraint_bottomBanner_Top : NSLayoutConstraint!;
+    @IBOutlet weak var constraint_bottomBanner_Bottom : NSLayoutConstraint!;
+    @IBOutlet weak var constraint_bottomBanner_Top: NSLayoutConstraint!
     
     let WhoCallMeSearchTag = "WhoCallMe";
     #if DEBUG
@@ -38,7 +38,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        case Department = 2
 //        case JobTitle = 3
         
-        static let Count = thumnail.hashValue + 1;
+        static let Count = thumnail.rawValue + 1;
     }
     
     enum GenerateStep : Int{
@@ -53,7 +53,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         case saveContact = 8
         case saveData = 9
         
-        static let Count = saveData.hashValue + 1;
+        static let Count = saveData.rawValue + 1;
     }
     static var genStep = GenerateStep.ready;
     
@@ -296,7 +296,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         
         //Create constraint to hide bottom banner
-        self.constraint_bottomBanner_Top = self.bannerView.topAnchor.constraint(equalTo: self.view.bottomAnchor);
         self.showBanner(visible: false);
         
         //Sets progressed count

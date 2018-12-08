@@ -27,7 +27,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
         case department = 2
         case jobTitle = 3
         
-        static let Count = jobTitle.hashValue + 1;
+        static let Count = jobTitle.rawValue + 1;
     }
     
     fileprivate var cells : [InfoType] = [InfoType.photo, InfoType.organization, InfoType.department, InfoType.jobTitle];
@@ -95,6 +95,10 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
 
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent;
+    }
+    
     /**
         Toggle information to draw on the ringing image
     */
@@ -105,7 +109,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
             if idx == nil{
                 self.cells.append(type);
                 self.cells = self.cells.sorted(by: { (left, right) -> Bool in
-                    return left.hashValue < right.hashValue;
+                    return left.rawValue < right.rawValue;
                 });
             }
         }else{
@@ -170,7 +174,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var value = UITableViewAutomaticDimension;
         
-        let index = self.cells[indexPath.row].hashValue;
+        let index = self.cells[indexPath.row].rawValue;
         switch(InfoType(rawValue: index)!){
             case .photo:
                 value = 150;
@@ -185,7 +189,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var value : UITableViewCell?;
         
-        let index = self.cells[indexPath.row].hashValue;
+        let index = self.cells[indexPath.row].rawValue;
         switch(InfoType(rawValue: index)!){
         case .photo:
             let cell = self.infoTable.dequeueReusableCell(withIdentifier: Cell_Ids.ContactImageCell) as? ContactImageCell;
@@ -232,7 +236,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
     }
     func refreshContactInfo(_ indexPath : IndexPath){
         
-        let index = self.cells[indexPath.row].hashValue;
+        let index = self.cells[indexPath.row].rawValue;
         
         switch(InfoType(rawValue: index)!){
             case .photo:
