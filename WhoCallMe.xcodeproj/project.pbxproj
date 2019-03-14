@@ -10,6 +10,7 @@
 		2C04E0D21E23D3C5008B1213 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5B5E311C9EAF8000C3F0E3 /* iAd.framework */; };
 		2C07E4F31E234CB200CDFC32 /* credif.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C07E4F21E234CB200CDFC32 /* credif.png */; };
 		2C07E4F51E234DF500CDFC32 /* GADBannerView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07E4F41E234DF500CDFC32 /* GADBannerView+.swift */; };
+		2C12938B223A91B300E7E19E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C12938A223A91B200E7E19E /* GoogleService-Info.plist */; };
 		2C12FC7820A148E80082A309 /* RxContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12FC7720A148E80082A309 /* RxContactController.swift */; };
 		2C14048320A1A5BA001B83B6 /* LSCircleProgressView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */; };
 		2C14571321148A05004DEDC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2C14571221148A05004DEDC1 /* .gitignore */; };
@@ -70,7 +71,6 @@
 		2C8F18F71CC0DBDF00A11FAA /* btn_delete_normal-05.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */; };
 		2C8F18F91CC0DBE800A11FAA /* btn_delete_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */; };
 		2C8F18FB1CC0DBF700A11FAA /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */; };
-		2C95FFE31E238A4B00972839 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C95FFE21E238A4B00972839 /* GoogleService-Info.plist */; };
 		2CE7CAC11CBF7D9D0032CB20 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC01CBF7D9D0032CB20 /* icon.png */; };
 		2CE7CAC31CBF82080032CB20 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */; };
 		2CE7CAC81CBF87550032CB20 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC71CBF87550032CB20 /* background.png */; };
@@ -99,6 +99,7 @@
 		231D8B507042CC998B06F8DF /* Pods-WhoCallMeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhoCallMeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhoCallMeUITests/Pods-WhoCallMeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2C07E4F21E234CB200CDFC32 /* credif.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = credif.png; sourceTree = "<group>"; };
 		2C07E4F41E234DF500CDFC32 /* GADBannerView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GADBannerView+.swift"; sourceTree = "<group>"; };
+		2C12938A223A91B200E7E19E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2C12FC7720A148E80082A309 /* RxContactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxContactController.swift; sourceTree = "<group>"; };
 		2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSCircleProgressView+.swift"; sourceTree = "<group>"; };
 		2C14571221148A05004DEDC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		2C18A04F1FD3C1AD00AF3381 /* organization.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = organization.png; sourceTree = "<group>"; };
 		2C18A0511FD3C39400AF3381 /* call_allow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_allow.png; sourceTree = "<group>"; };
 		2C18A0531FD3C44D00AF3381 /* call_deny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_deny.png; sourceTree = "<group>"; };
+		2C20B0712239458D009BCD12 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C20BD501F89EC9000CCC5A8 /* WCDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCDefaults.swift; sourceTree = "<group>"; };
 		2C20BD521F89F08500CCC5A8 /* GADRewardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADRewardManager.swift; sourceTree = "<group>"; };
 		2C20BD531F89F08600CCC5A8 /* GADInterstitial+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADInterstitial+.swift"; sourceTree = "<group>"; };
@@ -169,7 +171,6 @@
 		2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_delete_normal-05.png"; sourceTree = "<group>"; };
 		2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete_pressed.png; sourceTree = "<group>"; };
 		2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_delete.png; sourceTree = "<group>"; };
-		2C95FFE21E238A4B00972839 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CE7CAC01CBF7D9D0032CB20 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		2CE7CAC71CBF87550032CB20 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -291,8 +292,9 @@
 				2C4E488C1C9136E900CC4BA5 /* Assets.xcassets */,
 				2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */,
 				2C4E48891C9136E900CC4BA5 /* WhoCallMe.xcdatamodeld */,
-				2C95FFE21E238A4B00972839 /* GoogleService-Info.plist */,
 				2C4E48B51C913B7400CC4BA5 /* MainViewController.swift */,
+				2C12938A223A91B200E7E19E /* GoogleService-Info.plist */,
+				2C20B0712239458D009BCD12 /* Info.plist */,
 			);
 			path = WhoCallMe;
 			sourceTree = "<group>";
@@ -552,11 +554,11 @@
 				2C18A0541FD3C44E00AF3381 /* call_deny.png in Resources */,
 				2C8DD9981CC1BD8C0063BB92 /* icon_position.png in Resources */,
 				2CE7CAC11CBF7D9D0032CB20 /* icon.png in Resources */,
-				2C95FFE31E238A4B00972839 /* GoogleService-Info.plist in Resources */,
 				2C5C3DEE1C9CFD8600C94417 /* contact.png in Resources */,
 				2C07E4F31E234CB200CDFC32 /* credif.png in Resources */,
 				2CE7CACD1CBF88FD0032CB20 /* btn_view_normal.png in Resources */,
 				2C18A0521FD3C39500AF3381 /* call_allow.png in Resources */,
+				2C12938B223A91B300E7E19E /* GoogleService-Info.plist in Resources */,
 				2C18A0501FD3C1AE00AF3381 /* organization.png in Resources */,
 				2C8F18F71CC0DBDF00A11FAA /* btn_delete_normal-05.png in Resources */,
 			);

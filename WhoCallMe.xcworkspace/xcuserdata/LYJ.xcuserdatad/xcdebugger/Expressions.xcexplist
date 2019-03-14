@@ -11,10 +11,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ContactTemplateViewController.tableView(_:numberOfRowsInSection:):ContactTemplateViewController.swift">
+         contextName = "MainViewController.generateIndex(CNMutableContact, original : OriginalContract?) -&gt; ():MainViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.cells.count">
+               value = "original?.generatedNickname">
+            </PersistentString>
+            <PersistentString
+               value = "original?.nickname">
+            </PersistentString>
+            <PersistentString
+               value = "&quot;\(original?.nickname)&quot;">
+            </PersistentString>
+            <PersistentString
+               value = "contact.nickname">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,21 +31,32 @@
          contextName = "MainViewController.applyToTemplate(ContactTemplateViewController, contact : CNContact, needBackup : Bool, needSync : Bool) -&gt; OriginalContract?:MainViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "originalContact?.imageData">
+               value = "contact.imageData">
             </PersistentString>
             <PersistentString
                value = "UIImage(data: contact.imageData!).size">
             </PersistentString>
             <PersistentString
-               value = "contact.imageData">
+               value = "originalContact?.imageData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MainViewController.tableView(_:numberOfRowsInSection:):MainViewController.swift">
+         contextName = "specialized MainViewController.(generate([CNContact]) -&gt; ()).(closure #3):MainViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "OptionIndex.Count">
+               value = "target?.imageData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LSCircleProgressView.drawCircle(start:end:color:context:):LSCircleProgressView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.progress">
+            </PersistentString>
+            <PersistentString
+               value = "end + angle">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -65,6 +85,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ContactTemplateViewController.tableView(_:numberOfRowsInSection:):ContactTemplateViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.cells.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainViewController.tableView(_:numberOfRowsInSection:):MainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "OptionIndex.Count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LSCircleProgressView.draw(_:):LSCircleProgressView.swift">
          <PersistentStrings>
             <PersistentString
@@ -72,31 +108,6 @@
             </PersistentString>
             <PersistentString
                value = "self.frame.width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MainViewController.generateIndex(CNMutableContact, original : OriginalContract?) -&gt; ():MainViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "original?.generatedNickname">
-            </PersistentString>
-            <PersistentString
-               value = "original?.nickname">
-            </PersistentString>
-            <PersistentString
-               value = "&quot;\(original?.nickname)&quot;">
-            </PersistentString>
-            <PersistentString
-               value = "contact.nickname">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "specialized MainViewController.(generate([CNContact]) -&gt; ()).(closure #3):MainViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "target?.imageData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -15,6 +15,7 @@ import LSExtensions
 import RxSwift
 import RxCocoa
 import LSCircleProgressView
+import Crashlytics
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CNContactPickerDelegate, GADBannerViewDelegate {
     
@@ -289,6 +290,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidAppear(_ animated: Bool) {
 //        self.showAppleFullAD();
+        //Crashlytics.sharedInstance().crash();
     }
     
     var googleFullAD : GADInterstitial?;
