@@ -68,8 +68,8 @@ class WCMDataController: NSObject {
          - returns: returns new OriginalContract
     */
     func createContact() -> OriginalContract{
-        var contact : OriginalContract!;
-        contact = NSEntityDescription.insertNewObject(forEntityName: EntityNames.OriginalContract, into: self.context) as! OriginalContract;
+        let contact : OriginalContract! =
+            NSEntityDescription.insertNewObject(forEntityName: EntityNames.OriginalContract, into: self.context) as? OriginalContract;
         
         self.context.insert(contact);
         

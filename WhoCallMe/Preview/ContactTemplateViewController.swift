@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import Firebase
 
 /**
     view controller to create and preview call receive image
@@ -93,6 +94,10 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
     
     override func viewWillAppear(_ animated: Bool) {
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Analytics.setScreenName(for: self);
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{

@@ -16,6 +16,7 @@ import RxSwift
 import RxCocoa
 import LSCircleProgressView
 import Crashlytics
+import Firebase
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CNContactPickerDelegate, GADBannerViewDelegate {
     
@@ -150,6 +151,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
+        Analytics.logLeesamEvent(.convertOne, parameters: [:]);
         self.convertOneBag = DisposeBag();
         self.setState(.running);
         //button.isUserInteractionEnabled = false;
@@ -165,6 +167,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
+        Analytics.logLeesamEvent(.startClear, parameters: [:]);
         RxContactController.shared.requestAccess()
             .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .filter{ [unowned self]result in
@@ -207,6 +210,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("load contacts error[\(error)]");
                 self.openContactsSettings();
             }, onCompleted: { [unowned self] in
+                Analytics.logLeesamEvent(.finishClear, parameters: [:]);
                 self.setState(.completed);
             }).disposed(by: self.clearDisposeBag);
     }
@@ -226,6 +230,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
+        Analytics.logLeesamEvent(.startRestore, parameters: [:]);
         RxContactController.shared.requestAccess()
             .filter{ [unowned self]result in
                 result && !self.isRunning
@@ -269,6 +274,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("load contacts error[\(error)]");
                 self.openContactsSettings();
             }, onCompleted: { [unowned self] in
+                Analytics.logLeesamEvent(.finishRestore, parameters: [:]);
                 self.setState(.completed);
                 self.modelController.reset();
                 
@@ -279,6 +285,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var btn_Preview: UIButton!
     @IBAction func onClick_Preview(_ sender: UIButton) {
+        Analytics.logLeesamEvent(.previewCall, parameters: [:]);
         self.selectContact(true);
 //        self.navigationController?.navigationBar.translucent = true;
     }
@@ -289,6 +296,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        Analytics.setScreenName(for: self);
 //        self.showAppleFullAD();
         //Crashlytics.sharedInstance().crash();
     }
@@ -428,6 +436,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
+        Analytics.logLeesamEvent(.startConvertAll, parameters: [:]);
         RxContactController.shared.requestAccess()
             .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .filter{ [unowned self]result in
@@ -471,6 +480,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.openContactsSettings();
             }, onCompleted: { [unowned self] in
                 print("converting all has been completed");
+                Analytics.logLeesamEvent(.finishConvertAll, parameters: [:]);
                 self.setState(.completed);
                 self.modelController.reset();
                 

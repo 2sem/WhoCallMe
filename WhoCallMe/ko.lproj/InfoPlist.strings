@@ -7,4 +7,4 @@
 */
 CFBundleDisplayName = "누군지다알아";
 CFBundleName = "누군지다알아";
-NSContactsUsageDescription = "변환을 위해 연락처 접근이 필요합니다";
+NSContactsUsageDescription = "변환을 위해 연락처 접근이 필요합니다.";

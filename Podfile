@@ -9,6 +9,8 @@ target 'WhoCallMe' do
   # Pods for WhoCallMe
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
+  pod 'Firebase/Analytics'
+
   pod 'KakaoOpenSDK'
   pod 'LSExtensions'
   #, :path => '~/Projects/leesam/pods/LSExtensions/src/LSExtensions'

@@ -14,6 +14,7 @@
 		2C12FC7820A148E80082A309 /* RxContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12FC7720A148E80082A309 /* RxContactController.swift */; };
 		2C14048320A1A5BA001B83B6 /* LSCircleProgressView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */; };
 		2C14571321148A05004DEDC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2C14571221148A05004DEDC1 /* .gitignore */; };
+		2C14A28022C70079004D9A09 /* Analytics+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14A27F22C70079004D9A09 /* Analytics+.swift */; };
 		2C18A04C1FD3C15400AF3381 /* job.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A04B1FD3C15300AF3381 /* job.png */; };
 		2C18A04E1FD3C19200AF3381 /* department.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A04D1FD3C19100AF3381 /* department.png */; };
 		2C18A0501FD3C1AE00AF3381 /* organization.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A04F1FD3C1AD00AF3381 /* organization.png */; };
@@ -103,6 +104,7 @@
 		2C12FC7720A148E80082A309 /* RxContactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxContactController.swift; sourceTree = "<group>"; };
 		2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSCircleProgressView+.swift"; sourceTree = "<group>"; };
 		2C14571221148A05004DEDC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2C14A27F22C70079004D9A09 /* Analytics+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Analytics+.swift"; sourceTree = "<group>"; };
 		2C18A04B1FD3C15300AF3381 /* job.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job.png; sourceTree = "<group>"; };
 		2C18A04D1FD3C19100AF3381 /* department.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = department.png; sourceTree = "<group>"; };
 		2C18A04F1FD3C1AD00AF3381 /* organization.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = organization.png; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				2C20BD531F89F08600CCC5A8 /* GADInterstitial+.swift */,
 				2C20BD521F89F08500CCC5A8 /* GADRewardManager.swift */,
 				2C20BD581F89F36100CCC5A8 /* ReviewManager.swift */,
+				2C14A27F22C70079004D9A09 /* Analytics+.swift */,
 			);
 			name = leesam;
 			path = WhoCallMe/leesam;
@@ -620,7 +623,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/LSCircleProgressView/LSCircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/LSExtensions/LSExtensions.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -630,7 +632,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSCircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSExtensions.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -690,6 +691,7 @@
 				2C649D451C93C055005C26A3 /* ContactImageCell.swift in Sources */,
 				2C4E48B61C913B7400CC4BA5 /* MainViewController.swift in Sources */,
 				2C649D5C1C9418EC005C26A3 /* BaseOptionCell.swift in Sources */,
+				2C14A28022C70079004D9A09 /* Analytics+.swift in Sources */,
 				2C649D491C93C078005C26A3 /* ContactDeptCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
