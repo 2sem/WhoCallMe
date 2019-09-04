@@ -28,6 +28,11 @@
 	<string>0</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-9684378399371172~4206633246</string>
+	<key>GADUnitIdentifiers</key>
+	<dict>
+		<key>FullAd</key>
+		<string>ca-app-pub-9684378399371172/4108901647</string>
+	</dict>
 	<key>GoogleADUnitID</key>
 	<dict>
 		<key>FullAd</key>

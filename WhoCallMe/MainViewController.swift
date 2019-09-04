@@ -151,11 +151,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
-        Analytics.logLeesamEvent(.convertOne, parameters: [:]);
-        self.convertOneBag = DisposeBag();
-        self.setState(.running);
-        //button.isUserInteractionEnabled = false;
-        self.selectContact(false);
+        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad) in
+            Analytics.logLeesamEvent(.convertOne, parameters: [:]);
+            self.convertOneBag = DisposeBag();
+            self.setState(.running);
+            //button.isUserInteractionEnabled = false;
+            self.selectContact(false);
+        }
     }
     
     @IBOutlet weak var btn_ClearPhotos: UIButton!
@@ -168,51 +170,53 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         Analytics.logLeesamEvent(.startClear, parameters: [:]);
-        RxContactController.shared.requestAccess()
-            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .filter{ [unowned self]result in
-                return result && !self.isRunning
-            }
-            .flatMap({ (result) -> Observable<[CNContact]> in
-                let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactImageDataKey as CNKeyDescriptor];
-                
-                return RxContactController.shared.requestContacts(keysToFetch);
-            }).observeOn(MainScheduler.instance)
-            .flatMap{ [unowned self]contacts in
-                return self.askClearPhotos(contacts);
-            }.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .flatMap({ [unowned self](contacts) -> Observable<CNContact> in
-                self.mode.onNext(.clearAll);
-                self.setProcessing(true);
-                self.progressedCount.onNext(0);
-                self.totalCount.onNext(contacts.count);
-                
-                return Observable<CNContact>.create({ (observer) -> Disposable in
-                    contacts.forEach{ observer.onNext($0) }
-                    observer.onCompleted();
+        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad) in
+            RxContactController.shared.requestAccess()
+                .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .filter{ [unowned self]result in
+                    return result && !self.isRunning
+                }
+                .flatMap({ (result) -> Observable<[CNContact]> in
+                    let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactImageDataKey as CNKeyDescriptor];
                     
-                    return Disposables.create();
-                });
-            }).delay(0.1, scheduler: MainScheduler.instance)
-            .filter{ [unowned self]_ in self.isRunning }
-            .flatMap{ [unowned self]contact in
-                self.clearPhoto(contact)
-            }
-            .subscribe(onNext: { [unowned self]result in
-                CNContact.localizedString(forKey: CNLabelPhoneNumberMain);
-                CNContact.localizedString(forKey: CNLabelPhoneNumberiPhone);
-                CNContact.localizedString(forKey: CNLabelPhoneNumberMobile);
-                
-                //, CNContactDepartmentNameKey, CNContactJobTitleKey, CNContactPhoneNumbersKey,
-                //print("load contacts. count[\(contacts.count)]");
-                self.increaseProgressed();
-            }, onError: { [unowned self](error) in
-                print("load contacts error[\(error)]");
-                self.openContactsSettings();
-            }, onCompleted: { [unowned self] in
-                Analytics.logLeesamEvent(.finishClear, parameters: [:]);
-                self.setState(.completed);
-            }).disposed(by: self.clearDisposeBag);
+                    return RxContactController.shared.requestContacts(keysToFetch);
+                }).observeOn(MainScheduler.instance)
+                .flatMap{ [unowned self]contacts in
+                    return self.askClearPhotos(contacts);
+                }.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .flatMap({ [unowned self](contacts) -> Observable<CNContact> in
+                    self.mode.onNext(.clearAll);
+                    self.setProcessing(true);
+                    self.progressedCount.onNext(0);
+                    self.totalCount.onNext(contacts.count);
+                    
+                    return Observable<CNContact>.create({ (observer) -> Disposable in
+                        contacts.forEach{ observer.onNext($0) }
+                        observer.onCompleted();
+                        
+                        return Disposables.create();
+                    });
+                }).delay(0.1, scheduler: MainScheduler.instance)
+                .filter{ [unowned self]_ in self.isRunning }
+                .flatMap{ [unowned self]contact in
+                    self.clearPhoto(contact)
+                }
+                .subscribe(onNext: { [unowned self]result in
+                    CNContact.localizedString(forKey: CNLabelPhoneNumberMain);
+                    CNContact.localizedString(forKey: CNLabelPhoneNumberiPhone);
+                    CNContact.localizedString(forKey: CNLabelPhoneNumberMobile);
+                    
+                    //, CNContactDepartmentNameKey, CNContactJobTitleKey, CNContactPhoneNumbersKey,
+                    //print("load contacts. count[\(contacts.count)]");
+                    self.increaseProgressed();
+                    }, onError: { [unowned self](error) in
+                        print("load contacts error[\(error)]");
+                        self.openContactsSettings();
+                    }, onCompleted: { [unowned self] in
+                        Analytics.logLeesamEvent(.finishClear, parameters: [:]);
+                        self.setState(.completed);
+                }).disposed(by: self.clearDisposeBag);
+        }
     }
     
     @IBOutlet weak var btn_Restore: UIButton!
@@ -286,7 +290,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var btn_Preview: UIButton!
     @IBAction func onClick_Preview(_ sender: UIButton) {
         Analytics.logLeesamEvent(.previewCall, parameters: [:]);
-        self.selectContact(true);
+        AppDelegate.sharedGADManager?.show(unit: .full) { [weak self](unit, ad) in
+            self?.selectContact(true);
+        }
+        
 //        self.navigationController?.navigationBar.translucent = true;
     }
 
@@ -436,61 +443,63 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
-        Analytics.logLeesamEvent(.startConvertAll, parameters: [:]);
-        RxContactController.shared.requestAccess()
-            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .filter{ [unowned self]result in
-                result && !self.isRunning
-            }
-            .flatMap({ (result) -> Observable<[CNContact]> in
-                let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
-                                   CNContactNameSuffixKey as CNKeyDescriptor, CNContactDepartmentNameKey as CNKeyDescriptor,
-                                   CNContactJobTitleKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor,
-                                   CNContactImageDataKey as CNKeyDescriptor, CNContactNoteKey as CNKeyDescriptor];
-                
-                return RxContactController.shared.requestContacts(keysToFetch);
-            }).flatMap({ [unowned self](contacts) -> Observable<CNContact> in
-                self.mode.onNext(.convertAll);
-                self.setProcessing(true);
-                self.progressedCount.onNext(0);
-                self.totalCount.onNext(contacts.count);
-                
-                return Observable<CNContact>.create({ (observer) -> Disposable in
-                    contacts.forEach{ observer.onNext($0) }
-                    observer.onCompleted();
-                    
-                    return Disposables.create();
-                });
-            }).delay(0.1, scheduler: MainScheduler.instance)
-            .filter{ [unowned self]_ in self.isRunning }
-            .flatMap({ [unowned self](contact) -> Observable<Bool> in
-                //usleep(10)
-
-                return self.convert(contact);
-            }).observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            //.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onNext: { [unowned self](result) in
-                print("converting has been completed. result[\(result)]");
-                //self.generate(contacts);
-                //print("load contacts. count[\(contacts.count)]");
-                self.increaseProgressed();
-            }, onError: { [unowned self](error) in
-                self.setProcessing(false);
-                print("load contacts error[\(error)]");
-                self.openContactsSettings();
-            }, onCompleted: { [unowned self] in
-                print("converting all has been completed");
-                Analytics.logLeesamEvent(.finishConvertAll, parameters: [:]);
-                self.setState(.completed);
-                self.modelController.reset();
-                
-                guard !self.isConvertingOne else{
-                    self.showAlert(title: "Notification".localized(), msg: "Converting has been completed".localized(), actions: [UIAlertAction.init(title: "OK".localized(), style: .default, handler: nil)], style: .alert);
-                    return;
+        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad) in
+            Analytics.logLeesamEvent(.startConvertAll, parameters: [:]);
+            RxContactController.shared.requestAccess()
+                .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .filter{ [unowned self]result in
+                    result && !self.isRunning
                 }
-                
-                self.showFullAD();
-            }).disposed(by: self.generateDisposeBag);
+                .flatMap({ (result) -> Observable<[CNContact]> in
+                    let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+                                       CNContactNameSuffixKey as CNKeyDescriptor, CNContactDepartmentNameKey as CNKeyDescriptor,
+                                       CNContactJobTitleKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor,
+                                       CNContactImageDataKey as CNKeyDescriptor, CNContactNoteKey as CNKeyDescriptor];
+                    
+                    return RxContactController.shared.requestContacts(keysToFetch);
+                }).flatMap({ [unowned self](contacts) -> Observable<CNContact> in
+                    self.mode.onNext(.convertAll);
+                    self.setProcessing(true);
+                    self.progressedCount.onNext(0);
+                    self.totalCount.onNext(contacts.count);
+                    
+                    return Observable<CNContact>.create({ (observer) -> Disposable in
+                        contacts.forEach{ observer.onNext($0) }
+                        observer.onCompleted();
+                        
+                        return Disposables.create();
+                    });
+                }).delay(0.1, scheduler: MainScheduler.instance)
+                .filter{ [unowned self]_ in self.isRunning }
+                .flatMap({ [unowned self](contact) -> Observable<Bool> in
+                    //usleep(10)
+                    
+                    return self.convert(contact);
+                }).observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                //.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .subscribe(onNext: { [unowned self](result) in
+                    print("converting has been completed. result[\(result)]");
+                    //self.generate(contacts);
+                    //print("load contacts. count[\(contacts.count)]");
+                    self.increaseProgressed();
+                    }, onError: { [unowned self](error) in
+                        self.setProcessing(false);
+                        print("load contacts error[\(error)]");
+                        self.openContactsSettings();
+                    }, onCompleted: { [unowned self] in
+                        print("converting all has been completed");
+                        Analytics.logLeesamEvent(.finishConvertAll, parameters: [:]);
+                        self.setState(.completed);
+                        self.modelController.reset();
+                        
+                        guard !self.isConvertingOne else{
+                            self.showAlert(title: "Notification".localized(), msg: "Converting has been completed".localized(), actions: [UIAlertAction.init(title: "OK".localized(), style: .default, handler: nil)], style: .alert);
+                            return;
+                        }
+                        
+                        self.showFullAD();
+                }).disposed(by: self.generateDisposeBag);
+        }
     }
     
     func toggleContraint(value : Bool, constraintOn : NSLayoutConstraint, constarintOff : NSLayoutConstraint){
@@ -1240,9 +1249,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        
 //    }
     
-    /*
     // MARK: - Navigation
-
+    
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.

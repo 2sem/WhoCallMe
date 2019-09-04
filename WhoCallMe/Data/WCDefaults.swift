@@ -22,6 +22,8 @@ class WCDefaults{
         static let LastFullADShown = "LastFullADShown";
         static let LastShareShown = "LastShareShown";
         static let LastRewardShown = "LastRewardShown";
+        
+        static let LaunchCount = "LaunchCount";
     }
     
     static var isUpsideDown : Bool?{
@@ -74,6 +76,20 @@ class WCDefaults{
         
         set(value){
             Defaults.set(value.timeIntervalSince1970, forKey: Keys.LastRewardShown);
+        }
+    }
+    
+    static func increaseLaunchCount(){
+        self.LaunchCount = self.LaunchCount.advanced(by: 1);
+    }
+    static var LaunchCount : Int{
+        get{
+            //UIApplication.shared.version
+            return Defaults.integer(forKey: Keys.LaunchCount);
+        }
+        
+        set(value){
+            Defaults.set(value, forKey: Keys.LaunchCount);
         }
     }
 }
