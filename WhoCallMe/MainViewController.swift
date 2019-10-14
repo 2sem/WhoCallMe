@@ -128,7 +128,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var templateViewContainer: UIView!
     var templateView : ContactTemplateViewController?{
         get{
-            return self.templateViewContainer.viewController?.childViewController(type: ContactTemplateViewController.self);
+            return self.templateViewContainer?.viewController?.childViewController(type: ContactTemplateViewController.self);
         }
     }
     
@@ -620,17 +620,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
          - parameter contacts: List of contact to generate image
     */
     fileprivate func generate(_ contact : CNMutableContact) -> OriginalContract?{
-        var image : UIImage?;
-        
         // MARK: Generate Image for call receiving
         self.templateView?.showAllInfos();
         let original = self.applyToTemplate(self.templateView!, contact: contact);
         //skip generating image if there is no org, dept, job
         if self.hasDataToGenerate(contact) {
             self.updateStep(.createImage);
-            image = self.templateView?.view.renderImage();
-            if image != nil{
-                contact.imageData = UIImagePNGRepresentation(image!);
+            
+            if self.templateView?.parent is MainViewController, self.childViewController(type: ContactTemplateViewController.self) != nil{
+                if let image = self.templateView?.view.renderImage(){
+                    contact.imageData = UIImagePNGRepresentation(image);
+                }
             }
             
             //Store generated image
@@ -853,15 +853,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // MARK: Restores note(memo)
         let note = contact.note;
         //Gets position for choSeongs
-        let range = note.range(byTag: self.WhoCallMeSearchTag);
         var originalNoteHigh = "";
         var originalNoteLow = "";
         
-        if range != nil{
-            originalNoteHigh = String(note[...range!.lowerBound]);
-            originalNoteLow = String(note[range!.upperBound...]);
+        if let range = note.range(byTag: self.WhoCallMeSearchTag){
+            originalNoteHigh = String(note[..<range.lowerBound]);
+            originalNoteLow = String(note[range.upperBound...]);
             
-            contact.note = "\(originalNoteHigh) \(originalNoteLow)";
+            contact.note = "\(originalNoteHigh)\(originalNoteLow)";
         }
     }
     
