@@ -230,7 +230,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //check there is stored data
         guard self.modelController.countForContacts() > 0 else {
-            self.showAlert(title: self.msgs.getMsg(.ERROR), msg: self.msgs.getMsg(.ERR_NO_BAK_CONTACTS), actions: [UIAlertAction(title: self.msgs.getMsg(.OK), style: UIAlertActionStyle.default, handler: nil)], style: .alert);
+            self.showAlert(title: self.msgs.getMsg(.ERROR), msg: self.msgs.getMsg(.ERR_NO_BAK_CONTACTS), actions: [UIAlertAction(title: self.msgs.getMsg(.OK), style: UIAlertAction.Style.default, handler: nil)], style: .alert);
             return;
         }
         
@@ -276,7 +276,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.increaseProgressed();
             }, onError: { [unowned self](error) in
                 print("load contacts error[\(error)]");
-                self.openContactsSettings();
+                DispatchQueue.main.async { [weak self] in
+                    self?.openContactsSettings();
+                }
             }, onCompleted: { [unowned self] in
                 Analytics.logLeesamEvent(.finishRestore, parameters: [:]);
                 self.setState(.completed);
@@ -485,7 +487,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     }, onError: { [unowned self](error) in
                         self.setProcessing(false);
                         print("load contacts error[\(error)]");
-                        self.openContactsSettings();
+                        DispatchQueue.main.async {
+                            self.openContactsSettings();
+                        }
                     }, onCompleted: { [unowned self] in
                         print("converting all has been completed");
                         Analytics.logLeesamEvent(.finishConvertAll, parameters: [:]);
@@ -537,9 +541,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     fileprivate func openContactsSettings(){
-        self.showAlert(title: self.msgs[.ERROR], msg: self.msgs[.MSG_PLEASE_ALLOW_APP_CONTACTS], actions: [UIAlertAction(title: self.msgs[.SETTINGS], style: UIAlertActionStyle.default, handler: { (act) in
+        self.showAlert(title: self.msgs[.ERROR], msg: self.msgs[.MSG_PLEASE_ALLOW_APP_CONTACTS], actions: [UIAlertAction(title: self.msgs[.SETTINGS], style: UIAlertAction.Style.default, handler: { (act) in
             UIApplication.shared.openSettings()
-        }),UIAlertAction.init(title: self.msgs[.OK], style: UIAlertActionStyle.default, handler: nil)], style: UIAlertControllerStyle.alert);
+        }),UIAlertAction.init(title: self.msgs[.OK], style: UIAlertAction.Style.default, handler: nil)], style: UIAlertController.Style.alert);
     }
     
     fileprivate func showFullAD(){
@@ -629,7 +633,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             if self.templateView?.parent is MainViewController, self.childViewController(type: ContactTemplateViewController.self) != nil{
                 if let image = self.templateView?.view.renderImage(){
-                    contact.imageData = UIImagePNGRepresentation(image);
+                    contact.imageData = image.pngData();
                 }
             }
             
@@ -718,11 +722,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return Observable<[CNContact]>.create { (observer) -> Disposable in
             self.showAlert(title: self.msgs.getMsg(WCMMessageManager.MassageName.WARN),
                            msg: self.msgs.getMsg(WCMMessageManager.MassageName.WARN_CLEAR_PHOTOS_MSG),
-                           actions: [UIAlertAction(title: self.msgs.getMsg(WCMMessageManager.MassageName.WARN_CLEAR_PHOTOS_CLEAR), style: UIAlertActionStyle.destructive, handler: { (action) -> Void in
+                           actions: [UIAlertAction(title: self.msgs.getMsg(WCMMessageManager.MassageName.WARN_CLEAR_PHOTOS_CLEAR), style: UIAlertAction.Style.destructive, handler: { (action) -> Void in
                             observer.onNext(contacts);
                             observer.onCompleted();
-                           }), UIAlertAction(title: self.msgs.getMsg(WCMMessageManager.MassageName.CANCEL), style: UIAlertActionStyle.cancel, handler: nil)],
-                           style: UIAlertControllerStyle.actionSheet);
+                           }), UIAlertAction(title: self.msgs.getMsg(WCMMessageManager.MassageName.CANCEL), style: UIAlertAction.Style.cancel, handler: nil)],
+                           style:         UIApplication.shared.isIPad
+                ? .actionSheet : .alert);
             
             return Disposables.create();
         }
@@ -872,13 +877,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return Observable<[CNContact]>.create({ [unowned self](observer) -> Disposable in
             self.showAlert(title: self.msgs[.WARN],
                            msg: self.msgs[.WARN_RESTORE_CONTACTS_MSG],
-                           actions: [UIAlertAction(title: self.msgs[.WARN_RESTORE_CONTACTS_RESTORE], style: UIAlertActionStyle.destructive, handler: { (action) -> Void in
+                           actions: [UIAlertAction(title: self.msgs[.WARN_RESTORE_CONTACTS_RESTORE], style: UIAlertAction.Style.destructive, handler: { (action) -> Void in
                             observer.onNext(contacts);
                             observer.onCompleted();
-                           }), UIAlertAction(title: self.msgs[.CANCEL], style: UIAlertActionStyle.cancel, handler: { (action) -> Void in
+                           }), UIAlertAction(title: self.msgs[.CANCEL], style: UIAlertAction.Style.cancel, handler: { (action) -> Void in
                             observer.onCompleted();
                            })],
-                           style: UIAlertControllerStyle.actionSheet);
+                           style:         UIApplication.shared.isIPad
+                ? .actionSheet : .alert);
             
             return Disposables.create();
         })

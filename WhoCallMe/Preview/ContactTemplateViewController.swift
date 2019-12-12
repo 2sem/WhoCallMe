@@ -108,7 +108,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
         Toggle information to draw on the ringing image
     */
     func showInfo(_ type : InfoType, visible: Bool ){
-        let idx = self.cells.index(of: type);
+        let idx = self.cells.firstIndex(of: type);
         
         if visible {
             if idx == nil{
@@ -139,7 +139,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
     func removeUnavailableInfos(){
         let types = self.cells;
         for type in types {
-            let idx = self.cells.index(of: type);
+            let idx = self.cells.firstIndex(of: type);
             switch(type){
                 case .photo:
                     if self.contact?.imageData == nil{
@@ -177,7 +177,7 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var value = UITableViewAutomaticDimension;
+        var value = UITableView.automaticDimension;
         
         let index = self.cells[indexPath.row].rawValue;
         switch(InfoType(rawValue: index)!){

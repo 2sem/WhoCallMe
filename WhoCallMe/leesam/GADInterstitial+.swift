@@ -8,6 +8,7 @@
 
 import Foundation
 import GoogleMobileAds
+import LSExtensions
 
 /**
  GoogleADUnitID/{name}
@@ -15,18 +16,18 @@ import GoogleMobileAds
 extension GADInterstitial {
     static func loadUnitId(name : String) -> String?{
         var value : String?;
-        var unitList = Bundle.main.infoDictionary?["GoogleADUnitID"] as? [String : String];
-        guard unitList != nil else{
+        
+        guard let unitList = Bundle.main.infoDictionary?["GoogleADUnitID"] as? [String : String] else{
             print("Add [String : String] Dictionary as 'GoogleADUnitID'");
             return value;
         }
         
-        guard !(unitList ?? [:]).isEmpty else{
+        guard !unitList.isEmpty else{
             print("Add Unit into 'GoogleADUnitID'");
             return value;
         }
         
-        value = unitList?[name];
+        value = unitList[name];
         guard value != nil else{
             print("Add unit \(name) into GoogleADUnitID");
             return value;
