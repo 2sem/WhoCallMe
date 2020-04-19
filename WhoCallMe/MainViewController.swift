@@ -211,7 +211,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     self.increaseProgressed();
                     }, onError: { [unowned self](error) in
                         print("load contacts error[\(error)]");
-                        self.openContactsSettings();
+                        DispatchQueue.main.async { [weak self] in
+                            self?.openContactsSettings();
+                        }
                     }, onCompleted: { [unowned self] in
                         Analytics.logLeesamEvent(.finishClear, parameters: [:]);
                         self.setState(.completed);

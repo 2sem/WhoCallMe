@@ -1,135 +1,167 @@
 PODS:
-  - Crashlytics (3.12.0):
-    - Fabric (~> 1.9.0)
-  - Fabric (1.9.0)
-  - Firebase/AdMob (5.18.0):
-    - Firebase/Core
-    - Google-Mobile-Ads-SDK (~> 7.40)
-  - Firebase/Core (5.18.0):
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
+  - Firebase/AdMob (6.22.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.7.0)
-  - Firebase/CoreOnly (5.18.0):
-    - FirebaseCore (= 5.3.1)
-  - FirebaseAnalytics (5.7.0):
-    - FirebaseCore (~> 5.3)
-    - FirebaseInstanceID (~> 3.6)
-    - GoogleAppMeasurement (= 5.7.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
-    - GoogleUtilities/MethodSwizzler (~> 5.2)
-    - GoogleUtilities/Network (~> 5.2)
-    - "GoogleUtilities/NSData+zlib (~> 5.2)"
-    - nanopb (~> 0.3)
-  - FirebaseCore (5.3.1):
-    - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseInstanceID (3.7.0):
-    - FirebaseCore (~> 5.2)
-    - GoogleUtilities/Environment (~> 5.2)
-    - GoogleUtilities/UserDefaults (~> 5.2)
-  - Google-Mobile-Ads-SDK (7.41.0)
-  - GoogleAppMeasurement (5.7.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
-    - GoogleUtilities/MethodSwizzler (~> 5.2)
-    - GoogleUtilities/Network (~> 5.2)
-    - "GoogleUtilities/NSData+zlib (~> 5.2)"
-    - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (5.3.7):
+    - Google-Mobile-Ads-SDK (~> 7.50)
+  - Firebase/Analytics (6.22.0):
+    - Firebase/Core
+  - Firebase/Core (6.22.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.4.1)
+  - Firebase/CoreOnly (6.22.0):
+    - FirebaseCore (= 6.6.6)
+  - FirebaseAnalytics (6.4.1):
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstallations (~> 1.1)
+    - GoogleAppMeasurement (= 6.4.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (= 0.3.9011)
+  - FirebaseCore (6.6.6):
+    - FirebaseCoreDiagnostics (~> 1.2)
+    - FirebaseCoreDiagnosticsInterop (~> 1.2)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+  - FirebaseCoreDiagnostics (1.2.3):
+    - FirebaseCoreDiagnosticsInterop (~> 1.2)
+    - GoogleDataTransportCCTSupport (~> 2.0)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+    - nanopb (~> 0.3.901)
+  - FirebaseCoreDiagnosticsInterop (1.2.0)
+  - FirebaseInstallations (1.1.1):
+    - FirebaseCore (~> 6.6)
+    - GoogleUtilities/UserDefaults (~> 6.5)
+    - PromisesObjC (~> 1.2)
+  - GADManager (1.0.6):
+    - Firebase/AdMob
+  - Google-Mobile-Ads-SDK (7.58.0):
+    - GoogleAppMeasurement (~> 6.0)
+  - GoogleAppMeasurement (6.4.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (= 0.3.9011)
+  - GoogleDataTransport (5.1.1)
+  - GoogleDataTransportCCTSupport (2.0.3):
+    - GoogleDataTransport (~> 5.1)
+    - nanopb (~> 0.3.901)
+  - GoogleUtilities/AppDelegateSwizzler (6.5.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.3.7)
-  - GoogleUtilities/Logger (5.3.7):
+  - GoogleUtilities/Environment (6.5.2)
+  - GoogleUtilities/Logger (6.5.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.3.7):
+  - GoogleUtilities/MethodSwizzler (6.5.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.3.7):
+  - GoogleUtilities/Network (6.5.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.3.7)"
-  - GoogleUtilities/Reachability (5.3.7):
+  - "GoogleUtilities/NSData+zlib (6.5.2)"
+  - GoogleUtilities/Reachability (6.5.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (5.3.7):
+  - GoogleUtilities/UserDefaults (6.5.2):
     - GoogleUtilities/Logger
-  - KakaoOpenSDK (1.11.2):
-    - KakaoOpenSDK/KakaoCommon (= 1.11.2)
-    - KakaoOpenSDK/KakaoLink (= 1.11.2)
-    - KakaoOpenSDK/KakaoMessageTemplate (= 1.11.2)
-    - KakaoOpenSDK/KakaoNavi (= 1.11.2)
-    - KakaoOpenSDK/KakaoOpenSDK (= 1.11.2)
-    - KakaoOpenSDK/KakaoS2 (= 1.11.2)
-  - KakaoOpenSDK/KakaoCommon (1.11.2)
-  - KakaoOpenSDK/KakaoLink (1.11.2):
+  - KakaoOpenSDK (1.22.0):
+    - KakaoOpenSDK/KakaoCommon (= 1.22.0)
+    - KakaoOpenSDK/KakaoLink (= 1.22.0)
+    - KakaoOpenSDK/KakaoMessageTemplate (= 1.22.0)
+    - KakaoOpenSDK/KakaoNavi (= 1.22.0)
+    - KakaoOpenSDK/KakaoOpenSDK (= 1.22.0)
+    - KakaoOpenSDK/KakaoPlusFriend (= 1.22.0)
+  - KakaoOpenSDK/KakaoCommon (1.22.0)
+  - KakaoOpenSDK/KakaoLink (1.22.0):
     - KakaoOpenSDK/KakaoCommon
-  - KakaoOpenSDK/KakaoMessageTemplate (1.11.2)
-  - KakaoOpenSDK/KakaoNavi (1.11.2):
+  - KakaoOpenSDK/KakaoMessageTemplate (1.22.0)
+  - KakaoOpenSDK/KakaoNavi (1.22.0):
     - KakaoOpenSDK/KakaoCommon
-  - KakaoOpenSDK/KakaoOpenSDK (1.11.2)
-  - KakaoOpenSDK/KakaoS2 (1.11.2):
+  - KakaoOpenSDK/KakaoOpenSDK (1.22.0)
+  - KakaoOpenSDK/KakaoPlusFriend (1.22.0):
     - KakaoOpenSDK/KakaoCommon
   - LSCircleProgressView (0.0.8)
-  - LSExtensions (0.1.7)
-  - nanopb (0.3.901):
-    - nanopb/decode (= 0.3.901)
-    - nanopb/encode (= 0.3.901)
-  - nanopb/decode (0.3.901)
-  - nanopb/encode (0.3.901)
-  - RxAtomic (4.4.2)
-  - RxCocoa (4.4.2):
+  - LSExtensions (0.1.15)
+  - nanopb (0.3.9011):
+    - nanopb/decode (= 0.3.9011)
+    - nanopb/encode (= 0.3.9011)
+  - nanopb/decode (0.3.9011)
+  - nanopb/encode (0.3.9011)
+  - PromisesObjC (1.2.8)
+  - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.4.2):
-    - RxAtomic (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Firebase/AdMob
+  - Firebase/Analytics
   - Firebase/Core
+  - GADManager (from `~/Projects/leesam/pods/GADManager/src/GADManager`)
   - KakaoOpenSDK
   - LSCircleProgressView (from `~/Projects/leesam/pods/LSCircleProgressView/src/LSCircleProgressView`)
-  - LSExtensions
+  - LSExtensions (from `~/Projects/leesam/pods/LSExtensions/src/LSExtensions`)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Crashlytics
     - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
-    - FirebaseInstanceID
+    - FirebaseCoreDiagnostics
+    - FirebaseCoreDiagnosticsInterop
+    - FirebaseInstallations
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - KakaoOpenSDK
-    - LSExtensions
     - nanopb
-    - RxAtomic
+    - PromisesObjC
     - RxCocoa
     - RxSwift
 
 EXTERNAL SOURCES:
+  GADManager:
+    :path: "~/Projects/leesam/pods/GADManager/src/GADManager"
   LSCircleProgressView:
     :path: "~/Projects/leesam/pods/LSCircleProgressView/src/LSCircleProgressView"
+  LSExtensions:
+    :path: "~/Projects/leesam/pods/LSExtensions/src/LSExtensions"
 
 SPEC CHECKSUMS:
-  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
-  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
-  Firebase: 02f3281965c075426141a0ce1277e9de6649cab9
-  FirebaseAnalytics: 23851fe602c872130a2c5c55040b302120346cc2
-  FirebaseCore: 52f851b30e11360f1e67cf04b1edfebf0a47a2d3
-  FirebaseInstanceID: bd6fc5a258884e206fd5c474ebe4f5b00e21770e
-  Google-Mobile-Ads-SDK: 101ce89b94fdf60ec64ba7b6e9b9d812dc765936
-  GoogleAppMeasurement: 6cf307834da065863f9faf4c0de0a936d81dd832
-  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
-  KakaoOpenSDK: cb3237cef2f458f6b4b895475fac72fe7a76f34d
-  LSCircleProgressView: 667ea3f11156f5bac9c246cf1c055290f3d8f617
-  LSExtensions: 66ada67b1be79560d5a8d541c0b35601ad4d0e59
-  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
-  RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
-  RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
+  FirebaseAnalytics: 83f822fd0d33a46f49f89b8c3ab16ab4d89df08a
+  FirebaseCore: 9aca0f1fffb405176ba15311a5621fcde4106fcf
+  FirebaseCoreDiagnostics: 13a6564cd6d5375066bbc8940cc1753af24497f3
+  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
+  FirebaseInstallations: acb3216eb9784d3b1d2d2d635ff74fa892cc0c44
+  GADManager: ca74829d1ad17c59ef3411ffbd0ee689c0f053a8
+  Google-Mobile-Ads-SDK: 7052557293c75c676db55feb707ace9b790f32c1
+  GoogleAppMeasurement: e49be3954045b17d046f271b9cc1ec052bad9702
+  GoogleDataTransport: 6ffa4dd0b6d547f8d27b91bd92fa9e197a3f5f1f
+  GoogleDataTransportCCTSupport: 2d7e609f8c5af1a33d7d59053e6f8cba59365df5
+  GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
+  KakaoOpenSDK: 9973e17fcc5f7974abc5eaa68855868bca091d76
+  LSCircleProgressView: a40ebd3e860aa43392ff799d15da753ea42832c6
+  LSExtensions: 862b6100041604953c716d5c7e7fb927fbcf8dd3
+  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
 
-PODFILE CHECKSUM: d6b4f0ff313bd7dd7bf10e163ffe04bae2d410fb
+PODFILE CHECKSUM: 61051c4d3c4b0507d75775d12091448571c20569
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.8.4
