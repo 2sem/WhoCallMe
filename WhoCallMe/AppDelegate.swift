@@ -61,11 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        guard WCDefaults.LaunchCount % reviewInterval > 0 else{
+        guard LSDefaults.LaunchCount % reviewInterval > 0 else{
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
             }
-            WCDefaults.increaseLaunchCount();
+            LSDefaults.increaseLaunchCount();
             return;
         }
     }
@@ -82,20 +82,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
     
     // MARK: ReviewManagerDelegate
     func reviewGetLastShowTime() -> Date {
-        return WCDefaults.LastShareShown;
+        return LSDefaults.LastShareShown;
     }
     
     func reviewUpdate(showTime: Date) {
-        WCDefaults.LastShareShown = showTime;
+        LSDefaults.LastShareShown = showTime;
     }
     
     // MARK: GADRewardManagerDelegate
     func GADRewardGetLastShowTime() -> Date {
-        return WCDefaults.LastRewardShown;
+        return LSDefaults.LastRewardShown;
     }
     
     func GADRewardUserCompleted() {
-        WCDefaults.LastRewardShown = Date();
+        LSDefaults.LastRewardShown = Date();
     }
     
     func GADRewardUpdate(showTime: Date) {
@@ -172,16 +172,16 @@ extension AppDelegate : GADManagerDelegate{
     
     func GAD<GADUnitName>(manager: GADManager<GADUnitName>, updatShownTimeForUnit unit: GADUnitName, showTime time: Date){
         let now = Date();
-        if WCDefaults.LastFullADShown > now{
-            WCDefaults.LastFullADShown = now;
+        if LSDefaults.LastFullADShown > now{
+            LSDefaults.LastFullADShown = now;
         }
         
-        WCDefaults.LastFullADShown = time;
+        LSDefaults.LastFullADShown = time;
         //GHStoreManager.shared.tokenPurchased(1);
     }
     
     func GAD<GADUnitName>(manager: GADManager<GADUnitName>, lastShownTimeForUnit unit: GADUnitName) -> Date{
-        return WCDefaults.LastFullADShown;
+        return LSDefaults.LastFullADShown;
     }
     
     func GAD<GADUnitName>(manager: GADManager<GADUnitName>, willPresentADForUnit unit: GADUnitName){

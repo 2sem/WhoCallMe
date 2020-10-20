@@ -39,6 +39,7 @@
 
 /* Class = "UIButton"; normalTitle = "Selective"; ObjectID = "ZdL-Vf-bis"; */
 "ZdL-Vf-bis.normalTitle" = "선택한 연락처 변환";
+"u7F-tc-3ft.normalTitle" = "설정";
 
 /* Class = "UIButton"; normalTitle = "Preview"; ObjectID = "c8Y-Nw-s1m"; */
 "c8Y-Nw-s1m.normalTitle" = "미리보기";
@@ -76,3 +77,22 @@
 /* Class = "UILabel"; text = "Response"; ObjectID = "WQy-rQ-SCa"; */
 "WQy-rQ-SCa.text" = "응답";
 
+//Setting Navigation Title
+"7UZ-5G-zvM.title" = "설정";
+
+"PiL-Pm-M7w.headerTitle" = "연락처"; //table section
+"qdh-NL-1HZ.text" = "별명 생성";
+"7Se-sG-eqM.text" = "회사명 포함";
+"waD-cG-fZc.text" = "부서명 포함";
+"w2o-0n-uW3.text" = "직책명 포함";
+"xBY-vV-Fbx.text" = "초성 검색(한국어)";
+"cIJ-4j-ocU.text" = "수신 화면 생성";
+
+"sEk-42-c10.headerTitle" = "수신화면"; //table section
+"Jbb-yr-Nun.text" = "원본사진 전체화면";
+"Gs8-cb-W7h.text" = "수신화면에 회사명 포함";
+"Glq-cG-NzM.text" = "수신화면에 부서명 포함";
+"xdb-LA-AI0.text" = "수신화면에 직책명 포함";
+
+"2fh-7Y-kD9.headerTitle" = "앱 정보"; //table section
+"HI9-Wk-tMO.text" = "앱 버전";

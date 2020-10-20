@@ -139,8 +139,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var lb_status: UILabel!
     
     @IBOutlet weak var bannerView: GADBannerView!
-    
-    @IBOutlet weak var stack_button: UIStackView!
+        
+    @IBOutlet weak var photoOptionContainer: UIView!
+    @IBOutlet weak var photoOptionSwitch: UISwitch!
     
     @IBOutlet weak var btn_generateTitle: UIButton!
     @IBOutlet weak var btn_Generate: UIButton!
@@ -558,16 +559,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         Toggles information of the contact
     */
     func applyToggleInfos(_ template : ContactTemplateViewController){
-        for (i, cell) in (self.optionTable.visibleCells as! [BaseOptionCell]).enumerated() {
-            let type = ContactTemplateViewController.InfoType(rawValue: i);
-            switch(type!){
-                case .photo:
-                    template.useThumbNail = cell.optionValue;
-                    break;
-                default:
-                    break;
-            }
-        }
+        template.useThumbNail = !LSDefaults.needFullscreenPhoto;
+//        for (i, cell) in (self.optionTable.visibleCells as! [BaseOptionCell]).enumerated() {
+//            let type = ContactTemplateViewController.InfoType(rawValue: i);
+//            switch(type!){
+//                case .photo:
+//                    template.useThumbNail = cell.optionValue;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
     }
     
     /**
@@ -604,7 +606,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             var hasData = false;
             switch(type){
                 case .photo:
-                    hasData = contact.imageData != nil;
+                    hasData = LSDefaults.needMakeIncomingPhoto && contact.imageData != nil;
                     break;
                 case .organization:
                     hasData = contact.organizationName.any;
@@ -630,7 +632,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.templateView?.showAllInfos();
         let original = self.applyToTemplate(self.templateView!, contact: contact);
         //skip generating image if there is no org, dept, job
-        if self.hasDataToGenerate(contact) {
+        if LSDefaults.needMakeIncomingPhoto && self.hasDataToGenerate(contact) {
             self.updateStep(.createImage);
             
             if self.templateView?.parent is MainViewController, self.childViewController(type: ContactTemplateViewController.self) != nil{
@@ -772,40 +774,40 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         contact.nameSuffix = original?.suffix ?? "";
         
         //Sets nickname if nickname has been changed since generating
-        if (original?.generatedNickname ?? "") != contact.nickname{
+        if LSDefaults.needGenerateNickname && (original?.generatedNickname ?? "") != contact.nickname{
             original?.nickname = contact.nickname;
         }
         
         let fullDesc = contact.fullName ?? "";
         var jobDesc = "";
         
-        if !contact.organizationName.isEmpty{
+        if LSDefaults.needContainsOrg && !contact.organizationName.isEmpty{
             jobDesc += "\(contact.organizationName)";
         }
-        if !contact.departmentName.isEmpty{
-            jobDesc += "/\(contact.departmentName)";
+        if LSDefaults.needContainsDept && !contact.departmentName.isEmpty{
+            jobDesc += (jobDesc.isEmpty || jobDesc.last == "/" ? "" : "/") + "\(contact.departmentName)";
         }
-        if !contact.jobTitle.isEmpty{
-            jobDesc += "/\(contact.jobTitle)";
+        if LSDefaults.needContainsJob && !contact.jobTitle.isEmpty{
+            jobDesc += (jobDesc.isEmpty || jobDesc.last == "/" ? "" : "/") + "\(contact.jobTitle)";
         }
         
         //create new suffix if the contact doesn't have original suffix
-        if contact.nameSuffix.isEmpty {
-            original?.generatedSuffix = " \(jobDesc)";
+        if contact.nameSuffix.isEmpty && jobDesc.any {
+            original?.generatedSuffix = "\(jobDesc)";
             contact.nameSuffix = original?.generatedSuffix ?? "";
         }
         
         /** create new nickname if the contact doesn't have original nickname
             new nicknamed = full name + job description
         */
-        if (original?.nickname ?? "").isEmpty {
-            original?.generatedNickname = " \(fullDesc) \(jobDesc)";
+        if LSDefaults.needGenerateNickname && (original?.nickname ?? "").isEmpty && (fullDesc.trim().any || jobDesc.trim().any){
+            original?.generatedNickname = "\(fullDesc)\(fullDesc.any ? " " : "")\(jobDesc)";
             contact.nickname = original?.generatedNickname ?? "";
         }
         
         let choSeongs = (fullDesc + jobDesc).getKoreanChoSeongs() ?? "";
         
-        if choSeongs.any {
+        if LSDefaults.needMakeChoseong && choSeongs.any {
             
             let note = contact.note;
             //Gets position for choSeongs
@@ -1086,8 +1088,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 template.originalImage = UIImage(data: contact.imageData!);
             }
         }
-        
+
+        template.useThumbNail = !LSDefaults.needFullscreenPhoto;
         template.contact = contact;
+
         template.refresh();
         
         return originalContact;

@@ -9,16 +9,21 @@ target 'WhoCallMe' do
   # Pods for WhoCallMe
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
-  pod 'Firebase/Analytics'
+  
+  # Add the pod for Firebase Crashlytics
+  pod 'Firebase/Crashlytics'
 
+  # Recommended: Add the Firebase pod for Google Analytics
+  pod 'Firebase/Analytics'
+  
   pod 'KakaoOpenSDK'
   pod 'LSExtensions', :path => '~/Projects/leesam/pods/LSExtensions/src/LSExtensions'
   #pod 'LSExtensions'
   pod 'GADManager', :path => '~/Projects/leesam/pods/GADManager/src/GADManager'
   #pod 'LSCircleProgressView'
   pod 'LSCircleProgressView', :path => '~/Projects/leesam/pods/LSCircleProgressView/src/LSCircleProgressView'
-  pod 'RxSwift', '~> 4.0'
-  pod 'RxCocoa', '~> 4.0'
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
   
   pod 'Fabric'
   pod 'Crashlytics'

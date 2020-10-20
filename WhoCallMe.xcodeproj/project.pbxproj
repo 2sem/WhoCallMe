@@ -20,7 +20,7 @@
 		2C18A0501FD3C1AE00AF3381 /* organization.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A04F1FD3C1AD00AF3381 /* organization.png */; };
 		2C18A0521FD3C39500AF3381 /* call_allow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A0511FD3C39400AF3381 /* call_allow.png */; };
 		2C18A0541FD3C44E00AF3381 /* call_deny.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A0531FD3C44D00AF3381 /* call_deny.png */; };
-		2C20BD511F89EC9100CCC5A8 /* WCDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD501F89EC9000CCC5A8 /* WCDefaults.swift */; };
+		2C20BD511F89EC9100CCC5A8 /* LSDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD501F89EC9000CCC5A8 /* LSDefaults.swift */; };
 		2C20BD551F89F08600CCC5A8 /* GADRewardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD521F89F08500CCC5A8 /* GADRewardManager.swift */; };
 		2C20BD561F89F08600CCC5A8 /* GADInterstitial+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD531F89F08600CCC5A8 /* GADInterstitial+.swift */; };
 		2C20BD571F89F08600CCC5A8 /* GADInterstialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD541F89F08600CCC5A8 /* GADInterstialManager.swift */; };
@@ -72,6 +72,7 @@
 		2C8F18F71CC0DBDF00A11FAA /* btn_delete_normal-05.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */; };
 		2C8F18F91CC0DBE800A11FAA /* btn_delete_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */; };
 		2C8F18FB1CC0DBF700A11FAA /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */; };
+		2CDDEFB7250C59E50065B1B7 /* LSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */; };
 		2CE7CAC11CBF7D9D0032CB20 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC01CBF7D9D0032CB20 /* icon.png */; };
 		2CE7CAC31CBF82080032CB20 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */; };
 		2CE7CAC81CBF87550032CB20 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC71CBF87550032CB20 /* background.png */; };
@@ -111,7 +112,7 @@
 		2C18A0511FD3C39400AF3381 /* call_allow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_allow.png; sourceTree = "<group>"; };
 		2C18A0531FD3C44D00AF3381 /* call_deny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_deny.png; sourceTree = "<group>"; };
 		2C20B0712239458D009BCD12 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2C20BD501F89EC9000CCC5A8 /* WCDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCDefaults.swift; sourceTree = "<group>"; };
+		2C20BD501F89EC9000CCC5A8 /* LSDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSDefaults.swift; sourceTree = "<group>"; };
 		2C20BD521F89F08500CCC5A8 /* GADRewardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADRewardManager.swift; sourceTree = "<group>"; };
 		2C20BD531F89F08600CCC5A8 /* GADInterstitial+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADInterstitial+.swift"; sourceTree = "<group>"; };
 		2C20BD541F89F08600CCC5A8 /* GADInterstialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADInterstialManager.swift; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_delete_normal-05.png"; sourceTree = "<group>"; };
 		2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete_pressed.png; sourceTree = "<group>"; };
 		2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_delete.png; sourceTree = "<group>"; };
+		2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSSettingsViewController.swift; sourceTree = "<group>"; };
 		2CE7CAC01CBF7D9D0032CB20 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		2CE7CAC71CBF87550032CB20 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				2C5F8A121C959A9C00D8639F /* Contoller */,
 				2C649D501C93EEDE005C26A3 /* Option */,
 				2C649D391C93B83C005C26A3 /* Preview */,
+				2CDDEFB3250C55180065B1B7 /* Settings */,
 				2C649D381C93B7DE005C26A3 /* Data */,
 				2C3D5DB81C92F5A800BF2B5F /* image.png */,
 				2C3D5DBA1C93074A00BF2B5F /* blank.png */,
@@ -340,7 +343,7 @@
 		2C649D381C93B7DE005C26A3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				2C20BD501F89EC9000CCC5A8 /* WCDefaults.swift */,
+				2C20BD501F89EC9000CCC5A8 /* LSDefaults.swift */,
 				2C5352481C968B5C00D719EF /* OriginalContract+CoreDataProperties.swift */,
 				2C5352491C968B5C00D719EF /* OriginalContract.swift */,
 			);
@@ -406,6 +409,14 @@
 			);
 			name = leesam;
 			path = WhoCallMe/leesam;
+			sourceTree = "<group>";
+		};
+		2CDDEFB3250C55180065B1B7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		3940D0C1D46843CD92884D66 /* Frameworks */ = {
@@ -612,7 +623,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "${PODS_ROOT}/FirebaseCrashlytics/run -gsp \"${PROJECT_DIR}/${PROJECT}/GoogleService-Info.plist\"\n";
 		};
 		3090E849B238BCDA14187680 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -644,6 +655,7 @@
 				"${BUILT_PRODUCTS_DIR}/LSExtensions/LSExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -654,6 +666,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -695,8 +708,9 @@
 				2C649D5E1C941B69005C26A3 /* OptionPhotoCell.swift in Sources */,
 				2C20BD5B1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift in Sources */,
 				2C4E48831C9136E900CC4BA5 /* AppDelegate.swift in Sources */,
+				2CDDEFB7250C59E50065B1B7 /* LSSettingsViewController.swift in Sources */,
 				2C649D621C941BB5005C26A3 /* OptionDeptCell.swift in Sources */,
-				2C20BD511F89EC9100CCC5A8 /* WCDefaults.swift in Sources */,
+				2C20BD511F89EC9100CCC5A8 /* LSDefaults.swift in Sources */,
 				2C07E4F51E234DF500CDFC32 /* GADBannerView+.swift in Sources */,
 				2C20BD591F89F36100CCC5A8 /* ReviewManager.swift in Sources */,
 				2C53524B1C968B5C00D719EF /* OriginalContract.swift in Sources */,
@@ -889,7 +903,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.8;
+				MARKETING_VERSION = 2.2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -914,7 +928,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.8;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

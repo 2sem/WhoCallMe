@@ -147,17 +147,17 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
                     }
                     break;
                 case .organization:
-                    if self.contact?.organizationName.isEmpty == true{
+                    if self.contact?.organizationName.isEmpty == true || !LSDefaults.needPhotoContainsOrg{
                         self.cells.remove(at: idx!);
                     }
                     break;
                 case .department:
-                    if self.contact?.departmentName.isEmpty == true{
+                    if self.contact?.departmentName.isEmpty == true || !LSDefaults.needPhotoContainsDept{
                         self.cells.remove(at: idx!);
                     }
                     break;
                 case .jobTitle:
-                    if self.contact?.jobTitle.isEmpty == true{
+                    if self.contact?.jobTitle.isEmpty == true || !LSDefaults.needPhotoContainsJob{
                         self.cells.remove(at: idx!);
                     }
                     break;
