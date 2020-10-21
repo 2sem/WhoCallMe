@@ -47,6 +47,7 @@
 		2C5C3DF91C9D1DBC00C94417 /* WCMMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C3DF81C9D1DBC00C94417 /* WCMMessageManager.swift */; };
 		2C5C3DFA1C9D246300C94417 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C5C3DFC1C9D246300C94417 /* Localizable.strings */; };
 		2C5D3D9A1CC674D3000EF11A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D3D9C1CC674D3000EF11A /* InfoPlist.strings */; };
+		2C5DCBD4254070BB007DB448 /* Crashlytics+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DCBD3254070BB007DB448 /* Crashlytics+.swift */; };
 		2C5F8A141C959AD800D8639F /* WCMDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F8A131C959AD800D8639F /* WCMDataController.swift */; };
 		2C649D451C93C055005C26A3 /* ContactImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C649D441C93C055005C26A3 /* ContactImageCell.swift */; };
 		2C649D471C93C069005C26A3 /* ContactOrgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C649D461C93C069005C26A3 /* ContactOrgCell.swift */; };
@@ -149,6 +150,7 @@
 		2C5C3DFE1C9D2C3100C94417 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C5D3D9B1CC674D3000EF11A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C5D3D9D1CC674D6000EF11A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2C5DCBD3254070BB007DB448 /* Crashlytics+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Crashlytics+.swift"; sourceTree = "<group>"; };
 		2C5F8A131C959AD800D8639F /* WCMDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCMDataController.swift; sourceTree = "<group>"; };
 		2C649D441C93C055005C26A3 /* ContactImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactImageCell.swift; sourceTree = "<group>"; };
 		2C649D461C93C069005C26A3 /* ContactOrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactOrgCell.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 		2C4E48811C9136E900CC4BA5 /* WhoCallMe */ = {
 			isa = PBXGroup;
 			children = (
+				2CAE22C525405D600003FBF7 /* extensions */,
 				2C5C3DFC1C9D246300C94417 /* Localizable.strings */,
 				2C5C3DF51C9D16D400C94417 /* Manager */,
 				2C3E39521C9C1C1D00EC0AED /* Image */,
@@ -393,6 +396,14 @@
 				2C8DD9991CC1BD930063BB92 /* icon_team.png */,
 			);
 			path = Preview;
+			sourceTree = "<group>";
+		};
+		2CAE22C525405D600003FBF7 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2C5DCBD3254070BB007DB448 /* Crashlytics+.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		2CCF228A1C924A0C0080B206 /* leesam */ = {
@@ -728,6 +739,7 @@
 				2C649D5C1C9418EC005C26A3 /* BaseOptionCell.swift in Sources */,
 				2C14A28022C70079004D9A09 /* Analytics+.swift in Sources */,
 				2C649D491C93C078005C26A3 /* ContactDeptCell.swift in Sources */,
+				2C5DCBD4254070BB007DB448 /* Crashlytics+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,7 +915,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -928,7 +940,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

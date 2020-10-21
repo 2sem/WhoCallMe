@@ -27,7 +27,7 @@ extension Analytics{
         }
         
         Analytics.setScreenName(name, screenClass: className);
-        print("[\(#function)] set scree name for firebase analytics. name[\(name ?? "")] screen[\(className ?? "")]");
+        print("[\(#function)] set screen name for firebase analytics. name[\(name ?? "")] screen[\(className ?? "")]");
     }
     
     enum LeesamEvent : String{

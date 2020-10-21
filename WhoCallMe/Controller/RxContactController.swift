@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Contacts
+import FirebaseCrashlytics
 
 class RxContactController : NSObject{
     let contactStore = CNContactStore();
@@ -22,6 +23,7 @@ class RxContactController : NSObject{
             self.contactStore.requestAccess(for: .contacts) { (result, error) in
                 if let error = error{
                     //emit error to allow to access contacts
+                    Crashlytics.crashlytics().record(error: error);
                     observer.onError(error);
                     return;
                 }

@@ -96,7 +96,7 @@ PODS:
   - KakaoOpenSDK/KakaoPlusFriend (1.23.5):
     - KakaoOpenSDK/KakaoCommon
   - LSCircleProgressView (0.0.9)
-  - LSExtensions (0.1.15)
+  - LSExtensions (0.1.16)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -171,7 +171,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   KakaoOpenSDK: 3989b5a77441a5e5ee7aa3bc255e4c33ad9be554
   LSCircleProgressView: 1fb9262a19579818a6a224d706dc2df252d84083
-  LSExtensions: 862b6100041604953c716d5c7e7fb927fbcf8dd3
+  LSExtensions: 2ff05276e136ac1001514b325c46736f98867bba
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
@@ -180,4 +180,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f39b10bf225e5736d52557447f8b01066f624a39
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0
