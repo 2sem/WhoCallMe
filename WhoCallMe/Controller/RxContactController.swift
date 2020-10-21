@@ -53,6 +53,7 @@ class RxContactController : NSObject{
                 observer.onNext(contacts);
                 observer.onCompleted();
             }catch let error{
+                Crashlytics.crashlytics().record(error: error);
                 observer.onError(error);
             }
             
@@ -76,6 +77,7 @@ class RxContactController : NSObject{
                 observer.onCompleted();
             }catch(let error){
                 print("Contact saving is failed. error[\(error)]");
+                Crashlytics.crashlytics().record(error: error);
                 observer.onError(error);
             }
             
