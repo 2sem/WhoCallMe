@@ -20,17 +20,26 @@ class RxContactController : NSObject{
      */
     func requestAccess() -> Observable<Bool>{
         return Observable<Bool>.create({ (observer) -> Disposable in
-            self.contactStore.requestAccess(for: .contacts) { (result, error) in
-                if let error = error{
-                    //emit error to allow to access contacts
-                    Crashlytics.crashlytics().record(error: error);
-                    observer.onError(error);
-                    return;
+//            DispatchQueue.main.async {
+                self.contactStore.requestAccess(for: .contacts) { (result, error) in
+                    if let error = error{
+                        //emit error to allow to access contacts
+                        Crashlytics.crashlytics().record(error: error);
+                        observer.onError(error);
+                        return;
+                    }
+                    
+                    if result{
+                        observer.onNext(result);
+                        observer.onCompleted(); //leesam
+                    }else{
+                        let err = NSError.init(domain: "contact.access.permission", code: -1, userInfo: ["message": "no permission"]);
+                        Crashlytics.crashlytics().record(error: err);
+                        observer.onNext(result);
+                        observer.onError(err); //no permission?
+                    }
                 }
-                
-                observer.onNext(result);
-                observer.onCompleted();
-            }
+//            }
             
             return Disposables.create();
         })

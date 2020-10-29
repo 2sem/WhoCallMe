@@ -153,11 +153,24 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad) in
-            Analytics.logLeesamEvent(.convertOne, parameters: [:]);
             self.convertOneBag = DisposeBag();
-            self.setState(.running);
+            RxContactController.shared.requestAccess()
+                .observeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+                .subscribe(onNext: { [unowned self]result in
+                    
+                    }, onError: { [unowned self](error) in
+                        print("load contacts error[\(error)]");
+                        DispatchQueue.main.async { [weak self] in
+                            self?.openContactsSettings();
+                        }
+                    }, onCompleted: { [unowned self] in
+                        self.setState(.running);
+
+                        Analytics.logLeesamEvent(.convertOne, parameters: [:]);
+                        self.selectContact(false);
+                }).disposed(by: self.convertOneBag);
+            
             //button.isUserInteractionEnabled = false;
-            self.selectContact(false);
         }
     }
     
@@ -710,12 +723,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func selectContact(_ needToPreview : Bool = false){
         self.mode.onNext(needToPreview ? .previewOne : .convertOne);
         
-        //prepares native view controller lists of contact
-        let picker = CNContactPickerViewController();
-        picker.displayedPropertyKeys = [CNContactGivenNameKey, CNContactNameSuffixKey, CNContactNicknameKey, CNContactImageDataKey, CNContactOrganizationNameKey, CNContactDepartmentNameKey, CNContactJobTitleKey, CNContactEmailAddressesKey, CNContactPhoneNumbersKey, CNContactNoteKey];
-        picker.delegate = self;
+        DispatchQueue.main.async { [weak self] in
+            //prepares native view controller lists of contact
+            let picker = CNContactPickerViewController();
+            picker.displayedPropertyKeys = [CNContactGivenNameKey, CNContactNameSuffixKey, CNContactNicknameKey, CNContactImageDataKey, CNContactOrganizationNameKey, CNContactDepartmentNameKey, CNContactJobTitleKey, CNContactEmailAddressesKey, CNContactPhoneNumbersKey, CNContactNoteKey];
+            picker.delegate = self;
 
-        self.present(picker, animated: true, completion: nil);
+            self?.present(picker, animated: true, completion: nil);
+        }
+        
     }
     
     /**
