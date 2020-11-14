@@ -1,0 +1,16 @@
+name: Test
+on:
+  pull_request:
+    branches:
+    - master
+jobs:
+  test:
+    name: Testing Swift Package and iOS app
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Selecting XCode 12.1
+        run: sudo xcode-select -switch /Applications/Xcode_12.1.app
+      - name: Testing Swift package
+        run: exec ./.github/scripts/test_swift_package.sh
