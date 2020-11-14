@@ -152,7 +152,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
-        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad) in
+        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad, result) in
             self.convertOneBag = DisposeBag();
             RxContactController.shared.requestAccess()
                 .observeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
@@ -184,7 +184,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         Analytics.logLeesamEvent(.startClear, parameters: [:]);
-        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad) in
+        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad, result) in
             RxContactController.shared.requestAccess()
                 .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .filter{ [unowned self]result in
@@ -308,7 +308,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var btn_Preview: UIButton!
     @IBAction func onClick_Preview(_ sender: UIButton) {
         Analytics.logLeesamEvent(.previewCall, parameters: [:]);
-        AppDelegate.sharedGADManager?.show(unit: .full) { [weak self](unit, ad) in
+        AppDelegate.sharedGADManager?.show(unit: .full) { [weak self](unit, ad, result) in
             self?.selectContact(true);
         }
         
@@ -461,7 +461,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
-        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad) in
+        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad, result) in
             Analytics.logLeesamEvent(.startConvertAll, parameters: [:]);
             RxContactController.shared.requestAccess()
                 .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))

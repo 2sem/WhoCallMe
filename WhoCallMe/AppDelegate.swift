@@ -170,6 +170,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
 extension AppDelegate : GADManagerDelegate{
     typealias E = GADUnitName
     
+    func GAD<E>(manager: GADManager<E>, lastPreparedTimeForUnit unit: E) -> Date{
+        return Date();
+    }
+    
+    func GAD<E>(manager: GADManager<E>, updateLastPreparedTimeForUnit unit: E, preparedTime time: Date){
+        
+    }
+    
     func GAD<GADUnitName>(manager: GADManager<GADUnitName>, updatShownTimeForUnit unit: GADUnitName, showTime time: Date){
         let now = Date();
         if LSDefaults.LastFullADShown > now{
@@ -182,9 +190,5 @@ extension AppDelegate : GADManagerDelegate{
     
     func GAD<GADUnitName>(manager: GADManager<GADUnitName>, lastShownTimeForUnit unit: GADUnitName) -> Date{
         return LSDefaults.LastFullADShown;
-    }
-    
-    func GAD<GADUnitName>(manager: GADManager<GADUnitName>, willPresentADForUnit unit: GADUnitName){
-        
     }
 }
