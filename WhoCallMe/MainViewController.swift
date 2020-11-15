@@ -833,7 +833,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //Gets original note if search tag has been found in it
             if range != nil{
-                originalNoteHigh = String(note[...range!.lowerBound]);
+                originalNoteHigh = String(note[..<range!.lowerBound]);
                 originalNoteLow = String(note[range!.upperBound...]);
             }else{
                 originalNoteHigh = note;
@@ -1235,13 +1235,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if self.needToPreview{
             self.preview(contact);
         }else{
+            self.updateProgress(0, totalCount: 1);
+            
             Observable<CNContact>.just(contact)
                 .delay(0.1, scheduler: MainScheduler.instance)
                 .flatMapLatest({ [unowned self](contact) -> Observable<Bool> in
                     return self.convert(contact);
                 })
                 .asDriver(onErrorJustReturn: false)
-                .drive(onNext: { [unowned self](contact) in
+                .drive(onNext: { [unowned self](result) in
+                    if result{
+                        self.increaseProgressed();
+                    }
                     self.setState(.completed);
                 }, onCompleted: { [unowned self] in
                     self.btn_Gen_Select.isUserInteractionEnabled = true;

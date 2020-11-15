@@ -8,6 +8,9 @@
 Pods/
 Podfile.lock
 
+#Archives
+archives/
+
 ### Swift ###
 # Xcode
 #
