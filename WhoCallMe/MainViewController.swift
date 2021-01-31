@@ -340,6 +340,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //google Bottom AD - leak?
         let req = GADRequest();
+        req.hideTestLabel();
         if self.enableAds{
             self.bannerView.load(req);
         }

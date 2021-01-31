@@ -1,0 +1,24 @@
+stages:
+    - build
+    - clean
+build_project:
+    stage: build
+    script:
+        #- xcodebuild clean -workspace loahelper.xcworkspace -scheme loahelper | xcpretty
+        - pod install
+        - projectname=WhoCallMe
+        - versionstring=$(versionnumber=$(xcodebuild -project ${projectname}.xcodeproj -showBuildSettings | grep "MARKETING_VERSION" | sed 's/[ ]*MARKETING_VERSION = //')
+        - versionnumber=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${projectname}/Info.plist")
+        - archivename=${projectname}_${versionstring}_${versionnumber}
+        - xcodebuild -workspace ${projectname}.xcworkspace -scheme ${projectname} clean archive -configuration Release -archivePath archives/${archivename}.xcarchive | xcpretty
+        - xcodebuild -exportArchive -archivePath archives/${archivename}.xcarchive -exportOptionsPlist AppStoreUpload.plist -exportPath exports | xcpretty
+        - xcrun altool --upload-app -f exports/${projectname}.ipa -u $APPLE_ID -p $APPLE_PWD | xcpretty
+        #- xcodebuild -workspace loahelper.xcworkspace -scheme loahelper -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.1' | xcpretty -s
+    #tags:
+        #- ios_11
+        #- osx_10-15-7
+
+clean_project:
+    stage: clean
+    script:
+        - cd ../..
