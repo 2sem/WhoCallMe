@@ -7,7 +7,7 @@ target 'WhoCallMe' do
   inhibit_all_warnings!
 
   # Pods for WhoCallMe
-  pod 'Firebase/Core'
+  #pod 'Firebase/Core'
   pod 'Firebase/AdMob'
   
   # Add the pod for Firebase Crashlytics
@@ -27,6 +27,12 @@ target 'WhoCallMe' do
   
   pod 'Fabric'
   pod 'Crashlytics'
+  
+  #  post_install do |installer|
+  #    installer.pods_project.build_configurations.each do |config|
+  #      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+  #    end
+  #  end
   
   target 'WhoCallMeUITests' do
     inherit! :search_paths

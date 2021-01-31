@@ -73,6 +73,8 @@
 		2C8F18F71CC0DBDF00A11FAA /* btn_delete_normal-05.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */; };
 		2C8F18F91CC0DBE800A11FAA /* btn_delete_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */; };
 		2C8F18FB1CC0DBF700A11FAA /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */; };
+		2CB4EB35255FDDE90090D957 /* AppStoreUpload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */; };
+		2CB4EB39255FE6EC0090D957 /* .gitlab-ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */; };
 		2CDDEFB7250C59E50065B1B7 /* LSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */; };
 		2CE7CAC11CBF7D9D0032CB20 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC01CBF7D9D0032CB20 /* icon.png */; };
 		2CE7CAC31CBF82080032CB20 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */; };
@@ -176,6 +178,8 @@
 		2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_delete_normal-05.png"; sourceTree = "<group>"; };
 		2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete_pressed.png; sourceTree = "<group>"; };
 		2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_delete.png; sourceTree = "<group>"; };
+		2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppStoreUpload.plist; sourceTree = "<group>"; };
+		2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
 		2CD00FEE254B03EC0011CFCC /* WhoCallMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhoCallMe.entitlements; sourceTree = "<group>"; };
 		2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSSettingsViewController.swift; sourceTree = "<group>"; };
 		2CE7CAC01CBF7D9D0032CB20 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 		2C4E48761C9136E900CC4BA5 = {
 			isa = PBXGroup;
 			children = (
+				2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */,
+				2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */,
 				2C14571221148A05004DEDC1 /* .gitignore */,
 				2CCF228A1C924A0C0080B206 /* leesam */,
 				2C4E48811C9136E900CC4BA5 /* WhoCallMe */,
@@ -552,6 +558,7 @@
 				2C4E48B41C91379300CC4BA5 /* LaunchScreen.storyboard in Resources */,
 				2C14571321148A05004DEDC1 /* .gitignore in Resources */,
 				2C5C3DF01C9CFD9100C94417 /* contacts_.png in Resources */,
+				2CB4EB35255FDDE90090D957 /* AppStoreUpload.plist in Resources */,
 				2CE7CAC81CBF87550032CB20 /* background.png in Resources */,
 				2C3D5DBB1C93074A00BF2B5F /* blank.png in Resources */,
 				2C5D3D9A1CC674D3000EF11A /* InfoPlist.strings in Resources */,
@@ -575,6 +582,7 @@
 				2C8F18EF1CC0C0AF00A11FAA /* icon_convert_select.png in Resources */,
 				2C4E48881C9136E900CC4BA5 /* Main.storyboard in Resources */,
 				2C18A04C1FD3C15400AF3381 /* job.png in Resources */,
+				2CB4EB39255FE6EC0090D957 /* .gitlab-ci.yml in Resources */,
 				2C5C3DF21C9CFDAD00C94417 /* stop.png in Resources */,
 				2C18A04E1FD3C19200AF3381 /* department.png in Resources */,
 				2C8F18FB1CC0DBF700A11FAA /* icon_delete.png in Resources */,
@@ -838,6 +846,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -895,6 +904,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -929,7 +939,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -956,7 +966,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
