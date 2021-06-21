@@ -21,7 +21,7 @@ extension GADInterstialManagerDelegate{
     }
 }
 
-class GADInterstialManager : NSObject, GADInterstitialDelegate{
+class GADInterstialManager : NSObject{
     var window : UIWindow;
     var unitId : String;
     var interval : TimeInterval = 60.0 * 60.0 * 3.0;
@@ -52,7 +52,7 @@ class GADInterstialManager : NSObject, GADInterstitialDelegate{
         self.delegate?.GADInterstialUpdate(showTime: Date());
     }
     
-    var fullAd : GADInterstitial?
+    var fullAd : GADInterstitialAd?
     var canShow : Bool{
         get{
             var value = true;
@@ -96,27 +96,21 @@ class GADInterstialManager : NSObject, GADInterstitialDelegate{
          return;
          }*/
         
-        guard self.fullAd?.hasBeenUsed ?? true else{
-            print("full ad is not yet used - self.fullAd?.hasBeenUsed");
+        guard self.fullAd?.isReady() ?? true else{
+            print("full ad is not ready - self.fullAd?.isReady");
             self.__show();
             return;
         }
         
         print("create new full ad");
         
-        self.fullAd?.delegate = nil;
-        self.fullAd = GADInterstitial(adUnitID: self.unitId);
-        self.fullAd?.delegate = self;
         let req = GADRequest();
-        #if DEBUG
-            req.testDevices = ["5fb1f297b8eafe217348a756bdb2de56"];
-        #endif
-        /*if let alert = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController as? UIAlertController{
-         alert.dismiss(animated: false, completion: nil);
-         }
-         }*/
         
-        self.fullAd?.load(req);
+        GADInterstitialAd.load(withAdUnitID: self.unitId, request: req, completionHandler: { (newAd, error) in
+            self.fullAd = newAd;
+            self.fullAd?.fullScreenContentDelegate = self;
+            self._show();
+        })
         self.delegate?.GADInterstialWillLoad();
     }
     
@@ -145,21 +139,21 @@ class GADInterstialManager : NSObject, GADInterstitialDelegate{
         self.delegate?.GADInterstialUpdate(showTime: Date());
         //RSDefaults.LastFullADShown = Date();
     }
-    
-    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-        print("Interstitial is ready to be presented");
-        
-        self._show();
-    }
-    
-    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+}
+
+extension GADInterstialManager : GADFullScreenContentDelegate{
+    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         self.fullAd = nil;
     }
     
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         /*self.window.rootViewController?.showAlert(title: "후원해주셔서 감사합니다.", msg: "불편하신 사항은 리뷰에 남겨주시면 반영하겠습니다.", actions: [UIAlertAction.init(title: "확인", style: .default, handler: nil), UIAlertAction.init(title: "평가하기", style: .default, handler: { (act) in
-            UIApplication.shared.openReview();
-        })], style: .alert);*/
+        //            UIApplication.shared.openReview();
+        //        })], style: .alert);*/
     }
-
+//    func interstitialDidReceiveAd(_ ad: GADInterstitialAd) {
+//        print("Interstitial is ready to be presented");
+//
+//        self._show();
+//    }
 }

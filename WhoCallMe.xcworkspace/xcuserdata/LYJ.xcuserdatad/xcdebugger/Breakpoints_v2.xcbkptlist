@@ -15,8 +15,8 @@
             timestampString = "590128148.967123"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "897"
-            endingLineNumber = "897"
+            startingLineNumber = "887"
+            endingLineNumber = "887"
             landmarkName = "askRestore(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -32,8 +32,8 @@
             timestampString = "590128148.96917"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "922"
-            endingLineNumber = "922"
+            startingLineNumber = "912"
+            endingLineNumber = "912"
             landmarkName = "restore(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -49,8 +49,8 @@
             timestampString = "590128148.969494"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "921"
-            endingLineNumber = "921"
+            startingLineNumber = "911"
+            endingLineNumber = "911"
             landmarkName = "restore(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -66,8 +66,8 @@
             timestampString = "590128148.969805"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "920"
-            endingLineNumber = "920"
+            startingLineNumber = "910"
+            endingLineNumber = "910"
             landmarkName = "restore(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -83,8 +83,8 @@
             timestampString = "590128148.970117"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "896"
-            endingLineNumber = "896"
+            startingLineNumber = "886"
+            endingLineNumber = "886"
             landmarkName = "MainViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -117,8 +117,8 @@
             timestampString = "590128148.970721"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1181"
-            endingLineNumber = "1181"
+            startingLineNumber = "1171"
+            endingLineNumber = "1171"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -134,8 +134,8 @@
             timestampString = "590128148.971022"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1187"
-            endingLineNumber = "1187"
+            startingLineNumber = "1177"
+            endingLineNumber = "1177"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -151,8 +151,8 @@
             timestampString = "590128148.971337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "923"
-            endingLineNumber = "923"
+            startingLineNumber = "913"
+            endingLineNumber = "913"
             landmarkName = "restore(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -168,8 +168,8 @@
             timestampString = "590128148.9716361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1231"
-            endingLineNumber = "1231"
+            startingLineNumber = "1221"
+            endingLineNumber = "1221"
             landmarkName = "MainViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -270,8 +270,8 @@
             timestampString = "590128148.973038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "622"
-            endingLineNumber = "622"
+            startingLineNumber = "612"
+            endingLineNumber = "612"
             landmarkName = "hasDataToGenerate(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -287,8 +287,8 @@
             timestampString = "590128148.973345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "625"
-            endingLineNumber = "625"
+            startingLineNumber = "615"
+            endingLineNumber = "615"
             landmarkName = "hasDataToGenerate(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -304,8 +304,8 @@
             timestampString = "590128148.973965"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1088"
-            endingLineNumber = "1088"
+            startingLineNumber = "1078"
+            endingLineNumber = "1078"
             landmarkName = "applyToTemplate(_:contact:needBackup:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -321,8 +321,8 @@
             timestampString = "590128148.9752491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "612"
-            endingLineNumber = "612"
+            startingLineNumber = "602"
+            endingLineNumber = "602"
             landmarkName = "MainViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -355,8 +355,8 @@
             timestampString = "590128148.9770401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "967"
-            endingLineNumber = "967"
+            startingLineNumber = "957"
+            endingLineNumber = "957"
             landmarkName = "MainViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -372,8 +372,8 @@
             timestampString = "590128148.9773819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "799"
-            endingLineNumber = "799"
+            startingLineNumber = "789"
+            endingLineNumber = "789"
             landmarkName = "generateIndex(_:original:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -454,8 +454,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "708"
-            endingLineNumber = "708"
+            startingLineNumber = "698"
+            endingLineNumber = "698"
             landmarkName = "preview(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -470,8 +470,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "712"
-            endingLineNumber = "712"
+            startingLineNumber = "702"
+            endingLineNumber = "702"
             landmarkName = "preview(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -630,8 +630,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "683"
-            endingLineNumber = "683"
+            startingLineNumber = "673"
+            endingLineNumber = "673"
             landmarkName = "convert(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -646,8 +646,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1244"
-            endingLineNumber = "1244"
+            startingLineNumber = "1234"
+            endingLineNumber = "1234"
             landmarkName = "contactPicker(_:didSelect:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -678,8 +678,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "695"
-            endingLineNumber = "695"
+            startingLineNumber = "685"
+            endingLineNumber = "685"
             landmarkName = "convert(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -694,8 +694,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
+            startingLineNumber = "680"
+            endingLineNumber = "680"
             landmarkName = "convert(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -710,8 +710,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1251"
-            endingLineNumber = "1251"
+            startingLineNumber = "1241"
+            endingLineNumber = "1241"
             landmarkName = "contactPicker(_:didSelect:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -726,8 +726,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1253"
-            endingLineNumber = "1253"
+            startingLineNumber = "1243"
+            endingLineNumber = "1243"
             landmarkName = "contactPicker(_:didSelect:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -790,8 +790,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "979"
-            endingLineNumber = "979"
+            startingLineNumber = "969"
+            endingLineNumber = "969"
             landmarkName = "updateProgress(_:totalCount:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -806,8 +806,8 @@
             filePath = "WhoCallMe/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "975"
-            endingLineNumber = "975"
+            startingLineNumber = "965"
+            endingLineNumber = "965"
             landmarkName = "updateProgress(_:totalCount:)"
             landmarkType = "7">
          </BreakpointContent>

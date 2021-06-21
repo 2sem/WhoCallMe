@@ -26,7 +26,14 @@ extension Analytics{
             name = "미리보기";
         }
         
-        Analytics.setScreenName(name, screenClass: className);
+        var params : [String : Any] = [AnalyticsParameterScreenClass : type(of: self)];
+        
+        if let name = name{
+            params[AnalyticsParameterScreenName] = name;
+        }
+        
+        FirebaseAnalytics.Analytics.logEvent(AnalyticsEventScreenView,
+                                             parameters: params);
         print("[\(#function)] set screen name for firebase analytics. name[\(name ?? "")] screen[\(className ?? "")]");
     }
     
