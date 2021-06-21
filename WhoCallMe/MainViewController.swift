@@ -15,10 +15,10 @@ import LSExtensions
 import RxSwift
 import RxCocoa
 import LSCircleProgressView
-import Crashlytics
+import FirebaseCrashlytics
 import Firebase
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CNContactPickerDelegate, GADBannerViewDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CNContactPickerDelegate {
     
     class Cell_Ids{
         static let OptionPhotoCell = "OptionPhotoCell";
@@ -326,7 +326,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //Crashlytics.sharedInstance().crash();
     }
     
-    var googleFullAD : GADInterstitial?;
+    var googleFullAD : GADInterstitialAd?;
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -545,16 +545,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             print("hide banner");
         }
         self.bannerView.isHidden = !visible;
-    }
-    
-    /// MARK: GADBannerViewDelegate
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        self.showBanner(visible: true);
-    }
-    
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("banner error -  \(error)");
-        self.showBanner(visible: false);
     }
     
     fileprivate func openContactsSettings(){
@@ -1292,4 +1282,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     */
 
+}
+
+extension MainViewController : GADBannerViewDelegate{
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        self.showBanner(visible: true);
+    }
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("banner error -  \(error)");
+        self.showBanner(visible: false);
+    }
 }

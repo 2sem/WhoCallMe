@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '10.0'
+ platform :ios, '10.0'
 
 target 'WhoCallMe' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
@@ -8,7 +8,7 @@ target 'WhoCallMe' do
 
   # Pods for WhoCallMe
   #pod 'Firebase/Core'
-  pod 'Firebase/AdMob'
+#  pod 'Firebase/AdMob'
   
   # Add the pod for Firebase Crashlytics
   pod 'Firebase/Crashlytics'
@@ -19,14 +19,14 @@ target 'WhoCallMe' do
   pod 'KakaoOpenSDK'
   pod 'LSExtensions', :path => '~/Projects/leesam/pods/LSExtensions/src/LSExtensions'
   #pod 'LSExtensions'
-  pod 'GADManager', :path => '~/Projects/leesam/pods/GADManager/src/GADManager'
+  pod 'GADManager'#, :path => '~/Projects/leesam/pods/GADManager/src/GADManager'
   #pod 'LSCircleProgressView'
   pod 'LSCircleProgressView', :path => '~/Projects/leesam/pods/LSCircleProgressView/src/LSCircleProgressView'
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
   
-  pod 'Fabric'
-  pod 'Crashlytics'
+#  pod 'Fabric'
+#  pod 'Crashlytics'
   
   #  post_install do |installer|
   #    installer.pods_project.build_configurations.each do |config|

@@ -10,7 +10,6 @@
 		2C04E0D21E23D3C5008B1213 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5B5E311C9EAF8000C3F0E3 /* iAd.framework */; };
 		2C07E4F31E234CB200CDFC32 /* credif.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C07E4F21E234CB200CDFC32 /* credif.png */; };
 		2C07E4F51E234DF500CDFC32 /* GADBannerView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07E4F41E234DF500CDFC32 /* GADBannerView+.swift */; };
-		2C12938B223A91B300E7E19E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C12938A223A91B200E7E19E /* GoogleService-Info.plist */; };
 		2C12FC7820A148E80082A309 /* RxContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12FC7720A148E80082A309 /* RxContactController.swift */; };
 		2C14048320A1A5BA001B83B6 /* LSCircleProgressView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */; };
 		2C14571321148A05004DEDC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2C14571221148A05004DEDC1 /* .gitignore */; };
@@ -75,6 +74,8 @@
 		2C8F18FB1CC0DBF700A11FAA /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */; };
 		2CB4EB35255FDDE90090D957 /* AppStoreUpload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */; };
 		2CB4EB39255FE6EC0090D957 /* .gitlab-ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */; };
+		2CCEA2872680D99F00F71240 /* GADRewardedAd+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEA2862680D99F00F71240 /* GADRewardedAd+.swift */; };
+		2CCEA2912680DC3900F71240 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C12938A223A91B200E7E19E /* GoogleService-Info.plist */; };
 		2CDDEFB7250C59E50065B1B7 /* LSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */; };
 		2CE7CAC11CBF7D9D0032CB20 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC01CBF7D9D0032CB20 /* icon.png */; };
 		2CE7CAC31CBF82080032CB20 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */; };
@@ -180,6 +181,7 @@
 		2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_delete.png; sourceTree = "<group>"; };
 		2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppStoreUpload.plist; sourceTree = "<group>"; };
 		2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
+		2CCEA2862680D99F00F71240 /* GADRewardedAd+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADRewardedAd+.swift"; sourceTree = "<group>"; };
 		2CD00FEE254B03EC0011CFCC /* WhoCallMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhoCallMe.entitlements; sourceTree = "<group>"; };
 		2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSSettingsViewController.swift; sourceTree = "<group>"; };
 		2CE7CAC01CBF7D9D0032CB20 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				2C07E4F41E234DF500CDFC32 /* GADBannerView+.swift */,
 				2C20BD541F89F08600CCC5A8 /* GADInterstialManager.swift */,
 				2C20BD531F89F08600CCC5A8 /* GADInterstitial+.swift */,
+				2CCEA2862680D99F00F71240 /* GADRewardedAd+.swift */,
 				2C20BD521F89F08500CCC5A8 /* GADRewardManager.swift */,
 				2C20BD581F89F36100CCC5A8 /* ReviewManager.swift */,
 				2C14A27F22C70079004D9A09 /* Analytics+.swift */,
@@ -571,6 +574,7 @@
 				2C8F18F31CC0C59E00A11FAA /* btn_revert_pressed.png in Resources */,
 				2C8DD9A11CC1C2CF0063BB92 /* circle_btn_pressed.png in Resources */,
 				2CE7CACE1CBF88FD0032CB20 /* btn_view_pressed.png in Resources */,
+				2CCEA2912680DC3900F71240 /* GoogleService-Info.plist in Resources */,
 				2C8DD99D1CC1C2C40063BB92 /* circle_bg.png in Resources */,
 				2C8F18F51CC0C5EF00A11FAA /* icon_revert.png in Resources */,
 				2CFB58B91E5E97D300C94DB5 /* icon_view.png in Resources */,
@@ -595,7 +599,6 @@
 				2C07E4F31E234CB200CDFC32 /* credif.png in Resources */,
 				2CE7CACD1CBF88FD0032CB20 /* btn_view_normal.png in Resources */,
 				2C18A0521FD3C39500AF3381 /* call_allow.png in Resources */,
-				2C12938B223A91B300E7E19E /* GoogleService-Info.plist in Resources */,
 				2C18A0501FD3C1AE00AF3381 /* organization.png in Resources */,
 				2C8F18F71CC0DBDF00A11FAA /* btn_delete_normal-05.png in Resources */,
 			);
@@ -636,7 +639,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"",
 			);
 			outputFileListPaths = (
 			);
@@ -644,7 +647,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/FirebaseCrashlytics/run -gsp \"${PROJECT_DIR}/${PROJECT}/GoogleService-Info.plist\"\n";
+			shellScript = "${PODS_ROOT}/FirebaseCrashlytics/run -gsp \"${PROJECT_DIR}/${PROJECT}/GoogleService-Info.plist\" -p ios\n";
 		};
 		3090E849B238BCDA14187680 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -750,6 +753,7 @@
 				2C649D471C93C069005C26A3 /* ContactOrgCell.swift in Sources */,
 				2C5C3DF91C9D1DBC00C94417 /* WCMMessageManager.swift in Sources */,
 				2C53524A1C968B5C00D719EF /* OriginalContract+CoreDataProperties.swift in Sources */,
+				2CCEA2872680D99F00F71240 /* GADRewardedAd+.swift in Sources */,
 				2C3D5DBD1C93090900BF2B5F /* ContactTemplateViewController.swift in Sources */,
 				2C4E488B1C9136E900CC4BA5 /* WhoCallMe.xcdatamodeld in Sources */,
 				2C12FC7820A148E80082A309 /* RxContactController.swift in Sources */,
@@ -939,7 +943,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.2;
+				MARKETING_VERSION = 2.2.3;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -966,7 +970,7 @@
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.2;
+				MARKETING_VERSION = 2.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
