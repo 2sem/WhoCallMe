@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import StringLogger
 
 class LSDefaults{
     private static var isInitialized = false;
@@ -52,6 +53,9 @@ class LSDefaults{
         static let needPhotoContainsJob = "needPhotoContainsJob";
 
         static let LaunchCount = "LaunchCount";
+        
+        static let AdsShownCount = "AdsShownCount";
+        static let AdsTrackingRequested = "AdsTrackingRequested";
     }
     
     static var isUpsideDown : Bool?{
@@ -222,3 +226,56 @@ class LSDefaults{
         }
     }
 }
+
+extension LSDefaults{
+    static var AdsShownCount : Int{
+        get{
+            return Defaults.integer(forKey: Keys.AdsShownCount);
+        }
+        
+        set{
+            Defaults.set(newValue, forKey: Keys.AdsShownCount);
+        }
+    }
+    
+    static func increateAdsShownCount(){
+        guard AdsShownCount < 3 else {
+            return
+        }
+        
+        AdsShownCount += 1;
+        "Ads Shown Count[\(AdsShownCount)]".debug();
+    }
+    
+    static var AdsTrackingRequested : Bool{
+        get{
+            return Defaults.bool(forKey: Keys.AdsTrackingRequested);
+        }
+        
+        set{
+            Defaults.set(newValue, forKey: Keys.AdsTrackingRequested);
+        }
+    }
+    
+    static func requestAppTrackingIfNeed() -> Bool{
+        guard !AdsTrackingRequested else{
+            return false;
+        }
+        
+        guard AdsShownCount >= 1 else{
+            AdsShownCount += 1;
+            return false;
+        }
+        
+        guard #available(iOS 14.0, *) else{
+            return false;
+        }
+        
+        AppDelegate.sharedGADManager?.requestPermission(completion: { (result) in
+            AdsTrackingRequested = true;
+        })
+        
+        return true;
+    }
+}
+
