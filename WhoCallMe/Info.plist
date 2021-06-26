@@ -25,7 +25,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>118</string>
+	<string>117</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-9684378399371172~4206633246</string>
 	<key>GADUnitIdentifiers</key>
@@ -56,7 +56,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>This app needs access contacts to convert</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>맞춤형 광고 허용을 통해 개발자에게 더많은 수익을 기부할 수 있습니다.</string>
+	<string>You can donate to app developer by allow personalized ads</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
