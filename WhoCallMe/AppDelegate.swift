@@ -72,6 +72,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        print("app become active");
+        #if DEBUG
+        let test = true;
+        #else
+        let test = false;
+        #endif
+        
+        guard !LSDefaults.requestAppTrackingIfNeed() else{
+            return;
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
