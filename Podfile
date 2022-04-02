@@ -19,7 +19,7 @@ target 'WhoCallMe' do
   pod 'KakaoOpenSDK'
   pod 'LSExtensions', :path => '~/Projects/leesam/pods/LSExtensions/src/LSExtensions'
   #pod 'LSExtensions'
-  pod 'GADManager'#, :path => '~/Projects/leesam/pods/GADManager/src/GADManager'
+  pod 'GADManager', :path => '~/Projects/leesam/pods/GADManager/src/GADManager'
   #pod 'LSCircleProgressView'
   pod 'LSCircleProgressView', :path => '~/Projects/leesam/pods/LSCircleProgressView/src/LSCircleProgressView'
   pod 'RxSwift', '~> 5'

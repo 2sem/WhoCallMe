@@ -8,4 +8,4 @@
 CFBundleDisplayName = "누군지다알아";
 CFBundleName = "누군지다알아";
 NSContactsUsageDescription = "변환을 위해 연락처 접근이 필요합니다.";
-NSUserTrackingUsageDescription = "맞춤형 광고 허용을 통해 개발자에게 더많은 수익을 기부할 수 있습니다."
+NSUserTrackingUsageDescription = "맞춤형 광고 허용을 통해 개발자에게 더많은 수익을 기부할 수 있습니다.";
