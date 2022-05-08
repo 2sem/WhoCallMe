@@ -8,6 +8,8 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIcons</key>
 	<dict/>
 	<key>CFBundleIcons~ipad</key>
@@ -25,7 +27,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>119</string>
+	<string>120</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-9684378399371172~4206633246</string>
 	<key>GADUnitIdentifiers</key>
@@ -56,7 +58,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>This app needs access contacts to convert</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>You can donate to app developer by allow personalized ads</string>
+	<string>Your data will be used to deliver personalized ads to you</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
