@@ -57,6 +57,7 @@
 		2C649D601C941B93005C26A3 /* OptionOrgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C649D5F1C941B93005C26A3 /* OptionOrgCell.swift */; };
 		2C649D621C941BB5005C26A3 /* OptionDeptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C649D611C941BB5005C26A3 /* OptionDeptCell.swift */; };
 		2C649D641C941BC1005C26A3 /* OptionJobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C649D631C941BC1005C26A3 /* OptionJobCell.swift */; };
+		2C73A3E528B5163A005C4DCF /* .github in Resources */ = {isa = PBXBuildFile; fileRef = 2C73A3E428B5163A005C4DCF /* .github */; };
 		2C8DD9961CC1BD840063BB92 /* icon_company.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8DD9951CC1BD840063BB92 /* icon_company.png */; };
 		2C8DD9981CC1BD8C0063BB92 /* icon_position.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8DD9971CC1BD8C0063BB92 /* icon_position.png */; };
 		2C8DD99A1CC1BD930063BB92 /* icon_team.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8DD9991CC1BD930063BB92 /* icon_team.png */; };
@@ -72,8 +73,8 @@
 		2C8F18F71CC0DBDF00A11FAA /* btn_delete_normal-05.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */; };
 		2C8F18F91CC0DBE800A11FAA /* btn_delete_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */; };
 		2C8F18FB1CC0DBF700A11FAA /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */; };
+		2C9FBD9428B27BBB00E1235E /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 2C9FBD9328B27BBB00E1235E /* Fastfile */; };
 		2CB4EB35255FDDE90090D957 /* AppStoreUpload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */; };
-		2CB4EB39255FE6EC0090D957 /* .gitlab-ci.yml in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */; };
 		2CCEA2872680D99F00F71240 /* GADRewardedAd+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEA2862680D99F00F71240 /* GADRewardedAd+.swift */; };
 		2CCEA2912680DC3900F71240 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C12938A223A91B200E7E19E /* GoogleService-Info.plist */; };
 		2CDDEFB7250C59E50065B1B7 /* LSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */; };
@@ -164,6 +165,7 @@
 		2C649D5F1C941B93005C26A3 /* OptionOrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionOrgCell.swift; sourceTree = "<group>"; };
 		2C649D611C941BB5005C26A3 /* OptionDeptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionDeptCell.swift; sourceTree = "<group>"; };
 		2C649D631C941BC1005C26A3 /* OptionJobCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionJobCell.swift; sourceTree = "<group>"; };
+		2C73A3E428B5163A005C4DCF /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = "<group>"; };
 		2C8DD9951CC1BD840063BB92 /* icon_company.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_company.png; sourceTree = "<group>"; };
 		2C8DD9971CC1BD8C0063BB92 /* icon_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_position.png; sourceTree = "<group>"; };
 		2C8DD9991CC1BD930063BB92 /* icon_team.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_team.png; sourceTree = "<group>"; };
@@ -179,8 +181,8 @@
 		2C8F18F61CC0DBDF00A11FAA /* btn_delete_normal-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_delete_normal-05.png"; sourceTree = "<group>"; };
 		2C8F18F81CC0DBE800A11FAA /* btn_delete_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete_pressed.png; sourceTree = "<group>"; };
 		2C8F18FA1CC0DBF700A11FAA /* icon_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_delete.png; sourceTree = "<group>"; };
+		2C9FBD9328B27BBB00E1235E /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppStoreUpload.plist; sourceTree = "<group>"; };
-		2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
 		2CCEA2862680D99F00F71240 /* GADRewardedAd+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADRewardedAd+.swift"; sourceTree = "<group>"; };
 		2CD00FEE254B03EC0011CFCC /* WhoCallMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhoCallMe.entitlements; sourceTree = "<group>"; };
 		2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSSettingsViewController.swift; sourceTree = "<group>"; };
@@ -266,7 +268,8 @@
 		2C4E48761C9136E900CC4BA5 = {
 			isa = PBXGroup;
 			children = (
-				2CB4EB38255FE6EC0090D957 /* .gitlab-ci.yml */,
+				2C73A3E428B5163A005C4DCF /* .github */,
+				2C9FBD9228B27B3100E1235E /* fastlane */,
 				2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */,
 				2C14571221148A05004DEDC1 /* .gitignore */,
 				2CCF228A1C924A0C0080B206 /* leesam */,
@@ -406,6 +409,14 @@
 				2C8DD9991CC1BD930063BB92 /* icon_team.png */,
 			);
 			path = Preview;
+			sourceTree = "<group>";
+		};
+		2C9FBD9228B27B3100E1235E /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				2C9FBD9328B27BBB00E1235E /* Fastfile */,
+			);
+			path = fastlane;
 			sourceTree = "<group>";
 		};
 		2CAE22C525405D600003FBF7 /* extensions */ = {
@@ -584,9 +595,9 @@
 				2C4E488D1C9136E900CC4BA5 /* Assets.xcassets in Resources */,
 				2C8F18EB1CC0C08300A11FAA /* btn_convert_select_normal.png in Resources */,
 				2C8F18EF1CC0C0AF00A11FAA /* icon_convert_select.png in Resources */,
+				2C73A3E528B5163A005C4DCF /* .github in Resources */,
 				2C4E48881C9136E900CC4BA5 /* Main.storyboard in Resources */,
 				2C18A04C1FD3C15400AF3381 /* job.png in Resources */,
-				2CB4EB39255FE6EC0090D957 /* .gitlab-ci.yml in Resources */,
 				2C5C3DF21C9CFDAD00C94417 /* stop.png in Resources */,
 				2C18A04E1FD3C19200AF3381 /* department.png in Resources */,
 				2C8F18FB1CC0DBF700A11FAA /* icon_delete.png in Resources */,
@@ -596,6 +607,7 @@
 				2C8DD9981CC1BD8C0063BB92 /* icon_position.png in Resources */,
 				2CE7CAC11CBF7D9D0032CB20 /* icon.png in Resources */,
 				2C5C3DEE1C9CFD8600C94417 /* contact.png in Resources */,
+				2C9FBD9428B27BBB00E1235E /* Fastfile in Resources */,
 				2C07E4F31E234CB200CDFC32 /* credif.png in Resources */,
 				2CE7CACD1CBF88FD0032CB20 /* btn_view_normal.png in Resources */,
 				2C18A0521FD3C39500AF3381 /* call_allow.png in Resources */,
@@ -675,7 +687,6 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WhoCallMe/Pods-WhoCallMe-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
@@ -693,7 +704,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
@@ -940,14 +950,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M29A6H95KD;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -967,14 +977,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = M29A6H95KD;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "${SRCROOT}/WhoCallMe/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.credif.who;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
