@@ -24,7 +24,6 @@
 		2C20BD561F89F08600CCC5A8 /* GADInterstitial+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD531F89F08600CCC5A8 /* GADInterstitial+.swift */; };
 		2C20BD571F89F08600CCC5A8 /* GADInterstialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD541F89F08600CCC5A8 /* GADInterstialManager.swift */; };
 		2C20BD591F89F36100CCC5A8 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD581F89F36100CCC5A8 /* ReviewManager.swift */; };
-		2C20BD5B1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20BD5A1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift */; };
 		2C3D5DBB1C93074A00BF2B5F /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D5DBA1C93074A00BF2B5F /* blank.png */; };
 		2C3D5DBD1C93090900BF2B5F /* ContactTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D5DBC1C93090900BF2B5F /* ContactTemplateViewController.swift */; };
 		2C3E215B1E9F067B00A493F5 /* Y2K.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 2C3E215A1E9F067B00A493F5 /* Y2K.PNG */; };
@@ -122,7 +121,6 @@
 		2C20BD531F89F08600CCC5A8 /* GADInterstitial+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADInterstitial+.swift"; sourceTree = "<group>"; };
 		2C20BD541F89F08600CCC5A8 /* GADInterstialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADInterstialManager.swift; sourceTree = "<group>"; };
 		2C20BD581F89F36100CCC5A8 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
-		2C20BD5A1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KakaoLink.swift"; sourceTree = "<group>"; };
 		2C3D5DB81C92F5A800BF2B5F /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		2C3D5DBA1C93074A00BF2B5F /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 		2C3D5DBC1C93090900BF2B5F /* ContactTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTemplateViewController.swift; sourceTree = "<group>"; };
@@ -430,7 +428,6 @@
 		2CCF228A1C924A0C0080B206 /* leesam */ = {
 			isa = PBXGroup;
 			children = (
-				2C20BD5A1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift */,
 				2C14048220A1A5BA001B83B6 /* LSCircleProgressView+.swift */,
 				2C07E4F41E234DF500CDFC32 /* GADBannerView+.swift */,
 				2C20BD541F89F08600CCC5A8 /* GADInterstialManager.swift */,
@@ -760,7 +757,6 @@
 				2C20BD561F89F08600CCC5A8 /* GADInterstitial+.swift in Sources */,
 				2C5F8A141C959AD800D8639F /* WCMDataController.swift in Sources */,
 				2C649D5E1C941B69005C26A3 /* OptionPhotoCell.swift in Sources */,
-				2C20BD5B1F89F3D200CCC5A8 /* UIApplication+KakaoLink.swift in Sources */,
 				2C4E48831C9136E900CC4BA5 /* AppDelegate.swift in Sources */,
 				2CDDEFB7250C59E50065B1B7 /* LSSettingsViewController.swift in Sources */,
 				2C649D621C941BB5005C26A3 /* OptionDeptCell.swift in Sources */,

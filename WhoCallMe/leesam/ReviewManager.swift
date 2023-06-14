@@ -96,7 +96,6 @@ class ReviewManager : NSObject{
                 };
             }, UIAlertAction(title: String(format: "'%@' 추천".localized(), name), style: .default) { (act) in
                         //self.window.rootViewController?.share(["\(UIApplication.shared.urlForItunes.absoluteString)"]);
-                //UIApplication.shared.shareByKakao();
                 self.window.rootViewController?.share([URL(string: "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(UIApplication.shared.appId)&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!]);
             }/*,UIAlertAction(title: "제보하기".localized(), style: .default, handler: { (act) in
                 //do not gain today
