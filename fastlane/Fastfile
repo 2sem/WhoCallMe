@@ -111,7 +111,7 @@ platform :ios do
       skip_profile_detection: true,
       export_options: {
         provisioningProfiles: {
-          @package_name => "WhoCallMe Note Permission",
+          @package_name => "WhoCallMe Release",
         }
       },
       silent: true
