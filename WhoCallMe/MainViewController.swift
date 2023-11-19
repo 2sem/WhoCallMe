@@ -342,7 +342,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //google Bottom AD - leak?
         let req = GADRequest();
         req.hideTestLabel();
-        req.enableBottomCollapsible()
+        req.enableCollapsible()
         if self.enableAds{
             self.bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(self.bannerView.frame.width)
 //            self.bannerHeightConstraint.constant = self.bannerView.adSize.size.height
