@@ -139,7 +139,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var lb_status: UILabel!
     
     @IBOutlet weak var bannerView: GADBannerView!
-        
+    @IBOutlet weak var bannerHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var photoOptionContainer: UIView!
     @IBOutlet weak var photoOptionSwitch: UISwitch!
     
@@ -341,7 +342,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //google Bottom AD - leak?
         let req = GADRequest();
         req.hideTestLabel();
+        req.enableBottomCollapsible()
         if self.enableAds{
+            self.bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(self.bannerView.frame.width)
+//            self.bannerHeightConstraint.constant = self.bannerView.adSize.size.height
             self.bannerView.load(req);
         }
         
