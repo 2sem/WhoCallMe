@@ -16,7 +16,6 @@ target 'WhoCallMe' do
   # Recommended: Add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
   
-  pod 'LSExtensions' #, :path => '~/Projects/leesam/pods/LSExtensions/src/LSExtensions'
   pod 'GADManager' #, :path => '~/Projects/leesam/pods/GADManager/src/GADManager'
   #pod 'LSCircleProgressView'
   pod 'LSCircleProgressView' #, :path => '~/Projects/leesam/pods/LSCircleProgressView/src/LSCircleProgressView'
