@@ -21,14 +21,14 @@ jobs:
     runs-on: macos-13
     steps:
       - name: Checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Create pods cache key
         id: pods-cache-hash
         run: echo "::set-output name=hash::${{ runner.os }}-pods-cache-hash-${{ hashFiles('./Podfile.lock') }}"
 
       - name: Cache pods
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: cache-pods
         with:
           path: ./Pods
@@ -52,10 +52,10 @@ jobs:
         IOS_KEY_PATH: 'api-key.json'
     steps:
       - name: Checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         
       - name: Load cached pods
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ./Pods
           key: ${{ needs.install-pods.outputs.pods-cache-key }}
