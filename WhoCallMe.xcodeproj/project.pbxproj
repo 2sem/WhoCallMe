@@ -78,7 +78,7 @@
 		2CB4EB35255FDDE90090D957 /* AppStoreUpload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB4EB34255FDDE90090D957 /* AppStoreUpload.plist */; };
 		2CCEA2872680D99F00F71240 /* GADRewardedAd+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEA2862680D99F00F71240 /* GADRewardedAd+.swift */; };
 		2CCEA2912680DC3900F71240 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C12938A223A91B200E7E19E /* GoogleService-Info.plist */; };
-		2CD08CC62B9B09680085E8C7 /* LSExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD08CC52B9B09680085E8C7 /* LSExtensions */; };
+		2CD08CC92B9B53C30085E8C7 /* LSExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD08CC82B9B53C30085E8C7 /* LSExtensions */; };
 		2CDDEFB7250C59E50065B1B7 /* LSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDEFB6250C59E50065B1B7 /* LSSettingsViewController.swift */; };
 		2CE7CAC11CBF7D9D0032CB20 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC01CBF7D9D0032CB20 /* icon.png */; };
 		2CE7CAC31CBF82080032CB20 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7CAC21CBF82080032CB20 /* AppIcon.appiconset */; };
@@ -204,7 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C04E0D21E23D3C5008B1213 /* iAd.framework in Frameworks */,
-				2CD08CC62B9B09680085E8C7 /* LSExtensions in Frameworks */,
+				2CD08CC92B9B53C30085E8C7 /* LSExtensions in Frameworks */,
 				17306BC7616DCCE96106D4A1 /* Pods_WhoCallMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,7 +492,7 @@
 			);
 			name = WhoCallMe;
 			packageProductDependencies = (
-				2CD08CC52B9B09680085E8C7 /* LSExtensions */,
+				2CD08CC82B9B53C30085E8C7 /* LSExtensions */,
 			);
 			productName = WhoCallMe;
 			productReference = 2C4E487F1C9136E900CC4BA5 /* WhoCallMe.app */;
@@ -544,17 +544,16 @@
 			};
 			buildConfigurationList = 2C4E487A1C9136E900CC4BA5 /* Build configuration list for PBXProject "WhoCallMe" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				ko,
 			);
 			mainGroup = 2C4E48761C9136E900CC4BA5;
 			packageReferences = (
-				2CD08CC42B9B09680085E8C7 /* XCRemoteSwiftPackageReference "LSExtensions" */,
+				2CD08CC72B9B53C30085E8C7 /* XCRemoteSwiftPackageReference "LSExtensions" */,
 			);
 			productRefGroup = 2C4E48801C9136E900CC4BA5 /* Products */;
 			projectDirPath = "";
@@ -1088,7 +1087,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2CD08CC42B9B09680085E8C7 /* XCRemoteSwiftPackageReference "LSExtensions" */ = {
+		2CD08CC72B9B53C30085E8C7 /* XCRemoteSwiftPackageReference "LSExtensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/2sem/LSExtensions";
 			requirement = {
@@ -1099,9 +1098,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2CD08CC52B9B09680085E8C7 /* LSExtensions */ = {
+		2CD08CC82B9B53C30085E8C7 /* LSExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2CD08CC42B9B09680085E8C7 /* XCRemoteSwiftPackageReference "LSExtensions" */;
+			package = 2CD08CC72B9B53C30085E8C7 /* XCRemoteSwiftPackageReference "LSExtensions" */;
 			productName = LSExtensions;
 		};
 /* End XCSwiftPackageProductDependency section */
