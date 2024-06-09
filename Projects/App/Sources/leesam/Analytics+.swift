@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAnalytics
 
 extension UIViewController{
     func setAnalyticScreenName(){

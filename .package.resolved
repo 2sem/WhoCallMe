@@ -1,5 +1,5 @@
 {
-  "originHash" : "714a3986cca29a4a4274749d81ed0017e67929d348d244c5215c20e200c77f2c",
+  "originHash" : "3c0eae65f85e8eefc8281aa1cde41ad448b59a38f29cf487bb6ad2dbace0e522",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "748c7837511d0e6a507737353af268484e1745e2",
         "version" : "1.2024011601.1"
+      }
+    },
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
       }
     },
     {
@@ -89,6 +98,15 @@
       "state" : {
         "revision" : "2d12673670417654f08f5f90fdd62926dc3a2648",
         "version" : "100.0.0"
+      }
+    },
+    {
+      "identity" : "kakao-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kakao/kakao-ios-sdk",
+      "state" : {
+        "revision" : "9f9b830dfd7ee66607c6fddcfeb1a6bc07e48714",
+        "version" : "2.22.2"
       }
     },
     {
