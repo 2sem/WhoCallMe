@@ -27,6 +27,7 @@ let project = Project(
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                    "UIMainStoryboardFile": "Main",
                 ]
             ),
             sources: ["Sources/**"],
