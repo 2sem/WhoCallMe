@@ -11,6 +11,7 @@ let project = Project(
                .remote(url: "https://github.com/2sem/LSCircleProgressView", 
                        requirement: .upToNextMajor(from: "0.1.0")),
                .remote(url: "https://github.com/2sem/GADManager", requirement: .upToNextMajor(from: "1.3.2")),
+               .remote(url: "https://github.com/kakao/kakao-ios-sdk", requirement: .upToNextMajor(from: "2.22.2"))
     ],
     targets: [
         .target(
@@ -22,9 +23,11 @@ let project = Project(
             resources: ["Resources/**"],
             dependencies: [.package(product: "FirebaseCrashlytics", type: .runtime),
                            .package(product: "RxSwift", type: .runtime),
+                           .package(product: "RxCocoa", type: .runtime),
                            .package(product: "StringLogger", type: .runtime),
                            .package(product: "LSCircleProgressView", type: .runtime),
-                           .package(product: "GADManager", type: .runtime)
+                           .package(product: "GADManager", type: .runtime),
+                           .package(product: "KakaoSDK", type: .runtime)
             ]
         ),
         .target(

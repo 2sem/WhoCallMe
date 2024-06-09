@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import KakaoSDKCommon
+
 
 class KakaoManager {
     static func initialize() {
