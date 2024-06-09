@@ -21,7 +21,7 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "com.credif.who",
-            deploymentTargets: .iOS("12.0"),
+            deploymentTargets: .iOS("13.0"),
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchStoryboardName": "LaunchScreen.storyboard",
