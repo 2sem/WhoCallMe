@@ -6,7 +6,9 @@ let project = Project(
     packages: [
         .remote(
             url: "https://github.com/2sem/LSExtensions",
-            requirement: .exact("0.1.22"))],
+            requirement: .exact("0.1.22")),
+        .remote(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads",
+                requirement: .upToNextMajor(from: "11.5.0"))],
     settings: .settings(configurations: [
         .debug(
             name: "Debug",
@@ -31,7 +33,8 @@ let project = Project(
             resources: ["Resources/**"],
             entitlements: .file(path: .relativeToCurrentFile("Sources/App.entitlements")),
             dependencies: [.package(product: "LSExtensions", type: .runtime),
-                           .Projects.ThirdParty]
+                           .Projects.ThirdParty,
+                           .package(product: "GoogleMobileAds", type: .runtime),]
         ),
         .target(
             name: "AppTests",

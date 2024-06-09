@@ -22,6 +22,7 @@ let project = Project(
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             dependencies: [.package(product: "FirebaseCrashlytics", type: .runtime),
+                           .package(product: "FirebaseAnalytics", type: .runtime),
                            .package(product: "RxSwift", type: .runtime),
                            .package(product: "RxCocoa", type: .runtime),
                            .package(product: "StringLogger", type: .runtime),
