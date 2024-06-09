@@ -16,7 +16,7 @@ import RxSwift
 import RxCocoa
 import LSCircleProgressView
 import FirebaseCrashlytics
-import Firebase
+import FirebaseAnalytics
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CNContactPickerDelegate {
     

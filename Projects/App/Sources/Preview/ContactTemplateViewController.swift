@@ -8,7 +8,7 @@
 
 import UIKit
 import Contacts
-import Firebase
+import FirebaseAnalytics
 
 /**
     view controller to create and preview call receive image
