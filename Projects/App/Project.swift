@@ -40,11 +40,12 @@ let skAdNetworks: [Plist.Value] = ["cstr6suwn9",
 let project = Project(
     name: "App",
     packages: [
-        .remote(
-            url: "https://github.com/2sem/LSExtensions",
-            requirement: .exact("0.1.22")),
-        .remote(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads",
-                requirement: .upToNextMajor(from: "11.5.0"))],
+        .remote(url: "https://github.com/2sem/LSExtensions",
+                requirement: .exact("0.1.22")),
+        .remote(url: "https://github.com/2sem/GADManager",
+                requirement: .upToNextMajor(from: "1.3.3")),
+        
+    ],
     settings: .settings(configurations: [
         .debug(
             name: "Debug",
@@ -80,7 +81,7 @@ let project = Project(
             entitlements: .file(path: .relativeToCurrentFile("Sources/App.entitlements")),
             dependencies: [.package(product: "LSExtensions", type: .runtime),
                            .Projects.ThirdParty,
-                           .package(product: "GoogleMobileAds", type: .runtime),]
+            ]
         ),
         .target(
             name: "AppTests",
