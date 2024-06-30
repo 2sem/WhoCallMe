@@ -1,6 +1,0 @@
-framework module LSCircleProgressView {
-  umbrella header "LSCircleProgressView-umbrella.h"
-
-  export *
-  module * { export * }
-}
