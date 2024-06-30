@@ -3,6 +3,8 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+.package.resolved
+.Package.resolved
 
 # Icon must end with two
 Icon
