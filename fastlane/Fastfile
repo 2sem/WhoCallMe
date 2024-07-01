@@ -77,8 +77,8 @@ platform :ios do
 
   def setiOSVersions
     @app_version = get_version_number(
-       xcodeproj: @xcodeproj,
-       target: @project_name
+       xcodeproj: @xcodeproj
+      #  target: 'App'
     )
     puts "iOS 앱 버전: #{@app_version}"
 
