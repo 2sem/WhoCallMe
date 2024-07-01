@@ -60,9 +60,9 @@ jobs:
       #     path: ./Pods
       #     key: ${{ needs.install-pods.outputs.pods-cache-key }}
 
-      - name: Install Mise
+      - name: Select Xcode
         run: |
-          brew install mise
+          xcode-select -s /Applications/Xcode_15.4.app
 
       - name: Install Tuist
         run: |
