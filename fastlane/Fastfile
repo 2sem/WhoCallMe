@@ -17,6 +17,7 @@ platform :ios do
   def loadiOSConfigs()
     @package_name = ENV["PACKAGE_NAME"]
     @project_name = ENV["PRODUCT_NAME"]
+    @app_project_name = "App"
     @keychain_name = ENV["IOS_KEYCHAIN"]
     @keychain_password = ENV["IOS_KEYCHAIN_PWD"]
     @certificate_path = ENV["IOS_CERT_PATH"]
@@ -108,7 +109,7 @@ platform :ios do
     puts "iOS 빌드 시작: #{@full_app_verion}"
     build_app(
       workspace: "./#{@project_name}.xcworkspace",
-      scheme: "#{@project_name}",
+      scheme: @app_project_name,
       skip_profile_detection: true,
       export_options: {
         provisioningProfiles: {
