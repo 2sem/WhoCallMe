@@ -104,8 +104,7 @@ platform :ios do
     loadiOSConfigs()
     readySigning()
     setiOSVersions()
-    
-    xcode_select("/Applications/Xcode_15.2.app")
+
     puts "iOS 빌드 시작: #{@full_app_verion}"
     build_app(
       workspace: "./#{@project_name}.xcworkspace",
