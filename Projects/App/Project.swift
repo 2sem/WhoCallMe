@@ -63,7 +63,7 @@ let project = Project(
             deploymentTargets: .iOS("13.0"),
         infoPlist: .extendingDefault(
             with: [
-                "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                "UILaunchStoryboardName": "LaunchScreen",
                 "UIMainStoryboardFile": "Main",
                 "GADApplicationIdentifier": "ca-app-pub-9684378399371172~4206633246",
                 "GADUnitIdentifiers" : ["FullAd" : "ca-app-pub-9684378399371172/4108901647"],
