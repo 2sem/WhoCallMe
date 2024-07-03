@@ -73,7 +73,8 @@ let project = Project(
                 "Itunes App Id": "395429781",
                 "NSContactsUsageDescription": "This app needs access contacts to convert",
                 "NSUserTrackingUsageDescription": "Your data will be used to deliver personalized ads to you",
-                "SKAdNetworkItems": .array(skAdNetworks)
+                "SKAdNetworkItems": .array(skAdNetworks),
+                "CFBundleShortVersionString": "${MARKETING_VERSION}"
             ]
         ),
             sources: ["Sources/**"],
