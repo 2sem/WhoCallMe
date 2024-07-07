@@ -17,31 +17,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # install-pods:
-  #   runs-on: macos-13
-  #   steps:
-  #     - name: Checkout project
-  #       uses: actions/checkout@v4
-
-  #     - name: Create pods cache key
-  #       id: pods-cache-hash
-  #       run: echo "::set-output name=hash::${{ runner.os }}-pods-cache-hash-${{ hashFiles('./Podfile.lock') }}"
-
-  #     - name: Cache pods
-  #       uses: actions/cache@v4
-  #       id: cache-pods
-  #       with:
-  #         path: ./Pods
-  #         key: ${{ steps.pods-cache-hash.outputs.hash }}
-
-  #     - name: Install CocoaPods
-  #       if: steps.cache-pods.outputs.cache-hit == ''
-  #       run: |
-  #         pod install
-
-  #   outputs:
-  #     pods-cache-key: ${{ steps.pods-cache-hash.outputs.hash }}
-      
   deploy:
     # needs: install-pods
     runs-on: macos-14
@@ -53,12 +28,6 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-        
-      # - name: Load cached pods
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ./Pods
-      #     key: ${{ needs.install-pods.outputs.pods-cache-key }}
 
       - name: Select Xcode
         run: |
@@ -71,6 +40,17 @@ jobs:
       - name: Install Tuist
         run: |
           mise install tuist
+
+      - name: Create Tuist cache key
+        id: tuist-cache-hash
+        run: echo "hash=${{ hashFiles('./Tuist/.build/workspace-state.json') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache Tuist
+        uses: actions/cache@v4
+        id: cache-pods
+        with:
+          path: ./Tuist/.builld
+          key: ${{ steps.tuist-cache-hash.outputs.hash }}
 
       - name: Install Dependencies
         run: |
