@@ -41,16 +41,16 @@ jobs:
         run: |
           mise install tuist
 
-      - name: Create Tuist cache key
-        id: tuist-cache-hash
-        run: echo "hash=${{ hashFiles('./Tuist/.build/workspace-state.json') }}" >> $GITHUB_OUTPUT
+      # - name: Create Tuist cache key
+      #   id: tuist-cache-hash
+      #   run: echo "hash=${{ hashFiles('./Tuist/.build/workspace-state.json') }}" >> $GITHUB_OUTPUT
 
-      - name: Cache Tuist
-        uses: actions/cache@v4
-        id: cache-pods
-        with:
-          path: ./Tuist/.builld
-          key: ${{ steps.tuist-cache-hash.outputs.hash }}
+      # - name: Cache Tuist
+      #   uses: actions/cache@v4
+      #   id: cache-pods
+      #   with:
+      #     path: ./Tuist/.builld
+      #     key: ${{ steps.tuist-cache-hash.outputs.hash }}
 
       - name: Install Dependencies
         run: |
