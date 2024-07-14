@@ -10,8 +10,8 @@ let project = Project(
                        requirement: .upToNextMajor(from: "0.1.0")),
                .remote(url: "https://github.com/kakao/kakao-ios-sdk",
                        requirement: .upToNextMajor(from: "2.22.2")),
-               .remote(url: "https://github.com/firebase/firebase-ios-sdk",
-                       requirement: .upToNextMajor(from: "10.4.0")),
+               .remote(url: "https://github.com/2sem/LSExtensions",
+                       requirement: .exact("0.1.22")),
     ],
     targets: [
         .target(
@@ -26,9 +26,7 @@ let project = Project(
                            .package(product: "StringLogger", type: .runtime),
                            .package(product: "LSCircleProgressView", type: .runtime),
                            .package(product: "KakaoSDK", type: .runtime),
-                           .package(product: "FirebaseCrashlytics", type: .runtime),
-                           .package(product: "FirebaseAnalytics", type: .runtime),
-                            .external(name: "GADManager", condition: .none),
+                           .package(product: "LSExtensions", type: .runtime),
             ]
         ),
         .target(

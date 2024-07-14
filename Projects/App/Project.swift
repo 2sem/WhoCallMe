@@ -40,10 +40,10 @@ let skAdNetworks: [Plist.Value] = ["cstr6suwn9",
 let project = Project(
     name: "App",
     packages: [
-        .remote(url: "https://github.com/2sem/LSExtensions",
-                requirement: .exact("0.1.22")),
         .remote(url: "https://github.com/2sem/GADManager",
                 requirement: .upToNextMajor(from: "1.3.3")),
+        .remote(url: "https://github.com/firebase/firebase-ios-sdk",
+               requirement: .upToNextMajor(from: "10.4.0")),
         
     ],
     settings: .settings(configurations: [
@@ -80,8 +80,12 @@ let project = Project(
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             entitlements: .file(path: .relativeToCurrentFile("Sources/App.entitlements")),
-            dependencies: [.package(product: "LSExtensions", type: .runtime),
+            dependencies: [
+                            
                            .Projects.ThirdParty,
+                           .package(product: "FirebaseCrashlytics", type: .runtime),
+                           .package(product: "FirebaseAnalytics", type: .runtime),
+                           .package(product: "GADManager", type: .runtime)
             ]
         ),
         .target(
