@@ -27,7 +27,7 @@ CODE_SIGN_STYLE[config=Release]=Manual
 DEVELOPMENT_TEAM[sdk=iphoneos*][config=Release]=M29A6H95KD
 LD_RUNPATH_SEARCH_PATHS[config=Debug]=$(inherited) @executable_path/Frameworks
 LD_RUNPATH_SEARCH_PATHS[config=Release]=$(inherited) @executable_path/Frameworks
-OTHER_SWIFT_FLAGS[config=Debug]=$(inherited) -D COCOAPODS -D DEBUG
+OTHER_SWIFT_FLAGS[config=Debug]=$(inherited) -D DEBUG
 PROVISIONING_PROFILE_SPECIFIER[config=Debug]=
 PROVISIONING_PROFILE_SPECIFIER[config=Release]=WhoCallMe Release
 PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*][config=Release]=WhoCallMe Release
