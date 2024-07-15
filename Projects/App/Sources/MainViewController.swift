@@ -825,21 +825,23 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let range = note.range(byTag: self.WhoCallMeSearchTag);
             var originalNoteHigh = "";
             var originalNoteLow = "";
+            var originalNoteHighGap = "\n";
+            var originalNoteLowGap = "\n"
             
             //Gets original note if search tag has been found in it
             if range != nil{
                 originalNoteHigh = String(note[..<range!.lowerBound]);
                 originalNoteLow = String(note[range!.upperBound...]);
+                originalNoteHighGap = ""
+                originalNoteLowGap = ""
             }else{
                 originalNoteHigh = note;
             }
             
-            if originalNoteHigh.last != "\n".last{
-               originalNoteHigh = originalNoteHigh + "\n\n";
-            }
-            
             //Inserts cho-seongs into memo by wrapping tag
-            contact.note = ("\(originalNoteHigh)\n\(choSeongs.wrap(byTag: WhoCallMeSearchTag))\n\(originalNoteLow)");
+            contact.note = "\(originalNoteHigh)\(originalNoteHighGap)"
+                                + "\(choSeongs.wrap(byTag: WhoCallMeSearchTag))"
+                                + "\(originalNoteLowGap)\(originalNoteLow)";
             
             print("choSeongs[\(choSeongs)]");
         }
