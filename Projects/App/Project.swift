@@ -57,7 +57,7 @@ let project = Project(
     targets: [
         .target(
             name: "App",
-            destinations: .iOS,
+            destinations: [.iPhone],
             product: .app,
             bundleId: "com.credif.who",
             deploymentTargets: .iOS("13.0"),
