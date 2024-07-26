@@ -74,7 +74,8 @@ let project = Project(
                 "NSContactsUsageDescription": "This app needs access contacts to convert",
                 "NSUserTrackingUsageDescription": "Your data will be used to deliver personalized ads to you",
                 "SKAdNetworkItems": .array(skAdNetworks),
-                "CFBundleShortVersionString": "${MARKETING_VERSION}"
+                "CFBundleShortVersionString": "${MARKETING_VERSION}",
+                "CFBundleDisplayName": "WhoCallMe"
             ]
         ),
             sources: ["Sources/**"],
