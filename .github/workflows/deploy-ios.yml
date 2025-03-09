@@ -19,7 +19,7 @@ concurrency:
 jobs:
   deploy:
     # needs: install-pods
-    runs-on: macos-14
+    runs-on: macos-15
     env:
         PRODUCT_NAME: 'WhoCallMe'
         IOS_CERT_PATH: 'cert.p12'
