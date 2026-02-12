@@ -8,8 +8,7 @@ struct SplashScreen: View {
     var body: some View {
         Group {
             if initializer.isReady {
-                // Step 4: replace with MainScreen()
-                Color.clear
+                MainScreen()
             } else {
                 ProgressView()
             }
