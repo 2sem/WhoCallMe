@@ -7,17 +7,12 @@
 //
 
 import UIKit
-import CoreData
 import GoogleMobileAds
 import FirebaseCore
 import StoreKit
 import GADManager
 
 class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GADRewardManagerDelegate {
-    enum GADUnitName : String{
-        case full = "FullAd"
-    }
-    static var sharedGADManager : GADManager<GADUnitName>?;
     var rewardAd : GADRewardManager?;
     var reviewManager : ReviewManager?;
     
@@ -27,11 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
         // Override point for customization after application launch.
         FirebaseApp.configure();
 
-        // TODO: Step 8 - migrate ad managers to SwiftUI
-        // self.reviewManager = ReviewManager(window, interval: 60.0 * 60 * 24 * 2)
-        // self.rewardAd = GADRewardManager(window, unitId: ..., interval: ...)
-        // adManager setup moved to SwiftUI
-        
         return true
     }
 
@@ -46,28 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        guard LSDefaults.LaunchCount % reviewInterval > 0 else{
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            }
-            LSDefaults.increaseLaunchCount();
-            return;
+        guard LSDefaults.LaunchCount % reviewInterval > 0 else {
+            SKStoreReviewController.requestReview()
+            return
         }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        print("app become active");
-        #if DEBUG
-        let test = true;
-        #else
-        let test = false;
-        #endif
-        
-        guard !LSDefaults.requestAppTrackingIfNeed() else{
-            return;
-        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -163,28 +138,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
 
 }
 
-extension AppDelegate : GADManagerDelegate{
-    typealias E = GADUnitName
-    
-    func GAD<E>(manager: GADManager<E>, lastPreparedTimeForUnit unit: E) -> Date{
-        return Date();
-    }
-    
-    func GAD<E>(manager: GADManager<E>, updateLastPreparedTimeForUnit unit: E, preparedTime time: Date){
-        
-    }
-    
-    func GAD<GADUnitName>(manager: GADManager<GADUnitName>, updatShownTimeForUnit unit: GADUnitName, showTime time: Date){
-        let now = Date();
-        if LSDefaults.LastFullADShown > now{
-            LSDefaults.LastFullADShown = now;
-        }
-        
-        LSDefaults.LastFullADShown = time;
-        //GHStoreManager.shared.tokenPurchased(1);
-    }
-    
-    func GAD<GADUnitName>(manager: GADManager<GADUnitName>, lastShownTimeForUnit unit: GADUnitName) -> Date{
-        return LSDefaults.LastFullADShown;
-    }
-}

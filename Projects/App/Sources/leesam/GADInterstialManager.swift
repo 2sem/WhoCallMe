@@ -52,7 +52,7 @@ class GADInterstialManager : NSObject{
         self.delegate?.GADInterstialUpdate(showTime: Date());
     }
     
-    var fullAd : GADInterstitialAd?
+    var fullAd : InterstitialAd?
     var canShow : Bool{
         get{
             var value = true;
@@ -104,9 +104,9 @@ class GADInterstialManager : NSObject{
         
         print("create new full ad");
         
-        let req = GADRequest();
+        let req = Request();
         
-        GADInterstitialAd.load(withAdUnitID: self.unitId, request: req, completionHandler: { (newAd, error) in
+        InterstitialAd.load(with: self.unitId, request: req, completionHandler: { (newAd, error) in
             self.fullAd = newAd;
             self.fullAd?.fullScreenContentDelegate = self;
             self._show();
@@ -135,23 +135,23 @@ class GADInterstialManager : NSObject{
         }
         
         print("present full ad view[\(self.window.rootViewController?.description ?? "")]");
-        self.fullAd?.present(fromRootViewController: self.window.rootViewController!);
+        self.fullAd?.present(from: self.window.rootViewController!);
         self.delegate?.GADInterstialUpdate(showTime: Date());
         //RSDefaults.LastFullADShown = Date();
     }
 }
 
-extension GADInterstialManager : GADFullScreenContentDelegate{
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+extension GADInterstialManager : FullScreenContentDelegate{
+    func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
         self.fullAd = nil;
     }
     
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         /*self.window.rootViewController?.showAlert(title: "후원해주셔서 감사합니다.", msg: "불편하신 사항은 리뷰에 남겨주시면 반영하겠습니다.", actions: [UIAlertAction.init(title: "확인", style: .default, handler: nil), UIAlertAction.init(title: "평가하기", style: .default, handler: { (act) in
         //            UIApplication.shared.openReview();
         //        })], style: .alert);*/
     }
-//    func interstitialDidReceiveAd(_ ad: GADInterstitialAd) {
+//    func interstitialDidReceiveAd(_ ad: InterstitialAd) {
 //        print("Interstitial is ready to be presented");
 //
 //        self._show();

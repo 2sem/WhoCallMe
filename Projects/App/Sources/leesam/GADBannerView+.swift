@@ -1,5 +1,5 @@
 //
-//  GADBannerView+.swift
+//  BannerView+.swift
 //  talktrans
 //
 //  Created by 영준 이 on 2016. 12. 11..
@@ -9,7 +9,7 @@
 import Foundation
 import GoogleMobileAds
 
-extension GADBannerView{
+extension BannerView{
     func loadUnitId(_ name : String){
         guard let unitList = Bundle.main.infoDictionary?["GoogleADUnitID"] as? [String : String] else{
             print("Add [String : String] Dictionary as 'GoogleADUnitID'");

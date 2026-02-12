@@ -37,6 +37,7 @@ class LSDefaults{
         static let IsRotateFixed = "IsRotateFixed";
         
         static let LastFullADShown = "LastFullADShown";
+        static let LastOpeningAdPrepared = "LastOpeningAdPrepared";
         static let LastShareShown = "LastShareShown";
         static let LastRewardShown = "LastRewardShown";
         
@@ -105,9 +106,19 @@ class LSDefaults{
             let seconds = Defaults.double(forKey: Keys.LastRewardShown);
             return Date.init(timeIntervalSince1970: seconds);
         }
-        
+
         set(value){
             Defaults.set(value.timeIntervalSince1970, forKey: Keys.LastRewardShown);
+        }
+    }
+
+    static var LastOpeningAdPrepared: Date {
+        get {
+            let seconds = Defaults.double(forKey: Keys.LastOpeningAdPrepared)
+            return Date(timeIntervalSince1970: seconds)
+        }
+        set {
+            Defaults.set(newValue.timeIntervalSince1970, forKey: Keys.LastOpeningAdPrepared)
         }
     }
     
@@ -271,9 +282,9 @@ extension LSDefaults{
             return false;
         }
         
-        AppDelegate.sharedGADManager?.requestPermission(completion: { (result) in
-            AdsTrackingRequested = true;
-        })
+        SwiftUIAdManager.shared?.requestPermission { _ in
+            AdsTrackingRequested = true
+        }
         
         return true;
     }

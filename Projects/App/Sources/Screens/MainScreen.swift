@@ -16,6 +16,9 @@ struct MainScreen: View {
     @State private var contactPickerMode: Mode = .convertOne
     @State private var previewContact: CNContact?
 
+    @EnvironmentObject private var adManager: SwiftUIAdManager
+    @AppStorage(LSDefaults.Keys.LaunchCount) private var launchCount: Int = 0
+
     @Environment(\.modelContext) private var modelContext
     @Query private var backups: [ContactBackup]
     @State private var contactService: ContactService?
@@ -179,7 +182,7 @@ struct MainScreen: View {
             if isRunning {
                 operationState = .stopped
             } else {
-                Task { await startConvertAll() }
+                presentFullAdThen { await startConvertAll() }
             }
         } label: {
             HStack(spacing: 8) {
@@ -281,6 +284,20 @@ struct MainScreen: View {
                 .background(Color(.darkGray))
             }
             .disabled(isRunning && mode != .clearAll)
+        }
+    }
+
+    // MARK: - Ad Helper
+
+    private func presentFullAdThen(_ action: @escaping @Sendable () async -> Void) {
+        guard launchCount > 1 else {
+            Task { await action() }
+            return
+        }
+        Task {
+            await adManager.requestAppTrackingIfNeed()
+            await adManager.show(unit: .full)
+            await action()
         }
     }
 

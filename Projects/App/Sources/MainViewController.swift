@@ -138,7 +138,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var lb_count: UILabel!
     @IBOutlet weak var lb_status: UILabel!
     
-    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var bannerView: BannerView!
     @IBOutlet weak var bannerHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var photoOptionContainer: UIView!
@@ -153,7 +153,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
-        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad, result) in
+        SwiftUIAdManager.shared?.show(unit: .full) { [unowned self](unit, ad, result) in
             self.convertOneBag = DisposeBag();
             RxContactController.shared.requestAccess()
                 .observeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
@@ -185,7 +185,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         Analytics.logLeesamEvent(.startClear, parameters: [:]);
-        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad, result) in
+        SwiftUIAdManager.shared?.show(unit: .full) { [unowned self](unit, ad, result) in
             RxContactController.shared.requestAccess()
                 .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
                 .filter{ [unowned self]result in
@@ -309,7 +309,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var btn_Preview: UIButton!
     @IBAction func onClick_Preview(_ sender: UIButton) {
         Analytics.logLeesamEvent(.previewCall, parameters: [:]);
-        AppDelegate.sharedGADManager?.show(unit: .full) { [weak self](unit, ad, result) in
+        SwiftUIAdManager.shared?.show(unit: .full) { [weak self](unit, ad, result) in
             self?.selectContact(true);
         }
         
@@ -327,7 +327,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //Crashlytics.sharedInstance().crash();
     }
     
-    var googleFullAD : GADInterstitialAd?;
+    var googleFullAD : InterstitialAd?;
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -340,11 +340,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.progressedCount.onNext(cnt);
         
         //google Bottom AD - leak?
-        let req = GADRequest();
+        let req = Request();
         req.hideTestLabel();
         req.enableCollapsible()
         if self.enableAds{
-            self.bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(self.bannerView.frame.width)
+            self.bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(width: self.bannerView.frame.width)
 //            self.bannerHeightConstraint.constant = self.bannerView.adSize.size.height
             self.bannerView.load(req);
         }
@@ -466,7 +466,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return;
         }
         
-        AppDelegate.sharedGADManager?.show(unit: .full) { [unowned self](unit, ad, result) in
+        SwiftUIAdManager.shared?.show(unit: .full) { [unowned self](unit, ad, result) in
             Analytics.logLeesamEvent(.startConvertAll, parameters: [:]);
             RxContactController.shared.requestAccess()
                 .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
@@ -1290,11 +1290,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 }
 
-extension MainViewController : GADBannerViewDelegate{
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+extension MainViewController : BannerViewDelegate{
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         self.showBanner(visible: true);
     }
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         print("banner error -  \(error)");
         self.showBanner(visible: false);
     }
