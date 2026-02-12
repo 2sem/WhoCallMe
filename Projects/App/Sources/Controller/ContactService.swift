@@ -52,6 +52,7 @@ final class ContactService: ObservableObject {
             identifiers: identifiers,
             keys: ContactStore.keysForConvert
         )
+        let foundIDs = Set(contacts.map { $0.identifier })
         let total = contacts.count
 
         for (i, contact) in contacts.enumerated() {
@@ -73,6 +74,12 @@ final class ContactService: ObservableObject {
 
             onProgress(i + 1, total)
         }
+
+        // Delete orphaned backups whose contacts no longer exist in the store
+        for backup in backups where !foundIDs.contains(backup.id) {
+            modelContext.delete(backup)
+        }
+
         try modelContext.save()
     }
 
