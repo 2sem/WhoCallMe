@@ -21,6 +21,7 @@ struct ContactImageRenderer {
         vc.contact = contact
         vc.originalImage = originalImage
         vc.showAllInfos()
+        vc.refresh()
         vc.view.layoutIfNeeded()
 
         let renderer = UIGraphicsImageRenderer(bounds: vc.view.bounds)
