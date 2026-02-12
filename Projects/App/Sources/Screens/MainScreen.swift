@@ -17,6 +17,11 @@ struct MainScreen: View {
 
     @Environment(\.modelContext) private var modelContext
     @Query private var backups: [ContactBackup]
+    @State private var contactService: ContactService?
+    @State private var errorMessage: String?
+    @State private var showError = false
+    @State private var showRestoreConfirm = false
+    @State private var showClearConfirm = false
 
     var isRunning: Bool { operationState == .running }
 
@@ -90,17 +95,51 @@ struct MainScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear {
+            contactService = ContactService(modelContext: modelContext)
             totalCount = backups.count
             progressedCount = backups.count
+        }
+        .alert("Error", isPresented: $showError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(errorMessage ?? "")
+        }
+        .confirmationDialog(
+            NSLocalizedString("WARN_RESTORE_CONTACTS_MSG", comment: ""),
+            isPresented: $showRestoreConfirm,
+            titleVisibility: .visible
+        ) {
+            Button(NSLocalizedString("WARN_RESTORE_CONTACTS_RESTORE", comment: ""), role: .destructive) {
+                Task { await runRestore() }
+            }
+        }
+        .confirmationDialog(
+            NSLocalizedString("WARN_CLEAR_PHOTOS_MSG", comment: ""),
+            isPresented: $showClearConfirm,
+            titleVisibility: .visible
+        ) {
+            Button(NSLocalizedString("WARN_CLEAR_PHOTOS_CLEAR", comment: ""), role: .destructive) {
+                Task { await runClearPhotos() }
+            }
         }
         .sheet(isPresented: $isShowingContactPicker) {
             ContactPickerView { contact in
                 isShowingContactPicker = false
                 guard let contact else { return }
                 if contactPickerMode == .previewOne {
-                    // Step 6: preview(contact)
+                    // Step 6b: navigate to preview screen
                 } else {
-                    // Step 6: convert(contact)
+                    Task {
+                        do {
+                            try await contactService?.convertOne(contact)
+                            progressedCount = backups.count
+                            totalCount = backups.count
+                            operationState = .completed
+                        } catch {
+                            errorMessage = error.localizedDescription
+                            showError = true
+                        }
+                    }
                 }
             }
         }
@@ -202,7 +241,7 @@ struct MainScreen: View {
                 if isRunning && mode == .restoreAll {
                     operationState = .stopped
                 } else {
-                    Task { await startRestore() }
+                    Task { await startRestore() }   // shows confirm dialog
                 }
             } label: {
                 VStack(spacing: 4) {
@@ -238,11 +277,89 @@ struct MainScreen: View {
         }
     }
 
-    // MARK: - Operations (Step 6)
+    // MARK: - Operations
 
-    private func startConvertAll() async {}
-    private func startRestore() async {}
-    private func startClearPhotos() async {}
+    private func startConvertAll() async {
+        guard let service = contactService else { return }
+        mode = .convertAll
+        operationState = .running
+        progressedCount = 0
+        totalCount = 0
+        do {
+            try await service.convertAll(
+                onProgress: { done, total in
+                    progressedCount = done
+                    totalCount = total
+                },
+                isCancelled: { self.operationState == .stopped }
+            )
+            operationState = .completed
+            totalCount = backups.count
+            progressedCount = backups.count
+        } catch {
+            operationState = .ready
+            errorMessage = error.localizedDescription
+            showError = true
+        }
+    }
+
+    private func startRestore() async {
+        guard backups.count > 0 else {
+            errorMessage = NSLocalizedString("ERR_NO_BAK_CONTACTS", comment: "")
+            showError = true
+            return
+        }
+        showRestoreConfirm = true
+    }
+
+    private func runRestore() async {
+        guard let service = contactService else { return }
+        mode = .restoreAll
+        operationState = .running
+        progressedCount = backups.count
+        totalCount = backups.count
+        do {
+            try await service.restoreAll(
+                onProgress: { done, _ in
+                    progressedCount = backups.count - done
+                },
+                isCancelled: { self.operationState == .stopped }
+            )
+            operationState = .completed
+            progressedCount = 0
+            totalCount = 0
+        } catch {
+            operationState = .ready
+            errorMessage = error.localizedDescription
+            showError = true
+        }
+    }
+
+    private func startClearPhotos() async {
+        showClearConfirm = true
+    }
+
+    private func runClearPhotos() async {
+        guard let service = contactService else { return }
+        mode = .clearAll
+        operationState = .running
+        progressedCount = 0
+        totalCount = 0
+        do {
+            try await service.clearAllPhotos(
+                onProgress: { done, total in
+                    progressedCount = done
+                    totalCount = total
+                },
+                isCancelled: { self.operationState == .stopped }
+            )
+            operationState = .completed
+        } catch {
+            operationState = .ready
+            errorMessage = error.localizedDescription
+            showError = true
+        }
+    }
 }
 
 // MARK: - Ring Progress View
