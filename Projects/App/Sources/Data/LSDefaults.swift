@@ -55,7 +55,6 @@ class LSDefaults{
 
         static let LaunchCount = "LaunchCount";
         
-        static let AdsShownCount = "AdsShownCount";
         static let AdsTrackingRequested = "AdsTrackingRequested";
     }
     
@@ -239,25 +238,6 @@ class LSDefaults{
 }
 
 extension LSDefaults{
-    static var AdsShownCount : Int{
-        get{
-            return Defaults.integer(forKey: Keys.AdsShownCount);
-        }
-        
-        set{
-            Defaults.set(newValue, forKey: Keys.AdsShownCount);
-        }
-    }
-    
-    static func increateAdsShownCount(){
-        guard AdsShownCount < 3 else {
-            return
-        }
-        
-        AdsShownCount += 1;
-        "Ads Shown Count[\(AdsShownCount)]".debug();
-    }
-    
     static var AdsTrackingRequested : Bool{
         get{
             return Defaults.bool(forKey: Keys.AdsTrackingRequested);

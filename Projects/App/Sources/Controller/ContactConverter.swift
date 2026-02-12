@@ -1,4 +1,5 @@
 import Contacts
+import LSExtensions
 
 // Pure conversion logic extracted from MainViewController
 struct ContactConverter {
