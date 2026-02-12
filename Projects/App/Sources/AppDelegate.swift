@@ -13,10 +13,7 @@ import FirebaseCore
 import StoreKit
 import GADManager
 
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GADRewardManagerDelegate {
-
-    var window: UIWindow?
     enum GADUnitName : String{
         case full = "FullAd"
     }
@@ -29,22 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ReviewManagerDelegate, GA
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure();
-        
-        self.reviewManager = ReviewManager(self.window!, interval: 60.0 * 60 * 24 * 2);
-        self.reviewManager?.delegate = self;
-        //self.reviewManager?.show();
-        
-        self.rewardAd = GADRewardManager(self.window!, unitId: GADInterstitialAd.loadUnitId(name: "RewardAd") ?? "", interval: 60.0 * 60.0 * 6);
-        self.rewardAd?.delegate = self;
-        var adManager = GADManager<GADUnitName>.init(self.window!);
-        AppDelegate.sharedGADManager = adManager;
-        adManager.delegate = self;
-        #if DEBUG
-        adManager.prepare(interstitialUnit: .full, interval: 60.0);
-        #else
-        adManager.prepare(interstitialUnit: .full, interval: 60.0 * 60.0 * 6);
-        #endif
-        adManager.canShowFirstTime = false;
+
+        // TODO: Step 8 - migrate ad managers to SwiftUI
+        // self.reviewManager = ReviewManager(window, interval: 60.0 * 60 * 24 * 2)
+        // self.rewardAd = GADRewardManager(window, unitId: ..., interval: ...)
+        // adManager setup moved to SwiftUI
         
         return true
     }
