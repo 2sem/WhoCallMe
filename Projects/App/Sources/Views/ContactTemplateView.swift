@@ -19,5 +19,8 @@ struct ContactTemplateView: UIViewControllerRepresentable {
         vc.originalImage = originalImage
         vc.showAllInfos()
         vc.refresh()
+        if !LSDefaults.needFullscreenPhoto {
+            vc.showInfo(.photo, visible: false)
+        }
     }
 }

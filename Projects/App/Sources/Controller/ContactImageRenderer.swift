@@ -22,6 +22,9 @@ struct ContactImageRenderer {
         vc.originalImage = originalImage
         vc.showAllInfos()
         vc.refresh()
+        if !LSDefaults.needFullscreenPhoto {
+            vc.showInfo(.photo, visible: false)
+        }
         vc.view.layoutIfNeeded()
 
         let renderer = UIGraphicsImageRenderer(bounds: vc.view.bounds)
