@@ -14,6 +14,7 @@ struct MainScreen: View {
     @State private var totalCount: Int = 0
     @State private var isShowingContactPicker = false
     @State private var contactPickerMode: Mode = .convertOne
+    @State private var previewContact: CNContact?
 
     @Environment(\.modelContext) private var modelContext
     @Query private var backups: [ContactBackup]
@@ -94,6 +95,9 @@ struct MainScreen: View {
             }
         }
         .navigationBarHidden(true)
+        .navigationDestination(item: $previewContact) { contact in
+            PreviewScreen(contact: contact)
+        }
         .onAppear {
             contactService = ContactService(modelContext: modelContext)
             totalCount = backups.count
@@ -127,7 +131,7 @@ struct MainScreen: View {
                 isShowingContactPicker = false
                 guard let contact else { return }
                 if contactPickerMode == .previewOne {
-                    // Step 6b: navigate to preview screen
+                    previewContact = contact
                 } else {
                     Task {
                         do {
@@ -155,7 +159,10 @@ struct MainScreen: View {
             Text("누군지 다알아")
                 .font(.headline)
             Spacer()
-            NavigationLink(destination: Text("Preview")) {
+            Button {
+                contactPickerMode = .previewOne
+                isShowingContactPicker = true
+            } label: {
                 Text("미리보기")
                     .font(.subheadline)
                     .padding(.horizontal, 12)

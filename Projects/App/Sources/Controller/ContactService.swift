@@ -112,9 +112,14 @@ final class ContactService: ObservableObject {
 
         ContactConverter.generateIndex(target, backup: backup)
 
-        // Image generation: Step 6b (requires ContactTemplateViewController rendering)
-        // For now, preserve existing image behaviour
-        if !LSDefaults.needMakeIncomingPhoto {
+        // Image generation via ContactTemplateViewController
+        if LSDefaults.needMakeIncomingPhoto {
+            let originalImage = backup?.imageData.flatMap { UIImage(data: $0) }
+            if let rendered = ContactImageRenderer.render(contact: target, originalImage: originalImage) {
+                target.imageData = rendered.pngData()
+                backup?.generatedImage = target.imageData
+            }
+        } else {
             target.imageData = backup?.imageData
         }
 
