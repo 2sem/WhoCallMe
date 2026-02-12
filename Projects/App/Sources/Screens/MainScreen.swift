@@ -55,21 +55,32 @@ struct MainScreen: View {
 
     var body: some View {
         ZStack {
-            CheckeredBackground()
+            Color(.systemGroupedBackground)
                 .ignoresSafeArea()
+
+            // Ambient glow behind ring
+            RadialGradient(
+                colors: [Color.appRingEnd.opacity(0.15), Color.clear],
+                center: .center,
+                startRadius: 60,
+                endRadius: 200
+            )
+            .frame(width: 400, height: 400)
+            .allowsHitTesting(false)
 
             VStack(spacing: 0) {
                 headerBar
                     .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(Color(.systemBackground).opacity(0.85))
+                    .padding(.top, 12)
+                    .padding(.bottom, 10)
 
                 Spacer()
 
-                VStack(spacing: 20) {
+                VStack(spacing: 24) {
                     ZStack {
                         RingProgressView(progress: progress)
                             .frame(width: 240, height: 240)
+                            .shadow(color: Color.appRingEnd.opacity(0.3), radius: 20)
 
                         VStack(spacing: 4) {
                             Text("\(progressedCount)")
@@ -83,19 +94,19 @@ struct MainScreen: View {
                     }
 
                     convertAllButton
+                        .padding(.horizontal, 16)
                 }
 
                 Spacer()
 
-                VStack(spacing: 12) {
-                    convertOneButton
-                    settingsButton
-                }
-                .padding(.horizontal, 30)
+                actionsCard
+                    .padding(.horizontal, 16)
 
                 Spacer()
 
                 bottomBar
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 16)
             }
         }
         .navigationBarHidden(true)
@@ -158,22 +169,25 @@ struct MainScreen: View {
     // MARK: - Subviews
 
     private var headerBar: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "person.circle.fill")
-                .font(.title2)
-                .foregroundStyle(.secondary)
+        HStack(spacing: 12) {
+            if let icon = Bundle.main.appIcon {
+                Image(uiImage: icon)
+                    .resizable()
+                    .frame(width: 36, height: 36)
+                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            }
             Text("MAIN_APP_TITLE")
-                .font(.headline)
+                .font(.title3.bold())
             Spacer()
             Button {
                 contactPickerMode = .previewOne
                 isShowingContactPicker = true
             } label: {
                 Text("MAIN_PREVIEW")
-                    .font(.subheadline)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(Color(.systemGray5))
+                    .font(.subheadline.weight(.medium))
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 7)
+                    .background(.regularMaterial)
                     .clipShape(Capsule())
             }
             .foregroundStyle(.primary)
@@ -195,66 +209,105 @@ struct MainScreen: View {
                     .font(.title3.weight(.semibold))
             }
             .foregroundStyle(.white)
-            .frame(width: 200, height: 48)
-            .background(Color.appOrange)
-            .clipShape(Capsule())
-            .shadow(color: .appOrange.opacity(0.4), radius: 8, y: 4)
+            .frame(maxWidth: .infinity, minHeight: 56)
+            .background(
+                LinearGradient(
+                    colors: isRunning
+                        ? [Color(red: 1.0, green: 0.22, blue: 0.22), Color(red: 0.85, green: 0.10, blue: 0.10)]
+                        : [Color.appOrange, Color(red: 1.0, green: 0.45, blue: 0.0)],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .shadow(
+                color: (isRunning ? Color.red : Color.appOrange).opacity(0.35),
+                radius: 12,
+                y: 6
+            )
         }
+        .animation(.easeInOut(duration: 0.2), value: isRunning)
     }
 
-    private var convertOneButton: some View {
-        Button {
-            contactPickerMode = .convertOne
-            isShowingContactPicker = true
-        } label: {
-            HStack {
-                Image(systemName: "arrow.2.squarepath")
-                Text("MAIN_CONVERT_ONE")
-                    .font(.body.weight(.semibold))
-                Spacer()
-                if backups.count > 0 {
-                    Text("\(backups.count)")
-                        .font(.caption.weight(.bold))
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(.white.opacity(0.3))
-                        .clipShape(Capsule())
+    private var actionsCard: some View {
+        VStack(spacing: 0) {
+            Button {
+                contactPickerMode = .convertOne
+                isShowingContactPicker = true
+            } label: {
+                HStack(spacing: 14) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .fill(LinearGradient(
+                                colors: [Color.appOrange, Color(red: 1.0, green: 0.45, blue: 0.0)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ))
+                            .frame(width: 32, height: 32)
+                        Image(systemName: "arrow.2.squarepath")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(.white)
+                    }
+                    Text("MAIN_CONVERT_ONE")
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    if backups.count > 0 {
+                        Text("\(backups.count)")
+                            .font(.caption.weight(.bold))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 3)
+                            .background(Color(.tertiarySystemFill))
+                            .clipShape(Capsule())
+                            .foregroundStyle(.secondary)
+                    }
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color(.tertiaryLabel))
                 }
+                .padding(.horizontal, 16)
+                .frame(height: 52)
             }
-            .foregroundStyle(.white)
-            .padding(.horizontal, 20)
-            .frame(height: 48)
-            .frame(maxWidth: .infinity)
-            .background(Color.appOrange)
-            .clipShape(Capsule())
-        }
-        .disabled(isRunning)
-    }
+            .disabled(isRunning)
 
-    private var settingsButton: some View {
-        NavigationLink(destination: SettingsScreen()) {
-            HStack {
-                Image(systemName: "gearshape.fill")
-                Text("SETTINGS_TITLE")
-                    .font(.body.weight(.semibold))
-                Spacer()
+            Divider()
+                .padding(.leading, 62)
+
+            NavigationLink(destination: SettingsScreen()) {
+                HStack(spacing: 14) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .fill(Color(.systemGray))
+                            .frame(width: 32, height: 32)
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(.white)
+                    }
+                    Text("SETTINGS_TITLE")
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color(.tertiaryLabel))
+                }
+                .padding(.horizontal, 16)
+                .frame(height: 52)
             }
-            .foregroundStyle(.white)
-            .padding(.horizontal, 20)
-            .frame(height: 48)
-            .frame(maxWidth: .infinity)
-            .background(Color.appOrange)
-            .clipShape(Capsule())
         }
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color(.secondarySystemGroupedBackground))
+        )
     }
 
     private var bottomBar: some View {
-        HStack(spacing: 1) {
+        HStack(spacing: 12) {
             Button {
                 if isRunning && mode == .restoreAll {
                     operationState = .stopped
                 } else {
-                    Task { await startRestore() }   // shows confirm dialog
+                    Task { await startRestore() }
                 }
             } label: {
                 VStack(spacing: 4) {
@@ -263,9 +316,12 @@ struct MainScreen: View {
                     Text("MAIN_RESTORE")
                         .font(.caption.weight(.semibold))
                 }
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity, minHeight: 64)
-                .background(Color.appTeal)
+                .foregroundStyle(Color.appTeal)
+                .frame(maxWidth: .infinity, minHeight: 60)
+                .background(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Color.appTeal.opacity(0.12))
+                )
             }
             .disabled(isRunning && mode != .restoreAll)
 
@@ -282,9 +338,12 @@ struct MainScreen: View {
                     Text("MAIN_CLEAR_PHOTOS")
                         .font(.caption.weight(.semibold))
                 }
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity, minHeight: 64)
-                .background(Color(.darkGray))
+                .foregroundStyle(Color(.secondaryLabel))
+                .frame(maxWidth: .infinity, minHeight: 60)
+                .background(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Color(.secondarySystemGroupedBackground))
+                )
             }
             .disabled(isRunning && mode != .clearAll)
         }
@@ -403,55 +462,39 @@ private struct RingProgressView: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color(.systemGray5), lineWidth: 18)
+                .stroke(Color(.systemFill), lineWidth: 20)
 
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
-                    AngularGradient(
+                    LinearGradient(
                         colors: [Color.appRingStart, Color.appRingEnd],
-                        center: .center
+                        startPoint: .leading,
+                        endPoint: .trailing
                     ),
-                    style: StrokeStyle(lineWidth: 18, lineCap: .round)
+                    style: StrokeStyle(lineWidth: 20, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
                 .animation(.easeInOut(duration: 0.4), value: progress)
 
             Circle()
-                .fill(Color(.systemBackground))
-                .padding(10)
+                .fill(Color(.systemGroupedBackground))
+                .padding(11)
         }
     }
 }
 
-// MARK: - Checkered Background
+// MARK: - Bundle + App Icon
 
-private struct CheckeredBackground: View {
-    private let tileSize: CGFloat = 24
-
-    var body: some View {
-        GeometryReader { geo in
-            let cols = Int(geo.size.width / tileSize) + 2
-            let rows = Int(geo.size.height / tileSize) + 2
-
-            Canvas { context, _ in
-                for row in 0..<rows {
-                    for col in 0..<cols {
-                        let isLight = (row + col) % 2 == 0
-                        let rect = CGRect(
-                            x: CGFloat(col) * tileSize,
-                            y: CGFloat(row) * tileSize,
-                            width: tileSize,
-                            height: tileSize
-                        )
-                        context.fill(
-                            Path(rect),
-                            with: .color(isLight ? Color(.systemGray6) : Color(.systemGray5))
-                        )
-                    }
-                }
-            }
-        }
+private extension Bundle {
+    var appIcon: UIImage? {
+        guard
+            let icons = infoDictionary?["CFBundleIcons"] as? [String: Any],
+            let primary = icons["CFBundlePrimaryIcon"] as? [String: Any],
+            let files = primary["CFBundleIconFiles"] as? [String],
+            let name = files.last
+        else { return nil }
+        return UIImage(named: name)
     }
 }
 
