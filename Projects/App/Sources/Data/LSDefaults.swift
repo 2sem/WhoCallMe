@@ -268,25 +268,6 @@ extension LSDefaults{
         }
     }
     
-    static func requestAppTrackingIfNeed() -> Bool{
-        guard !AdsTrackingRequested else{
-            return false;
-        }
-        
-        guard AdsShownCount >= 1 else{
-            AdsShownCount += 1;
-            return false;
-        }
-        
-        guard #available(iOS 14.0, *) else{
-            return false;
-        }
-        
-        SwiftUIAdManager.shared?.requestPermission { _ in
-            AdsTrackingRequested = true
-        }
-        
-        return true;
-    }
 }
+
 

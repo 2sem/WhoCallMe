@@ -40,14 +40,6 @@ class SwiftUIAdManager: NSObject, ObservableObject {
         }
     }
 
-    // Compatibility wrapper for legacy UIKit callback-style callers
-    func show(unit: GADUnitName, completion: @escaping (GADUnitName, Any?, Bool) -> Void) {
-        Task { @MainActor in
-            let result = await show(unit: unit)
-            completion(unit, nil, result)
-        }
-    }
-
     func isTesting(unit: GADUnitName) -> Bool {
         return testUnits.contains(unit)
     }

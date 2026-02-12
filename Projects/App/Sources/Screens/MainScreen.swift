@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import Contacts
+import FirebaseAnalytics
 
 // MARK: - Main Screen
 
@@ -134,10 +135,12 @@ struct MainScreen: View {
                 isShowingContactPicker = false
                 guard let contact else { return }
                 if contactPickerMode == .previewOne {
+                    Analytics.logLeesamEvent(.previewCall)
                     previewContact = contact
                 } else {
                     Task {
                         do {
+                            Analytics.logLeesamEvent(.convertOne)
                             try await contactService?.convertOne(contact)
                             progressedCount = backups.count
                             totalCount = backups.count
@@ -305,6 +308,7 @@ struct MainScreen: View {
 
     private func startConvertAll() async {
         guard let service = contactService else { return }
+        Analytics.logLeesamEvent(.startConvertAll)
         mode = .convertAll
         operationState = .running
         progressedCount = 0
@@ -317,6 +321,7 @@ struct MainScreen: View {
                 },
                 isCancelled: { self.operationState == .stopped }
             )
+            Analytics.logLeesamEvent(.finishConvertAll)
             operationState = .completed
             totalCount = backups.count
             progressedCount = backups.count
@@ -338,6 +343,7 @@ struct MainScreen: View {
 
     private func runRestore() async {
         guard let service = contactService else { return }
+        Analytics.logLeesamEvent(.startRestore)
         mode = .restoreAll
         operationState = .running
         progressedCount = backups.count
@@ -349,6 +355,7 @@ struct MainScreen: View {
                 },
                 isCancelled: { self.operationState == .stopped }
             )
+            Analytics.logLeesamEvent(.finishRestore)
             operationState = .completed
             progressedCount = 0
             totalCount = 0
@@ -365,6 +372,7 @@ struct MainScreen: View {
 
     private func runClearPhotos() async {
         guard let service = contactService else { return }
+        Analytics.logLeesamEvent(.startClear)
         mode = .clearAll
         operationState = .running
         progressedCount = 0
@@ -377,6 +385,7 @@ struct MainScreen: View {
                 },
                 isCancelled: { self.operationState == .stopped }
             )
+            Analytics.logLeesamEvent(.finishClear)
             operationState = .completed
         } catch {
             operationState = .ready
