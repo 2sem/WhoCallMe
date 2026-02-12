@@ -120,7 +120,6 @@ final class ContactService: ObservableObject {
 
         try await ContactStore.shared.save(target)
         try modelContext.save()
-        modelContext.reset()
     }
 
     private func fetchBackup(for id: String) -> ContactBackup? {
