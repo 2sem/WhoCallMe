@@ -52,6 +52,13 @@ Notification="알림";
 
 "Converting has been completed"="변환이 완료되었습니다";
 
+MAIN_APP_TITLE="누군지 다알아";
+MAIN_PREVIEW="미리보기";
+MAIN_CONVERT="변환";
+MAIN_CONVERT_ONE="선택한 연락처 변환";
+MAIN_RESTORE="연락처 복원";
+MAIN_CLEAR_PHOTOS="모든 사진 삭제";
+
 SETTINGS_TITLE="설정";
 SETTINGS_SECTION_CONTACTS="연락처";
 SETTINGS_GENERATE_NICKNAME="별명 생성";

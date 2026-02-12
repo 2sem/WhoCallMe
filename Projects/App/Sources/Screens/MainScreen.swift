@@ -162,14 +162,14 @@ struct MainScreen: View {
             Image(systemName: "person.circle.fill")
                 .font(.title2)
                 .foregroundStyle(.secondary)
-            Text("누군지 다알아")
+            Text("MAIN_APP_TITLE")
                 .font(.headline)
             Spacer()
             Button {
                 contactPickerMode = .previewOne
                 isShowingContactPicker = true
             } label: {
-                Text("미리보기")
+                Text("MAIN_PREVIEW")
                     .font(.subheadline)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
@@ -191,7 +191,7 @@ struct MainScreen: View {
             HStack(spacing: 8) {
                 Image(systemName: isRunning ? "stop.fill" : "arrow.2.squarepath")
                     .font(.body.weight(.semibold))
-                Text(isRunning ? NSLocalizedString("STOP", comment: "") : "변환")
+                Text(isRunning ? NSLocalizedString("STOP", comment: "") : NSLocalizedString("MAIN_CONVERT", comment: ""))
                     .font(.title3.weight(.semibold))
             }
             .foregroundStyle(.white)
@@ -209,7 +209,7 @@ struct MainScreen: View {
         } label: {
             HStack {
                 Image(systemName: "arrow.2.squarepath")
-                Text("선택한 연락처 변환")
+                Text("MAIN_CONVERT_ONE")
                     .font(.body.weight(.semibold))
                 Spacer()
                 if backups.count > 0 {
@@ -235,7 +235,7 @@ struct MainScreen: View {
         NavigationLink(destination: SettingsScreen()) {
             HStack {
                 Image(systemName: "gearshape.fill")
-                Text("설정")
+                Text("SETTINGS_TITLE")
                     .font(.body.weight(.semibold))
                 Spacer()
             }
@@ -260,7 +260,7 @@ struct MainScreen: View {
                 VStack(spacing: 4) {
                     Image(systemName: "arrow.uturn.backward")
                         .font(.title3)
-                    Text("연락처 복원")
+                    Text("MAIN_RESTORE")
                         .font(.caption.weight(.semibold))
                 }
                 .foregroundStyle(.white)
@@ -279,7 +279,7 @@ struct MainScreen: View {
                 VStack(spacing: 4) {
                     Image(systemName: "trash")
                         .font(.title3)
-                    Text("모든 사진 삭제")
+                    Text("MAIN_CLEAR_PHOTOS")
                         .font(.caption.weight(.semibold))
                 }
                 .foregroundStyle(.white)

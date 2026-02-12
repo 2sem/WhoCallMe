@@ -11,7 +11,7 @@ struct PreviewScreen: View {
             isPreviewMode: true
         )
         .ignoresSafeArea()
-        .navigationTitle("미리보기")
+        .navigationTitle("MAIN_PREVIEW")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

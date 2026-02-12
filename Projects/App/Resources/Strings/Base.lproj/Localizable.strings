@@ -52,6 +52,13 @@ Notification="Notification";
 
 "Converting has been completed"="Converting has been completed";
 
+MAIN_APP_TITLE="Who's Calling";
+MAIN_PREVIEW="Preview";
+MAIN_CONVERT="Convert";
+MAIN_CONVERT_ONE="Convert Selected Contact";
+MAIN_RESTORE="Restore Contacts";
+MAIN_CLEAR_PHOTOS="Delete All Photos";
+
 SETTINGS_TITLE="Settings";
 SETTINGS_SECTION_CONTACTS="Contacts";
 SETTINGS_GENERATE_NICKNAME="Generate Nickname";
