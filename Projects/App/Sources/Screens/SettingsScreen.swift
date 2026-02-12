@@ -15,31 +15,31 @@ struct SettingsScreen: View {
 
     var body: some View {
         List {
-            Section("연락처") {
-                Toggle("별명 생성", isOn: $needGenerateNickname)
-                Toggle("회사명 포함", isOn: $needContainsOrg)
-                Toggle("부서명 포함", isOn: $needContainsDept)
-                Toggle("직책명 포함", isOn: $needContainsJob)
-                Toggle("초성 검색(한국어)", isOn: $needMakeChoseong)
-                Toggle("수신 화면 생성", isOn: $needMakeIncomingPhoto)
+            Section("SETTINGS_SECTION_CONTACTS") {
+                Toggle("SETTINGS_GENERATE_NICKNAME", isOn: $needGenerateNickname)
+                Toggle("SETTINGS_INCLUDE_COMPANY", isOn: $needContainsOrg)
+                Toggle("SETTINGS_INCLUDE_DEPARTMENT", isOn: $needContainsDept)
+                Toggle("SETTINGS_INCLUDE_JOB_TITLE", isOn: $needContainsJob)
+                Toggle("SETTINGS_KOREAN_CONSONANT_SEARCH", isOn: $needMakeChoseong)
+                Toggle("SETTINGS_GENERATE_INCOMING_SCREEN", isOn: $needMakeIncomingPhoto)
             }
 
-            Section("수신화면") {
-                Toggle("원본사진 전체화면", isOn: $needFullscreenPhoto)
+            Section("SETTINGS_SECTION_INCOMING_SCREEN") {
+                Toggle("SETTINGS_ORIGINAL_PHOTO_FULLSCREEN", isOn: $needFullscreenPhoto)
                     .disabled(!needMakeIncomingPhoto)
-                Toggle("수신화면에 회사명 포함", isOn: $needPhotoContainsOrg)
+                Toggle("SETTINGS_INCOMING_INCLUDE_COMPANY", isOn: $needPhotoContainsOrg)
                     .disabled(!needMakeIncomingPhoto)
-                Toggle("수신화면에 부서명 포함", isOn: $needPhotoContainsDept)
+                Toggle("SETTINGS_INCOMING_INCLUDE_DEPARTMENT", isOn: $needPhotoContainsDept)
                     .disabled(!needMakeIncomingPhoto)
-                Toggle("수신화면에 직책명 포함", isOn: $needPhotoContainsJob)
+                Toggle("SETTINGS_INCOMING_INCLUDE_JOB_TITLE", isOn: $needPhotoContainsJob)
                     .disabled(!needMakeIncomingPhoto)
             }
 
-            Section("앱 정보") {
-                LabeledContent("앱 버전", value: Bundle.main.appVersion)
+            Section("SETTINGS_SECTION_APP_INFO") {
+                LabeledContent("SETTINGS_APP_VERSION", value: Bundle.main.appVersion)
             }
         }
-        .navigationTitle("설정")
+        .navigationTitle("SETTINGS_TITLE")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

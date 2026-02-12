@@ -52,3 +52,18 @@ Notification="Notification";
 
 "Converting has been completed"="Converting has been completed";
 
+SETTINGS_TITLE="Settings";
+SETTINGS_SECTION_CONTACTS="Contacts";
+SETTINGS_GENERATE_NICKNAME="Generate Nickname";
+SETTINGS_INCLUDE_COMPANY="Include Company Name";
+SETTINGS_INCLUDE_DEPARTMENT="Include Department Name";
+SETTINGS_INCLUDE_JOB_TITLE="Include Job Title";
+SETTINGS_KOREAN_CONSONANT_SEARCH="Korean Consonant Search";
+SETTINGS_GENERATE_INCOMING_SCREEN="Generate Incoming Call Screen";
+SETTINGS_SECTION_INCOMING_SCREEN="Incoming Screen";
+SETTINGS_ORIGINAL_PHOTO_FULLSCREEN="Original Photo Fullscreen";
+SETTINGS_INCOMING_INCLUDE_COMPANY="Include Company in Screen";
+SETTINGS_INCOMING_INCLUDE_DEPARTMENT="Include Department in Screen";
+SETTINGS_INCOMING_INCLUDE_JOB_TITLE="Include Job Title in Screen";
+SETTINGS_SECTION_APP_INFO="App Info";
+SETTINGS_APP_VERSION="App Version";
