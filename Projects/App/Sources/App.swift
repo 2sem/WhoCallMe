@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct WhoCallMeApp: App {
@@ -8,5 +9,6 @@ struct WhoCallMeApp: App {
         WindowGroup {
             SplashScreen()
         }
+        .modelContainer(for: ContactBackup.self)
     }
 }
