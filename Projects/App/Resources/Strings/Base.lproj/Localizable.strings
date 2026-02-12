@@ -52,7 +52,7 @@ Notification="Notification";
 
 "Converting has been completed"="Converting has been completed";
 
-MAIN_APP_TITLE="Who's Calling";
+MAIN_APP_TITLE="WhoCallMe";
 MAIN_PREVIEW="Preview";
 MAIN_CONVERT="Convert";
 MAIN_CONVERT_ONE="Convert Selected Contact";
