@@ -30,7 +30,13 @@ final class ContactService: ObservableObject {
     // MARK: - Convert One
 
     func convertOne(_ contact: CNContact) async throws {
-        try await convertContact(contact)
+        try await ContactStore.shared.requestAccess()
+        let results = try await ContactStore.shared.fetch(
+            identifiers: [contact.identifier],
+            keys: ContactStore.keysForConvert
+        )
+        guard let fullContact = results.first else { return }
+        try await convertContact(fullContact)
     }
 
     // MARK: - Restore All
