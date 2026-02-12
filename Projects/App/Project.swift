@@ -60,7 +60,7 @@ let project = Project(
             destinations: [.iPhone],
             product: .app,
             bundleId: "com.credif.who",
-            deploymentTargets: .iOS("13.0"),
+            deploymentTargets: .iOS("18.0"),
         infoPlist: .extendingDefault(
             with: [
                 "UILaunchStoryboardName": "LaunchScreen",
