@@ -2,37 +2,30 @@ import SwiftUI
 import SwiftData
 import Contacts
 
+// MARK: - Main Screen
+
 struct MainScreen: View {
-    // MARK: - State (mirrors MainViewController BehaviorSubjects)
-
-    enum Mode {
-        case convertAll, convertOne, restoreAll, previewOne, clearAll
-    }
-
-    enum OperationState {
-        case ready, running, stopped, completed
-    }
+    enum Mode { case convertAll, convertOne, restoreAll, previewOne, clearAll }
+    enum OperationState { case ready, running, stopped, completed }
 
     @State private var mode: Mode = .convertAll
     @State private var operationState: OperationState = .ready
     @State private var progressedCount: Int = 0
     @State private var totalCount: Int = 0
-    @State private var useFullscreenPhoto: Bool = LSDefaults.needFullscreenPhoto
-
     @State private var isShowingContactPicker = false
     @State private var contactPickerMode: Mode = .convertOne
 
     @Environment(\.modelContext) private var modelContext
     @Query private var backups: [ContactBackup]
 
-    // MARK: - Computed
-
     var isRunning: Bool { operationState == .running }
+
     var progress: Double {
         guard totalCount > 0 else { return 1.0 }
         let p = mode == .restoreAll ? totalCount - progressedCount : progressedCount
         return Double(max(0, p)) / Double(totalCount)
     }
+
     var statusText: String {
         switch operationState {
         case .ready: return ""
@@ -50,37 +43,52 @@ struct MainScreen: View {
         }
     }
 
-    // MARK: - Body
-
     var body: some View {
-        VStack(spacing: 0) {
-            // Template preview placeholder (Step 6: wrap ContactTemplateViewController)
-            templatePreviewArea
+        ZStack {
+            CheckeredBackground()
+                .ignoresSafeArea()
 
-            Divider()
+            VStack(spacing: 0) {
+                headerBar
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color(.systemBackground).opacity(0.85))
 
-            // Progress + status
-            progressArea
-                .padding(.vertical, 12)
+                Spacer()
 
-            Divider()
+                VStack(spacing: 20) {
+                    ZStack {
+                        RingProgressView(progress: progress)
+                            .frame(width: 240, height: 240)
 
-            // Photo option toggle
-            photoOptionRow
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
+                        VStack(spacing: 4) {
+                            Text("\(progressedCount)")
+                                .font(.system(size: 72, weight: .thin, design: .rounded))
+                            if !statusText.isEmpty {
+                                Text(statusText)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
 
-            Divider()
+                    convertAllButton
+                }
 
-            // Action buttons
-            actionButtons
-                .padding(16)
+                Spacer()
 
-            Spacer()
+                VStack(spacing: 12) {
+                    convertOneButton
+                    settingsButton
+                }
+                .padding(.horizontal, 30)
 
-            // AdMob banner placeholder (Step 8)
-            bannerPlaceholder
+                Spacer()
+
+                bottomBar
+            }
         }
+        .navigationBarHidden(true)
         .onAppear {
             totalCount = backups.count
             progressedCount = backups.count
@@ -100,150 +108,208 @@ struct MainScreen: View {
 
     // MARK: - Subviews
 
-    private var templatePreviewArea: some View {
-        // Step 6: replace with UIViewControllerRepresentable for ContactTemplateViewController
-        Rectangle()
-            .fill(Color(.systemGray6))
-            .frame(height: 180)
-            .overlay(Text("Preview").foregroundStyle(.secondary))
-    }
-
-    private var progressArea: some View {
-        HStack(spacing: 20) {
-            CircularProgressView(progress: progress)
-                .frame(width: 60, height: 60)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text("\(progressedCount)")
-                    .font(.title2.monospacedDigit())
-                Text(statusText)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
+    private var headerBar: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "person.circle.fill")
+                .font(.title2)
+                .foregroundStyle(.secondary)
+            Text("누군지 다알아")
+                .font(.headline)
             Spacer()
+            NavigationLink(destination: Text("Preview")) {
+                Text("미리보기")
+                    .font(.subheadline)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color(.systemGray5))
+                    .clipShape(Capsule())
+            }
+            .foregroundStyle(.primary)
         }
-        .padding(.horizontal, 16)
     }
 
-    private var photoOptionRow: some View {
-        Toggle(isOn: $useFullscreenPhoto) {
-            Text(NSLocalizedString("option_fullscreen_photo", comment: "Fullscreen Photo"))
-        }
-        .onChange(of: useFullscreenPhoto) { _, newValue in
-            LSDefaults.needFullscreenPhoto = newValue
+    private var convertAllButton: some View {
+        Button {
+            if isRunning {
+                operationState = .stopped
+            } else {
+                Task { await startConvertAll() }
+            }
+        } label: {
+            HStack(spacing: 8) {
+                Image(systemName: isRunning ? "stop.fill" : "arrow.2.squarepath")
+                    .font(.body.weight(.semibold))
+                Text(isRunning ? NSLocalizedString("STOP", comment: "") : "변환")
+                    .font(.title3.weight(.semibold))
+            }
+            .foregroundStyle(.white)
+            .frame(width: 200, height: 48)
+            .background(Color.appOrange)
+            .clipShape(Capsule())
+            .shadow(color: .appOrange.opacity(0.4), radius: 8, y: 4)
         }
     }
 
-    private var actionButtons: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 10) {
-                // Convert All / Stop
-                Button {
-                    if isRunning {
-                        operationState = .stopped
-                    } else {
-                        Task { await startConvertAll() }
-                    }
-                } label: {
-                    Label(isRunning ? NSLocalizedString("STOP", comment: "") : NSLocalizedString("convert_all", comment: "Convert All"),
-                          systemImage: isRunning ? "stop.fill" : "arrow.triangle.2.circlepath")
-                        .frame(maxWidth: .infinity)
+    private var convertOneButton: some View {
+        Button {
+            contactPickerMode = .convertOne
+            isShowingContactPicker = true
+        } label: {
+            HStack {
+                Image(systemName: "arrow.2.squarepath")
+                Text("선택한 연락처 변환")
+                    .font(.body.weight(.semibold))
+                Spacer()
+                if backups.count > 0 {
+                    Text("\(backups.count)")
+                        .font(.caption.weight(.bold))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(.white.opacity(0.3))
+                        .clipShape(Capsule())
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(!isRunning && operationState == .running)
-
-                // Convert One
-                Button {
-                    contactPickerMode = .convertOne
-                    isShowingContactPicker = true
-                } label: {
-                    Label(NSLocalizedString("convert_one", comment: "Convert One"), systemImage: "person.crop.circle.badge.plus")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .disabled(isRunning)
             }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 20)
+            .frame(height: 48)
+            .frame(maxWidth: .infinity)
+            .background(Color.appOrange)
+            .clipShape(Capsule())
+        }
+        .disabled(isRunning)
+    }
 
-            HStack(spacing: 10) {
-                // Preview
-                Button {
-                    contactPickerMode = .previewOne
-                    isShowingContactPicker = true
-                } label: {
-                    Label(NSLocalizedString("preview", comment: "Preview"), systemImage: "eye")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .disabled(isRunning)
-
-                // Restore
-                Button {
-                    if isRunning {
-                        operationState = .stopped
-                    } else {
-                        Task { await startRestore() }
-                    }
-                } label: {
-                    Label(isRunning && mode == .restoreAll ? NSLocalizedString("STOP", comment: "") : NSLocalizedString("WARN_RESTORE_CONTACTS_RESTORE", comment: ""),
-                          systemImage: "arrow.uturn.backward")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .disabled(isRunning && mode != .restoreAll)
+    private var settingsButton: some View {
+        NavigationLink(destination: SettingsScreen()) {
+            HStack {
+                Image(systemName: "gearshape.fill")
+                Text("설정")
+                    .font(.body.weight(.semibold))
+                Spacer()
             }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 20)
+            .frame(height: 48)
+            .frame(maxWidth: .infinity)
+            .background(Color.appOrange)
+            .clipShape(Capsule())
+        }
+    }
 
-            // Clear Photos
+    private var bottomBar: some View {
+        HStack(spacing: 1) {
             Button {
-                if isRunning {
+                if isRunning && mode == .restoreAll {
+                    operationState = .stopped
+                } else {
+                    Task { await startRestore() }
+                }
+            } label: {
+                VStack(spacing: 4) {
+                    Image(systemName: "arrow.uturn.backward")
+                        .font(.title3)
+                    Text("연락처 복원")
+                        .font(.caption.weight(.semibold))
+                }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, minHeight: 64)
+                .background(Color.appTeal)
+            }
+            .disabled(isRunning && mode != .restoreAll)
+
+            Button {
+                if isRunning && mode == .clearAll {
                     operationState = .stopped
                 } else {
                     Task { await startClearPhotos() }
                 }
             } label: {
-                Label(isRunning && mode == .clearAll ? NSLocalizedString("STOP", comment: "") : NSLocalizedString("WARN_CLEAR_PHOTOS_CLEAR", comment: ""),
-                      systemImage: "photo.slash")
-                    .frame(maxWidth: .infinity)
+                VStack(spacing: 4) {
+                    Image(systemName: "trash")
+                        .font(.title3)
+                    Text("모든 사진 삭제")
+                        .font(.caption.weight(.semibold))
+                }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, minHeight: 64)
+                .background(Color(.darkGray))
             }
-            .buttonStyle(.bordered)
-            .tint(.red)
             .disabled(isRunning && mode != .clearAll)
         }
     }
 
-    private var bannerPlaceholder: some View {
-        // Step 8: replace with GADBannerView UIViewRepresentable
-        Color.clear.frame(height: 0)
-    }
+    // MARK: - Operations (Step 6)
 
-    // MARK: - Operations (Step 6: implement full logic)
-
-    private func startConvertAll() async {
-        // Step 6
-    }
-
-    private func startRestore() async {
-        // Step 6
-    }
-
-    private func startClearPhotos() async {
-        // Step 6
-    }
+    private func startConvertAll() async {}
+    private func startRestore() async {}
+    private func startClearPhotos() async {}
 }
 
-// MARK: - Circular Progress (replaces LSCircleProgressView)
+// MARK: - Ring Progress View
 
-private struct CircularProgressView: View {
+private struct RingProgressView: View {
     let progress: Double
 
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color(.systemGray4), lineWidth: 5)
+                .stroke(Color(.systemGray5), lineWidth: 18)
+
             Circle()
                 .trim(from: 0, to: progress)
-                .stroke(Color.accentColor, style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                .stroke(
+                    AngularGradient(
+                        colors: [Color.appRingStart, Color.appRingEnd],
+                        center: .center
+                    ),
+                    style: StrokeStyle(lineWidth: 18, lineCap: .round)
+                )
                 .rotationEffect(.degrees(-90))
-                .animation(.easeInOut, value: progress)
+                .animation(.easeInOut(duration: 0.4), value: progress)
+
+            Circle()
+                .fill(Color(.systemBackground))
+                .padding(10)
         }
     }
+}
+
+// MARK: - Checkered Background
+
+private struct CheckeredBackground: View {
+    private let tileSize: CGFloat = 24
+
+    var body: some View {
+        GeometryReader { geo in
+            let cols = Int(geo.size.width / tileSize) + 2
+            let rows = Int(geo.size.height / tileSize) + 2
+
+            Canvas { context, _ in
+                for row in 0..<rows {
+                    for col in 0..<cols {
+                        let isLight = (row + col) % 2 == 0
+                        let rect = CGRect(
+                            x: CGFloat(col) * tileSize,
+                            y: CGFloat(row) * tileSize,
+                            width: tileSize,
+                            height: tileSize
+                        )
+                        context.fill(
+                            Path(rect),
+                            with: .color(isLight ? Color(.systemGray6) : Color(.systemGray5))
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - App Colors
+
+extension Color {
+    static let appOrange = Color(red: 1.0, green: 0.72, blue: 0.0)
+    static let appTeal = Color(red: 0.13, green: 0.70, blue: 0.67)
+    static let appRingStart = Color(red: 0.10, green: 0.35, blue: 0.85)
+    static let appRingEnd = Color(red: 0.40, green: 0.65, blue: 1.0)
 }

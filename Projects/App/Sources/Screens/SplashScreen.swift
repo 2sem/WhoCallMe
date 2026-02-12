@@ -8,7 +8,9 @@ struct SplashScreen: View {
     var body: some View {
         Group {
             if initializer.isReady {
-                MainScreen()
+                NavigationStack {
+                    MainScreen()
+                }
             } else {
                 ProgressView()
             }
