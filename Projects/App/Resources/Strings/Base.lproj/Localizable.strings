@@ -31,6 +31,9 @@ WARN="Warning";
 WARN_CLEAR_PHOTOS_MSG="Clear photos for your all contacts";
 WARN_CLEAR_PHOTOS_CLEAR="Clear";
 
+WARN_CONVERT_ALL_MSG="Convert all contacts?";
+WARN_CONVERT_ALL_CONVERT="Convert";
+
 WARN_RESTORE_CONTACTS_MSG="Restore all contacts to before converting";
 WARN_RESTORE_CONTACTS_RESTORE="Restore";
 
@@ -55,7 +58,7 @@ Notification="Notification";
 MAIN_APP_TITLE="WhoCallMe";
 MAIN_PREVIEW="Preview";
 MAIN_CONVERT="Convert";
-MAIN_CONVERT_ONE="Convert Selected Contact";
+MAIN_CONVERT_ONE="Convert 1 Contact";
 MAIN_RESTORE="Restore Contacts";
 MAIN_CLEAR_PHOTOS="Delete All Photos";
 

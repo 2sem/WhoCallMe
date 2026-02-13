@@ -27,12 +27,13 @@ struct MainScreen: View {
     @State private var showError = false
     @State private var showRestoreConfirm = false
     @State private var showClearConfirm = false
+    @State private var showConvertConfirm = false
 
     var isRunning: Bool { operationState == .running }
 
     var progress: Double {
-        guard totalCount > 0 else { return 1.0 }
-        let p = mode == .restoreAll ? totalCount - progressedCount : progressedCount
+        guard totalCount > 0 else { return 0.0 }
+        let p = progressedCount
         return Double(max(0, p)) / Double(totalCount)
     }
 
@@ -42,7 +43,7 @@ struct MainScreen: View {
         case .stopped: return NSLocalizedString("STATUS_STOPPED", comment: "")
         case .running, .completed:
             switch mode {
-            case .convertAll:
+            case .convertAll, .convertOne:
                 return NSLocalizedString(operationState == .running ? "STATUS_CONVERTING" : "STATUS_CONVERTED", comment: "")
             case .restoreAll:
                 return NSLocalizedString(operationState == .running ? "STATUS_RESTORING" : "STATUS_RESTORED", comment: "")
@@ -115,8 +116,14 @@ struct MainScreen: View {
         }
         .onAppear {
             contactService = ContactService(modelContext: modelContext)
-            totalCount = backups.count
             progressedCount = backups.count
+            Task {
+                if let count = try? await ContactStore.shared.fetchCount() {
+                    totalCount = max(count, backups.count)
+                } else {
+                    totalCount = backups.count
+                }
+            }
         }
         .alert("Error", isPresented: $showError) {
             Button("OK", role: .cancel) {}
@@ -141,6 +148,15 @@ struct MainScreen: View {
                 Task { await runClearPhotos() }
             }
         }
+        .confirmationDialog(
+            NSLocalizedString("WARN_CONVERT_ALL_MSG", comment: ""),
+            isPresented: $showConvertConfirm,
+            titleVisibility: .visible
+        ) {
+            Button(NSLocalizedString("WARN_CONVERT_ALL_CONVERT", comment: "")) {
+                presentFullAdThen { await startConvertAll() }
+            }
+        }
         .sheet(isPresented: $isShowingContactPicker) {
             ContactPickerView { contact in
                 isShowingContactPicker = false
@@ -153,8 +169,11 @@ struct MainScreen: View {
                         do {
                             Analytics.logLeesamEvent(.convertOne)
                             try await contactService?.convertOne(contact)
+                            if let count = try? await ContactStore.shared.fetchCount() {
+                                totalCount = max(count, backups.count)
+                            }
                             progressedCount = backups.count
-                            totalCount = backups.count
+                            mode = .convertOne
                             operationState = .completed
                         } catch {
                             errorMessage = error.localizedDescription
@@ -199,7 +218,7 @@ struct MainScreen: View {
             if isRunning {
                 operationState = .stopped
             } else {
-                presentFullAdThen { await startConvertAll() }
+                showConvertConfirm = true
             }
         } label: {
             HStack(spacing: 8) {
@@ -252,15 +271,6 @@ struct MainScreen: View {
                         .font(.body)
                         .foregroundStyle(.primary)
                     Spacer()
-                    if backups.count > 0 {
-                        Text("\(backups.count)")
-                            .font(.caption.weight(.bold))
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 3)
-                            .background(Color(.tertiarySystemFill))
-                            .clipShape(Capsule())
-                            .foregroundStyle(.secondary)
-                    }
                     Image(systemName: "chevron.right")
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(Color(.tertiaryLabel))
@@ -382,7 +392,6 @@ struct MainScreen: View {
             )
             Analytics.logLeesamEvent(.finishConvertAll)
             operationState = .completed
-            totalCount = backups.count
             progressedCount = backups.count
         } catch {
             operationState = .ready
@@ -405,19 +414,18 @@ struct MainScreen: View {
         Analytics.logLeesamEvent(.startRestore)
         mode = .restoreAll
         operationState = .running
-        progressedCount = backups.count
-        totalCount = backups.count
+        let initialCount = backups.count
+        progressedCount = initialCount
         do {
             try await service.restoreAll(
                 onProgress: { done, _ in
-                    progressedCount = backups.count - done
+                    progressedCount = initialCount - done
                 },
                 isCancelled: { self.operationState == .stopped }
             )
             Analytics.logLeesamEvent(.finishRestore)
             operationState = .completed
             progressedCount = 0
-            totalCount = 0
         } catch {
             operationState = .ready
             errorMessage = error.localizedDescription
