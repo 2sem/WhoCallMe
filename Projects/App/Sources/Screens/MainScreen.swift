@@ -107,7 +107,9 @@ struct MainScreen: View {
 
                 bottomBar
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 16)
+                    .padding(.bottom, 8)
+
+                BannerAdView(unitName: .homeBanner)
             }
         }
         .navigationBarHidden(true)
