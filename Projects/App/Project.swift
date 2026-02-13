@@ -65,10 +65,10 @@ let project = Project(
             with: [
                 "UILaunchStoryboardName": "LaunchScreen",
                 "GADApplicationIdentifier": "ca-app-pub-9684378399371172~4206633246",
-                "GADUnitIdentifiers" : ["FullAd" : "ca-app-pub-9684378399371172/4108901647"],
-                "GoogleADUnitID": ["FullAd" : "ca-app-pub-9684378399371172/4108901647",
-                                   "RewardAd" : "ca-app-pub-9684378399371172/5771706946",
-                                   "TopBanner" : ""],
+                "GADUnitIdentifiers" : [
+                    "FullAd" : "ca-app-pub-9684378399371172/4108901647",
+                    "HomeBanner" : "ca-app-pub-9684378399371172/2132640843"
+                ],
                 "Itunes App Id": "395429781",
                 "NSContactsUsageDescription": "This app needs access contacts to convert",
                 "NSUserTrackingUsageDescription": "Your data will be used to deliver personalized ads to you",
