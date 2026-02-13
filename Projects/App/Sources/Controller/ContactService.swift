@@ -62,7 +62,8 @@ final class ContactService: ObservableObject {
 
             ContactConverter.restoreIndex(target, backup: backup)
 
-            if backup?.isModified != true {
+            // Only restore original if user hasn't manually changed the photo since conversion
+            if contact.imageData == backup?.generatedImage {
                 target.imageData = backup?.imageData
             }
 
@@ -114,14 +115,9 @@ final class ContactService: ObservableObject {
                 backup?.imageData = imageData
             }
             if let backup { modelContext.insert(backup) }
-        } else {
-            // Update original image if it changed
-            let hasImage = contact.imageData != nil
-            let hadImage = backup?.imageData != nil
-            if hasImage != hadImage {
-                backup?.imageData = contact.imageData
-                backup?.isModified = true
-            }
+        } else if contact.imageData != backup?.generatedImage {
+            // User manually changed their photo since last conversion — track new original
+            backup?.imageData = contact.imageData
         }
 
         ContactConverter.generateIndex(target, backup: backup)
@@ -159,12 +155,4 @@ final class ContactService: ObservableObject {
     }
 }
 
-// MARK: - ContactBackup transient flag
 
-extension ContactBackup {
-    // Transient flag (not persisted) - mirrors OriginalContract.isModified
-    var isModified: Bool {
-        get { (UserDefaults.standard.object(forKey: "backup_modified_\(id)") as? Bool) ?? false }
-        set { UserDefaults.standard.set(newValue, forKey: "backup_modified_\(id)") }
-    }
-}

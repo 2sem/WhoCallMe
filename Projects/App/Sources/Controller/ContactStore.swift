@@ -36,6 +36,15 @@ actor ContactStore {
         return try store.unifiedContacts(matching: predicate, keysToFetch: keys)
     }
 
+    func fetchCount() async throws -> Int {
+        let id = store.defaultContainerIdentifier()
+        let predicate = CNContact.predicateForContactsInContainer(withIdentifier: id)
+        return try store.unifiedContacts(
+            matching: predicate,
+            keysToFetch: [CNContactIdentifierKey as CNKeyDescriptor]
+        ).count
+    }
+
     func fetch(identifiers: [String], keys: [CNKeyDescriptor]) async throws -> [CNContact] {
         let predicate = CNContact.predicateForContacts(withIdentifiers: identifiers)
         return try store.unifiedContacts(matching: predicate, keysToFetch: keys)
