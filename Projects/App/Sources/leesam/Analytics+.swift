@@ -20,9 +20,7 @@ extension Analytics{
         var name : String?;
         let className : String? = viewController.classForCoder.description().components(separatedBy: ".").last;
         
-        if viewController is MainViewController{
-            name = "메인화면";
-        }else if viewController is ContactTemplateViewController{
+        if viewController is ContactTemplateViewController{
             name = "미리보기";
         }
         

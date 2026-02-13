@@ -37,6 +37,7 @@ class LSDefaults{
         static let IsRotateFixed = "IsRotateFixed";
         
         static let LastFullADShown = "LastFullADShown";
+        static let LastOpeningAdPrepared = "LastOpeningAdPrepared";
         static let LastShareShown = "LastShareShown";
         static let LastRewardShown = "LastRewardShown";
         
@@ -54,7 +55,6 @@ class LSDefaults{
 
         static let LaunchCount = "LaunchCount";
         
-        static let AdsShownCount = "AdsShownCount";
         static let AdsTrackingRequested = "AdsTrackingRequested";
     }
     
@@ -105,9 +105,19 @@ class LSDefaults{
             let seconds = Defaults.double(forKey: Keys.LastRewardShown);
             return Date.init(timeIntervalSince1970: seconds);
         }
-        
+
         set(value){
             Defaults.set(value.timeIntervalSince1970, forKey: Keys.LastRewardShown);
+        }
+    }
+
+    static var LastOpeningAdPrepared: Date {
+        get {
+            let seconds = Defaults.double(forKey: Keys.LastOpeningAdPrepared)
+            return Date(timeIntervalSince1970: seconds)
+        }
+        set {
+            Defaults.set(newValue.timeIntervalSince1970, forKey: Keys.LastOpeningAdPrepared)
         }
     }
     
@@ -228,25 +238,6 @@ class LSDefaults{
 }
 
 extension LSDefaults{
-    static var AdsShownCount : Int{
-        get{
-            return Defaults.integer(forKey: Keys.AdsShownCount);
-        }
-        
-        set{
-            Defaults.set(newValue, forKey: Keys.AdsShownCount);
-        }
-    }
-    
-    static func increateAdsShownCount(){
-        guard AdsShownCount < 3 else {
-            return
-        }
-        
-        AdsShownCount += 1;
-        "Ads Shown Count[\(AdsShownCount)]".debug();
-    }
-    
     static var AdsTrackingRequested : Bool{
         get{
             return Defaults.bool(forKey: Keys.AdsTrackingRequested);
@@ -257,25 +248,6 @@ extension LSDefaults{
         }
     }
     
-    static func requestAppTrackingIfNeed() -> Bool{
-        guard !AdsTrackingRequested else{
-            return false;
-        }
-        
-        guard AdsShownCount >= 1 else{
-            AdsShownCount += 1;
-            return false;
-        }
-        
-        guard #available(iOS 14.0, *) else{
-            return false;
-        }
-        
-        AppDelegate.sharedGADManager?.requestPermission(completion: { (result) in
-            AdsTrackingRequested = true;
-        })
-        
-        return true;
-    }
 }
+
 

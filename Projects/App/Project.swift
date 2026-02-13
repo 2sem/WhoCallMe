@@ -41,7 +41,7 @@ let project = Project(
     name: "App",
     packages: [
         .remote(url: "https://github.com/2sem/GADManager",
-                requirement: .upToNextMajor(from: "1.3.3")),
+                requirement: .upToNextMajor(from: "1.3.8")),
         // .remote(url: "https://github.com/firebase/firebase-ios-sdk",
         //        requirement: .upToNextMajor(from: "10.4.0")),
         
@@ -60,11 +60,10 @@ let project = Project(
             destinations: [.iPhone],
             product: .app,
             bundleId: "com.credif.who",
-            deploymentTargets: .iOS("13.0"),
+            deploymentTargets: .iOS("18.0"),
         infoPlist: .extendingDefault(
             with: [
                 "UILaunchStoryboardName": "LaunchScreen",
-                "UIMainStoryboardFile": "Main",
                 "GADApplicationIdentifier": "ca-app-pub-9684378399371172~4206633246",
                 "GADUnitIdentifiers" : ["FullAd" : "ca-app-pub-9684378399371172/4108901647"],
                 "GoogleADUnitID": ["FullAd" : "ca-app-pub-9684378399371172/4108901647",
