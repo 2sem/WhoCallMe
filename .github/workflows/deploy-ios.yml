@@ -16,49 +16,37 @@ concurrency:
   group: ${{ github.ref }}/ios/deploy
   cancel-in-progress: true
 
+permissions:
+  id-token: write
+
 jobs:
   deploy:
-    # needs: install-pods
-    runs-on: macos-15
+    runs-on: macos-26
     env:
         PRODUCT_NAME: 'WhoCallMe'
+        PACKAGE_NAME: 'com.credif.who'
         IOS_CERT_PATH: 'cert.p12'
         IOS_PROFILE_PATH: 'profile.mobileprovision'
         IOS_KEY_PATH: 'api-key.json'
+        IOS_IPA_PATH: './Output/IPA/App.ipa'
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
 
       - name: Select Xcode
         run: |
-          sudo xcode-select -s /Applications/Xcode_16.2.app
+          sudo xcode-select -s /Applications/Xcode_26.1.1.app
 
       - name: Install Mise
-        run: |
-            brew install mise
-
-      - name: Install Tuist
-        run: |
-          mise install tuist
-
-      # - name: Create Tuist cache key
-      #   id: tuist-cache-hash
-      #   run: echo "hash=${{ hashFiles('./Tuist/.build/workspace-state.json') }}" >> $GITHUB_OUTPUT
-
-      # - name: Cache Tuist
-      #   uses: actions/cache@v4
-      #   id: cache-pods
-      #   with:
-      #     path: ./Tuist/.builld
-      #     key: ${{ steps.tuist-cache-hash.outputs.hash }}
+        uses: jdx/mise-action@v2
 
       - name: Install Dependencies
         run: |
-          mise x -- tuist install
+          tuist install
 
-      - name: Build Tuist
+      - name: Generate Xcode Project
         run: |
-            mise x -- tuist build
+          tuist generate --no-open
 
       - name: Import signing certificate
         env:
@@ -74,11 +62,6 @@ jobs:
           echo "${{ secrets.IOS_PROFILE_DATA }}" > $IOS_PROFILE_PATH_BASE64
           base64 --decode -i $IOS_PROFILE_PATH_BASE64 -o $IOS_PROFILE_PATH
 
-      - name: Remove Network Security Exceptions
-        continue-on-error: true
-        run: |
-          /usr/libexec/PlistBuddy -c "delete :NSAppTransportSecurity:NSExceptionDomains" ./ios/$PRODUCT_NAME/Info.plist
-
       - name: Upgrade fastlane
         run: |
           sudo gem install fastlane
@@ -90,13 +73,73 @@ jobs:
           echo '${{ secrets.IOS_API_KEY }}' > $API_KEY_PATH_BASE64
           base64 --decode -i $API_KEY_PATH_BASE64 -o $IOS_KEY_PATH
           rm $API_KEY_PATH_BASE64
-          
-      - name: Build/Upload app
+
+      - name: Setup Certificates and Increment Version
         env:
-          PACKAGE_NAME: 'com.credif.who'
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           IOS_CERT_PWD: ${{ secrets.IOS_CERT_P12_PWD }}
           IOS_KEYCHAIN: ${{ secrets.IOS_KEYCHAIN }}
           IOS_KEYCHAIN_PWD: ${{ secrets.IOS_KEYCHAIN_PWD }}
+          IOS_KEY_PATH: ${{ env.IOS_KEY_PATH }}
         run: |
-          fastlane ios release description:'${{ github.event.inputs.body }}' isReleasing:${{ github.event.inputs.isReleasing }}
+          fastlane ios setup
+
+      - name: Create export options plist
+        env:
+          TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          cat > ./exportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>app-store</string>
+            <key>teamID</key>
+            <string>$TEAM_ID</string>
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>$PACKAGE_NAME</key>
+              <string>$PRODUCT_NAME</string>
+            </dict>
+            <key>signingStyle</key>
+            <string>manual</string>
+            <key>uploadSymbols</key>
+            <true/>
+            <key>compileBitcode</key>
+            <false/>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Build and Archive App
+        env:
+          TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          SCHEME: App
+          ARCHIVE_PATH: ./Output/Archive
+        run: |
+          WORKSPACE=${PRODUCT_NAME}.xcworkspace
+
+          tuist xcodebuild archive \
+            -workspace $WORKSPACE \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -archivePath "$ARCHIVE_PATH"
+
+      - name: Export IPA
+        run: |
+          ARCHIVE_PATH=./Output/Archive.xcarchive
+          EXPORT_PATH=./Output/IPA
+          EXPORT_OPTIONS_PLIST=./exportOptions.plist
+
+          xcodebuild -exportArchive \
+            -archivePath $ARCHIVE_PATH \
+            -exportPath $EXPORT_PATH \
+            -exportOptionsPlist $EXPORT_OPTIONS_PLIST
+
+      - name: Upload to TestFlight/App Store
+        env:
+          IOS_KEY_PATH: ${{ env.IOS_KEY_PATH }}
+          IOS_IPA_PATH: ${{ env.IOS_IPA_PATH }}
+        run: |
+          fastlane ios upload description:'${{ github.event.inputs.body }}' isReleasing:${{ github.event.inputs.isReleasing }}
