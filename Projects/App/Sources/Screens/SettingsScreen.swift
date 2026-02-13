@@ -14,6 +14,7 @@ struct SettingsScreen: View {
     @AppStorage(LSDefaults.Keys.needPhotoContainsJob) private var needPhotoContainsJob = true
 
     var body: some View {
+        VStack(spacing: 0) {
         List {
             Section("SETTINGS_SECTION_CONTACTS") {
                 Toggle("SETTINGS_GENERATE_NICKNAME", isOn: $needGenerateNickname)
@@ -41,6 +42,9 @@ struct SettingsScreen: View {
         }
         .navigationTitle("SETTINGS_TITLE")
         .navigationBarTitleDisplayMode(.inline)
+
+        BannerAdView(unitName: .settingsBanner)
+        } // VStack
     }
 }
 

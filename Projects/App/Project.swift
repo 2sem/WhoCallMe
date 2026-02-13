@@ -67,7 +67,8 @@ let project = Project(
                 "GADApplicationIdentifier": "ca-app-pub-9684378399371172~4206633246",
                 "GADUnitIdentifiers" : [
                     "FullAd" : "ca-app-pub-9684378399371172/4108901647",
-                    "HomeBanner" : "ca-app-pub-9684378399371172/2132640843"
+                    "HomeBanner" : "ca-app-pub-9684378399371172/2132640843",
+                    "SettingsBanner" : "ca-app-pub-9684378399371172/7926699548"
                 ],
                 "Itunes App Id": "395429781",
                 "NSContactsUsageDescription": "This app needs access contacts to convert",
