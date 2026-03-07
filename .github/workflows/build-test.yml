@@ -1,0 +1,53 @@
+name: "Build & Test"
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '**/*.swift'
+      - 'mise.toml'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '**/*.swift'
+      - 'mise.toml'
+
+jobs:
+  build-test:
+    name: Build & Test
+    runs-on: macos-26
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+      id-token: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Select Xcode
+      run: |
+        sudo xcode-select -s /Applications/Xcode_26.1.1.app
+
+    - name: Install Mise
+      uses: jdx/mise-action@v2
+
+    - name: Log in Tuist
+      run: |
+        tuist auth login
+
+    - name: Install Dependencies
+      run: |
+        tuist install
+
+    - name: Setup Tuist Cache Service
+      run: |
+        tuist setup cache
+
+    - name: Test App
+      env:
+        SCHEME: App
+      run: |
+        tuist test
