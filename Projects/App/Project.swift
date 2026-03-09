@@ -53,10 +53,6 @@ let project = Project(
             product: .app,
             bundleId: "com.credif.who",
             deploymentTargets: .iOS("18.0"),
-            settings: .settings(configurations: [
-                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
-                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
-            ]),
             infoPlist: .extendingDefault(
             with: [
                 "UILaunchStoryboardName": "LaunchScreen",
@@ -77,6 +73,10 @@ let project = Project(
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             entitlements: .file(path: .relativeToCurrentFile("Sources/App.entitlements")),
+            settings: .settings(configurations: [
+                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
+                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
+            ]),
             scripts: [
                 .post(
                     script: "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run",
