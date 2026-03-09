@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import WhoCallMe
+@testable import App
 
 class WhoCallMeTests: XCTestCase {
     
