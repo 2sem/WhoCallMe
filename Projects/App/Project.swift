@@ -105,7 +105,8 @@ let project = Project(
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "App")]
+            dependencies: [.target(name: "App")],
+            settings: .settings(base: ["CODE_SIGNING_ALLOWED": "NO"])
         ),
     ]
 )
