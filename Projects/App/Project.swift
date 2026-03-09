@@ -73,10 +73,6 @@ let project = Project(
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             entitlements: .file(path: .relativeToCurrentFile("Sources/App.entitlements")),
-            settings: .settings(configurations: [
-                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
-                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
-            ]),
             scripts: [
                 .post(
                     script: "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run",
@@ -91,8 +87,12 @@ let project = Project(
                     runForInstallBuildsOnly: true
                 )
             ],
+            settings: .settings(configurations: [
+                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
+                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
+            ]),
             dependencies: [
-                            
+
                            .Projects.ThirdParty,
                            .Projects.DynamicThirdParty,
                            .package(product: "GADManager", type: .runtime)
