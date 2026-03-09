@@ -87,16 +87,15 @@ let project = Project(
                     runForInstallBuildsOnly: true
                 )
             ],
-            settings: .settings(configurations: [
-                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
-                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
-            ]),
             dependencies: [
-
                            .Projects.ThirdParty,
                            .Projects.DynamicThirdParty,
                            .package(product: "GADManager", type: .runtime)
-            ]
+            ],
+            settings: .settings(configurations: [
+                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
+                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
+            ])
         ),
         .target(
             name: "AppTests",
