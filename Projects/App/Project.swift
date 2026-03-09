@@ -46,14 +46,6 @@ let project = Project(
         //        requirement: .upToNextMajor(from: "10.4.0")),
         
     ],
-    settings: .settings(configurations: [
-        .debug(
-            name: "Debug",
-            xcconfig: "Configs/app.debug.xcconfig"),
-        .release(
-            name: "Release",
-            xcconfig: "Configs/app.release.xcconfig")
-    ]),
     targets: [
         .target(
             name: "App",
@@ -61,7 +53,11 @@ let project = Project(
             product: .app,
             bundleId: "com.credif.who",
             deploymentTargets: .iOS("18.0"),
-        infoPlist: .extendingDefault(
+            settings: .settings(configurations: [
+                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
+                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
+            ]),
+            infoPlist: .extendingDefault(
             with: [
                 "UILaunchStoryboardName": "LaunchScreen",
                 "GADApplicationIdentifier": "ca-app-pub-9684378399371172~4206633246",
