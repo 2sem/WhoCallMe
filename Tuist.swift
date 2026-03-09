@@ -8,6 +8,7 @@
 import ProjectDescription
 
 let tuist = Tuist(
+    fullHandle: "gamehelper/whocallme",
     project: .tuist(
         compatibleXcodeVersions: .upToNextMajor("26.0"),
         generationOptions: .options(
