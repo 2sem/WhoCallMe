@@ -46,14 +46,6 @@ let project = Project(
         //        requirement: .upToNextMajor(from: "10.4.0")),
         
     ],
-    settings: .settings(configurations: [
-        .debug(
-            name: "Debug",
-            xcconfig: "Configs/app.debug.xcconfig"),
-        .release(
-            name: "Release",
-            xcconfig: "Configs/app.release.xcconfig")
-    ]),
     targets: [
         .target(
             name: "App",
@@ -61,7 +53,7 @@ let project = Project(
             product: .app,
             bundleId: "com.credif.who",
             deploymentTargets: .iOS("18.0"),
-        infoPlist: .extendingDefault(
+            infoPlist: .extendingDefault(
             with: [
                 "UILaunchStoryboardName": "LaunchScreen",
                 "GADApplicationIdentifier": "ca-app-pub-9684378399371172~4206633246",
@@ -96,11 +88,14 @@ let project = Project(
                 )
             ],
             dependencies: [
-                            
                            .Projects.ThirdParty,
                            .Projects.DynamicThirdParty,
                            .package(product: "GADManager", type: .runtime)
-            ]
+            ],
+            settings: .settings(configurations: [
+                .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
+                .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
+            ])
         ),
         .target(
             name: "AppTests",
@@ -110,7 +105,8 @@ let project = Project(
             infoPlist: .default,
             sources: ["Tests/**"],
             resources: [],
-            dependencies: [.target(name: "App")]
+            dependencies: [.target(name: "App")],
+            settings: .settings(base: ["CODE_SIGNING_ALLOWED": "NO"])
         ),
     ]
 )
