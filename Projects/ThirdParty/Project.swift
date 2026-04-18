@@ -5,7 +5,7 @@ let project = Project(
     packages: [.remote(url: "https://github.com/2sem/StringLogger",
                        requirement: .upToNextMajor(from: "0.7.0")),
                .remote(url: "https://github.com/2sem/LSExtensions",
-                       requirement: .exact("0.1.22")),
+                       requirement: .exact("0.1.23")),
     ],
     targets: [
         .target(
