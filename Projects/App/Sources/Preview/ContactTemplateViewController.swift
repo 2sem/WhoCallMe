@@ -9,6 +9,7 @@
 import UIKit
 import Contacts
 import FirebaseAnalytics
+import SwiftUI
 
 /**
     view controller to create and preview call receive image
@@ -82,6 +83,8 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
         // Makes navigationbar transparent
         self.navigationController?.navigationBar.shadowImage = UIImage();
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default);
+
+        self.applyDesignSystemAppearance();
 
         self.isPreviewMode = Bool(self.isPreviewMode);
         self.refreshName();
@@ -168,6 +171,23 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
     fileprivate func refreshName(){
         if self.isPreviewMode {
             self.lb_name?.text = self.contact?.fullName;
+        }
+    }
+
+    fileprivate func applyDesignSystemAppearance() {
+        self.view?.backgroundColor = UIColor(Color.appNight);
+        self.infoTable?.backgroundColor = UIColor(Color.appNight2).withAlphaComponent(0.22);
+        self.lb_name?.textColor = UIColor(Color.appNightText);
+        self.lb_status?.textColor = UIColor(Color.appNightText);
+        self.darkCoverView?.backgroundColor = UIColor(Color.appNight).withAlphaComponent(0.20);
+
+        if let commands = self.callCommandView?.subviews {
+            if commands.indices.contains(0) {
+                commands[0].backgroundColor = UIColor(Color.appDestructive);
+            }
+            if commands.indices.contains(1) {
+                commands[1].backgroundColor = UIColor(Color.appSuccess);
+            }
         }
     }
 

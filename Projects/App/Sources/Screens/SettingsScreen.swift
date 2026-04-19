@@ -14,37 +14,79 @@ struct SettingsScreen: View {
     @AppStorage(LSDefaults.Keys.needPhotoContainsJob) private var needPhotoContainsJob = true
 
     var body: some View {
-        VStack(spacing: 0) {
-        List {
-            Section("SETTINGS_SECTION_CONTACTS") {
-                Toggle("SETTINGS_GENERATE_NICKNAME", isOn: $needGenerateNickname)
-                Toggle("SETTINGS_INCLUDE_COMPANY", isOn: $needContainsOrg)
-                Toggle("SETTINGS_INCLUDE_DEPARTMENT", isOn: $needContainsDept)
-                Toggle("SETTINGS_INCLUDE_JOB_TITLE", isOn: $needContainsJob)
-                Toggle("SETTINGS_KOREAN_CONSONANT_SEARCH", isOn: $needMakeChoseong)
-                Toggle("SETTINGS_GENERATE_INCOMING_SCREEN", isOn: $needMakeIncomingPhoto)
-            }
+        ZStack {
+            Color.appBackground
+                .ignoresSafeArea()
 
-            Section("SETTINGS_SECTION_INCOMING_SCREEN") {
-                Toggle("SETTINGS_ORIGINAL_PHOTO_FULLSCREEN", isOn: $needFullscreenPhoto)
-                    .disabled(!needMakeIncomingPhoto)
-                Toggle("SETTINGS_INCOMING_INCLUDE_COMPANY", isOn: $needPhotoContainsOrg)
-                    .disabled(!needMakeIncomingPhoto)
-                Toggle("SETTINGS_INCOMING_INCLUDE_DEPARTMENT", isOn: $needPhotoContainsDept)
-                    .disabled(!needMakeIncomingPhoto)
-                Toggle("SETTINGS_INCOMING_INCLUDE_JOB_TITLE", isOn: $needPhotoContainsJob)
-                    .disabled(!needMakeIncomingPhoto)
-            }
+            VStack(spacing: 0) {
+                List {
+                    Section {
+                        settingsToggle("SETTINGS_GENERATE_NICKNAME", isOn: $needGenerateNickname)
+                        settingsToggle("SETTINGS_INCLUDE_COMPANY", isOn: $needContainsOrg)
+                        settingsToggle("SETTINGS_INCLUDE_DEPARTMENT", isOn: $needContainsDept)
+                        settingsToggle("SETTINGS_INCLUDE_JOB_TITLE", isOn: $needContainsJob)
+                        settingsToggle("SETTINGS_KOREAN_CONSONANT_SEARCH", isOn: $needMakeChoseong)
+                        settingsToggle("SETTINGS_GENERATE_INCOMING_SCREEN", isOn: $needMakeIncomingPhoto)
+                    } header: {
+                        Text("SETTINGS_SECTION_CONTACTS")
+                            .appEyebrow()
+                            .foregroundStyle(Color.appTextTertiary)
+                    }
 
-            Section("SETTINGS_SECTION_APP_INFO") {
-                LabeledContent("SETTINGS_APP_VERSION", value: Bundle.main.appVersion)
+                    Section {
+                        settingsToggle(
+                            "SETTINGS_ORIGINAL_PHOTO_FULLSCREEN",
+                            isOn: $needFullscreenPhoto,
+                            enabled: needMakeIncomingPhoto
+                        )
+                        settingsToggle(
+                            "SETTINGS_INCOMING_INCLUDE_COMPANY",
+                            isOn: $needPhotoContainsOrg,
+                            enabled: needMakeIncomingPhoto
+                        )
+                        settingsToggle(
+                            "SETTINGS_INCOMING_INCLUDE_DEPARTMENT",
+                            isOn: $needPhotoContainsDept,
+                            enabled: needMakeIncomingPhoto
+                        )
+                        settingsToggle(
+                            "SETTINGS_INCOMING_INCLUDE_JOB_TITLE",
+                            isOn: $needPhotoContainsJob,
+                            enabled: needMakeIncomingPhoto
+                        )
+                    } header: {
+                        Text("SETTINGS_SECTION_INCOMING_SCREEN")
+                            .appEyebrow()
+                            .foregroundStyle(Color.appTextTertiary)
+                    }
+
+                    Section {
+                        LabeledContent("SETTINGS_APP_VERSION", value: Bundle.main.appVersion)
+                            .foregroundStyle(Color.appTextSecondary)
+                    } header: {
+                        Text("SETTINGS_SECTION_APP_INFO")
+                            .appEyebrow()
+                            .foregroundStyle(Color.appTextTertiary)
+                    }
+                }
+                .listStyle(.insetGrouped)
+                .tint(Color.appAmberDeep)
+
+                BannerAdView(unitName: .settingsBanner)
             }
         }
         .navigationTitle("SETTINGS_TITLE")
         .navigationBarTitleDisplayMode(.inline)
+    }
 
-        BannerAdView(unitName: .settingsBanner)
-        } // VStack
+    private func settingsToggle(
+        _ title: LocalizedStringKey,
+        isOn: Binding<Bool>,
+        enabled: Bool = true
+    ) -> some View {
+        Toggle(title, isOn: isOn)
+            .foregroundStyle(enabled ? Color.appTextPrimary : Color.appDisabled)
+            .disabled(!enabled)
     }
 }
 

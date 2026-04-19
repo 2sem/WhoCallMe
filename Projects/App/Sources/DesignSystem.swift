@@ -15,6 +15,14 @@ extension Color {
     static let appTextSecondary = Color(adaptive: "#5C564D", dark: "#B8B0A3")
     static let appTextTertiary  = Color(adaptive: "#8A8377", dark: "#5C564D")
 
+    // Semantic tokens
+    static let appSuccess       = appMint
+    static let appDestructive   = Color(adaptive: "#E64545", dark: "#EF5A5A")
+    static let appDestructiveDeep = Color(adaptive: "#C72E2E", dark: "#D84545")
+    static let appDisabled      = Color(adaptive: "#C7C0B4", dark: "#3C3832")
+    static let appSeparator     = Color(adaptive: "#E6DDD0", dark: "#2F2C26")
+    static let appBorder        = Color(adaptive: "#DDD3C5", dark: "#3A362F")
+
     // Paper family — raw light values (for always-light contexts)
     static let appPaper       = Color(hex: "#F6F1EA")
     static let appPaper0      = Color(hex: "#FBF7F0")
@@ -184,5 +192,137 @@ extension LinearGradient {
             startPoint: .leading,
             endPoint: .trailing
         )
+    }
+
+    static var appDestructiveGradient: LinearGradient {
+        LinearGradient(
+            colors: [Color.appDestructive, Color.appDestructiveDeep],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+    }
+}
+
+// MARK: - Reusable Components / Styles
+
+enum AppButtonTone {
+    case primary
+    case destructive
+}
+
+struct AppCapsuleButtonStyle: ButtonStyle {
+    let tone: AppButtonTone
+    let foreground: Color
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(foreground)
+            .frame(maxWidth: .infinity, minHeight: 56)
+            .background(
+                tone == .destructive
+                    ? LinearGradient.appDestructiveGradient
+                    : LinearGradient.appAmberGradient
+            )
+            .clipShape(Capsule())
+            .shadow(
+                color: (tone == .destructive ? Color.appDestructive : Color.appAmberDeep)
+                    .opacity(configuration.isPressed ? 0.2 : 0.35),
+                radius: configuration.isPressed ? 8 : 12,
+                y: configuration.isPressed ? 3 : 6
+            )
+            .scaleEffect(configuration.isPressed ? 0.995 : 1)
+            .animation(.appTap, value: configuration.isPressed)
+    }
+}
+
+struct AppCardStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(
+                RoundedRectangle(cornerRadius: .radiusLG, style: .continuous)
+                    .fill(Color.appSurface)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: .radiusLG, style: .continuous)
+                            .stroke(Color.appBorder, lineWidth: 1)
+                    )
+                    .shadow(color: Color.appInk.opacity(0.06), radius: 12, y: 4)
+            )
+    }
+}
+
+extension View {
+    func appCard() -> some View {
+        modifier(AppCardStyle())
+    }
+}
+
+struct AppIconBadge: View {
+    let systemImage: String
+    let backgroundColor: Color?
+    let foreground: Color
+
+    init(
+        systemImage: String,
+        backgroundColor: Color? = nil,
+        foreground: Color = .appInk
+    ) {
+        self.systemImage = systemImage
+        self.backgroundColor = backgroundColor
+        self.foreground = foreground
+    }
+
+    var body: some View {
+        ZStack {
+            if let backgroundColor {
+                RoundedRectangle(cornerRadius: .radiusSM, style: .continuous)
+                    .fill(backgroundColor)
+            } else {
+                RoundedRectangle(cornerRadius: .radiusSM, style: .continuous)
+                    .fill(LinearGradient.appAmberGradient)
+            }
+
+            Image(systemName: systemImage)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(foreground)
+        }
+        .frame(width: 32, height: 32)
+    }
+}
+
+struct AppActionRow: View {
+    let title: LocalizedStringKey
+    let icon: String
+    let iconBackgroundColor: Color?
+    let iconForeground: Color
+
+    init(
+        title: LocalizedStringKey,
+        icon: String,
+        iconBackgroundColor: Color? = nil,
+        iconForeground: Color = .appInk
+    ) {
+        self.title = title
+        self.icon = icon
+        self.iconBackgroundColor = iconBackgroundColor
+        self.iconForeground = iconForeground
+    }
+
+    var body: some View {
+        HStack(spacing: .spMD) {
+            AppIconBadge(
+                systemImage: icon,
+                backgroundColor: iconBackgroundColor,
+                foreground: iconForeground
+            )
+            Text(title)
+                .appBody()
+                .foregroundStyle(Color.appTextPrimary)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Color.appTextTertiary)
+        }
+        .padding(.horizontal, .spMD)
+        .frame(height: 52)
     }
 }

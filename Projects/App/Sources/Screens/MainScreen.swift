@@ -70,19 +70,19 @@ struct MainScreen: View {
 
             VStack(spacing: 0) {
                 headerBar
-                    .padding(.horizontal, 16)
-                    .padding(.top, 12)
+                    .padding(.horizontal, .spMD)
+                    .padding(.top, .spSM)
                     .padding(.bottom, 10)
 
                 Spacer()
 
-                VStack(spacing: 24) {
+                VStack(spacing: .spLG) {
                     ZStack {
                         RingProgressView(progress: progress)
                             .frame(width: 240, height: 240)
                             .shadow(color: Color.appAmberDeep.opacity(0.25), radius: 20)
 
-                        VStack(spacing: 4) {
+                        VStack(spacing: .sp2xs) {
                             Text("\(progressedCount)")
                                 .font(.system(size: 80, weight: .thin))
                                 .monospacedDigit()
@@ -96,19 +96,19 @@ struct MainScreen: View {
                     }
 
                     convertAllButton
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, .spMD)
                 }
 
                 Spacer()
 
                 actionsCard
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, .spMD)
 
                 Spacer()
 
                 bottomBar
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 8)
+                    .padding(.horizontal, .spMD)
+                    .padding(.bottom, .spXS)
 
                 BannerAdView(unitName: .homeBanner)
             }
@@ -191,12 +191,12 @@ struct MainScreen: View {
     // MARK: - Subviews
 
     private var headerBar: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: .spSM) {
             if let icon = Bundle.main.appIcon {
                 Image(uiImage: icon)
                     .resizable()
                     .frame(width: 36, height: 36)
-                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: .radiusSM, style: .continuous))
             }
             Text("MAIN_APP_TITLE")
                 .font(.title3.bold())
@@ -212,7 +212,7 @@ struct MainScreen: View {
                     .background(.regularMaterial)
                     .clipShape(Capsule())
             }
-            .foregroundStyle(.primary)
+            .foregroundStyle(Color.appTextPrimary)
         }
     }
 
@@ -224,30 +224,20 @@ struct MainScreen: View {
                 showConvertConfirm = true
             }
         } label: {
-            HStack(spacing: 8) {
+            HStack(spacing: .spXS) {
                 Image(systemName: isRunning ? "stop.fill" : "arrow.2.squarepath")
                     .font(.body.weight(.semibold))
                 Text(isRunning ? NSLocalizedString("STOP", comment: "") : NSLocalizedString("MAIN_CONVERT", comment: ""))
-                    .font(.system(size: 17, weight: .semibold))
+                    .appBody()
+                    .fontWeight(.semibold)
             }
-            .foregroundStyle(isRunning ? Color.white : Color(red: 0.10, green: 0.07, blue: 0.03))
-            .frame(maxWidth: .infinity, minHeight: 56)
-            .background(
-                LinearGradient(
-                    colors: isRunning
-                        ? [Color(red: 1.0, green: 0.22, blue: 0.22), Color(red: 0.85, green: 0.10, blue: 0.10)]
-                        : [Color.appAmber, Color.appAmberDeep],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
-            .clipShape(Capsule())
-            .shadow(
-                color: (isRunning ? Color.red : Color.appAmberDeep).opacity(0.35),
-                radius: 12,
-                y: 6
-            )
         }
+        .buttonStyle(
+            AppCapsuleButtonStyle(
+                tone: isRunning ? .destructive : .primary,
+                foreground: isRunning ? .appNightText : .appInk
+            )
+        )
         .animation(.appEase, value: isRunning)
     }
 
@@ -257,63 +247,31 @@ struct MainScreen: View {
                 contactPickerMode = .convertOne
                 isShowingContactPicker = true
             } label: {
-                HStack(spacing: .spMD) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: .radiusSM, style: .continuous)
-                            .fill(LinearGradient.appAmberGradient)
-                            .frame(width: 32, height: 32)
-                        Image(systemName: "arrow.2.squarepath")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundStyle(Color(red: 0.10, green: 0.07, blue: 0.03))
-                    }
-                    Text("MAIN_CONVERT_ONE")
-                        .appBody()
-                        .foregroundStyle(Color.appTextPrimary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color.appTextTertiary)
-                }
-                .padding(.horizontal, .spMD)
-                .frame(height: 52)
+                AppActionRow(title: "MAIN_CONVERT_ONE", icon: "arrow.2.squarepath")
             }
             .disabled(isRunning)
 
             Divider()
                 .padding(.leading, 62)
-                .foregroundStyle(Color.appPaper2)
+                .foregroundStyle(Color.appSeparator)
 
             NavigationLink(destination: SettingsScreen()) {
-                HStack(spacing: .spMD) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: .radiusSM, style: .continuous)
-                            .fill(Color.appTextSecondary)
-                            .frame(width: 32, height: 32)
-                        Image(systemName: "gearshape.fill")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundStyle(Color.appBackground)
-                    }
-                    Text("SETTINGS_TITLE")
-                        .appBody()
-                        .foregroundStyle(Color.appTextPrimary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color.appTextTertiary)
-                }
-                .padding(.horizontal, .spMD)
-                .frame(height: 52)
+                AppActionRow(
+                    title: "SETTINGS_TITLE",
+                    icon: "gearshape.fill",
+                    iconBackgroundColor: .appTextSecondary,
+                    iconForeground: .appBackground
+                )
             }
         }
-        .background(
-            RoundedRectangle(cornerRadius: .radiusLG, style: .continuous)
-                .fill(Color.appSurface)
-                .shadow(color: Color.appInk.opacity(0.06), radius: 12, y: 4)
-        )
+        .appCard()
     }
 
     private var bottomBar: some View {
         HStack(spacing: .spSM) {
+            let restoreDisabled = isRunning && mode != .restoreAll
+            let clearDisabled = isRunning && mode != .clearAll
+
             Button {
                 if isRunning && mode == .restoreAll {
                     operationState = .stopped
@@ -328,14 +286,18 @@ struct MainScreen: View {
                         .appCaption()
                         .fontWeight(.semibold)
                 }
-                .foregroundStyle(Color.appMint)
+                .foregroundStyle(restoreDisabled ? Color.appDisabled : Color.appSuccess)
                 .frame(maxWidth: .infinity, minHeight: 60)
                 .background(
                     RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
                         .fill(Color.appSurface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
+                                .stroke(Color.appBorder, lineWidth: 1)
+                        )
                 )
             }
-            .disabled(isRunning && mode != .restoreAll)
+            .disabled(restoreDisabled)
 
             Button {
                 if isRunning && mode == .clearAll {
@@ -351,14 +313,18 @@ struct MainScreen: View {
                         .appCaption()
                         .fontWeight(.semibold)
                 }
-                .foregroundStyle(Color.appTextSecondary)
+                .foregroundStyle(clearDisabled ? Color.appDisabled : Color.appTextSecondary)
                 .frame(maxWidth: .infinity, minHeight: 60)
                 .background(
                     RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
                         .fill(Color.appSurface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
+                                .stroke(Color.appBorder, lineWidth: 1)
+                        )
                 )
             }
-            .disabled(isRunning && mode != .clearAll)
+            .disabled(clearDisabled)
         }
     }
 
@@ -508,4 +474,3 @@ private extension Bundle {
         return UIImage(named: name)
     }
 }
-

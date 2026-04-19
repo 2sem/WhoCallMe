@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ContactImageCell: UITableViewCell {
 
@@ -14,7 +15,10 @@ class ContactImageCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.selectionStyle = .none
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
+        self.contactImage.tintColor = UIColor(Color.appNightText)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
