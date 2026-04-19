@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ContactDeptCell: UITableViewCell {
 
@@ -15,7 +16,11 @@ class ContactDeptCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.selectionStyle = .none
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
+        self.titleLabel?.textColor = UIColor(Color.appNightText)
+        self.valueLabel?.textColor = UIColor(Color.appNightText)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

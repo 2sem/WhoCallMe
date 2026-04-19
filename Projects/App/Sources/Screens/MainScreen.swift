@@ -56,12 +56,11 @@ struct MainScreen: View {
 
     var body: some View {
         ZStack {
-            Color(.systemGroupedBackground)
+            Color.appBackground
                 .ignoresSafeArea()
 
-            // Ambient glow behind ring
             RadialGradient(
-                colors: [Color.appRingEnd.opacity(0.15), Color.clear],
+                colors: [Color.appAmberDeep.opacity(0.12), Color.clear],
                 center: .center,
                 startRadius: 60,
                 endRadius: 200
@@ -71,43 +70,45 @@ struct MainScreen: View {
 
             VStack(spacing: 0) {
                 headerBar
-                    .padding(.horizontal, 16)
-                    .padding(.top, 12)
+                    .padding(.horizontal, .spMD)
+                    .padding(.top, .spSM)
                     .padding(.bottom, 10)
 
                 Spacer()
 
-                VStack(spacing: 24) {
+                VStack(spacing: .spLG) {
                     ZStack {
                         RingProgressView(progress: progress)
                             .frame(width: 240, height: 240)
-                            .shadow(color: Color.appRingEnd.opacity(0.3), radius: 20)
+                            .shadow(color: Color.appAmberDeep.opacity(0.25), radius: 20)
 
-                        VStack(spacing: 4) {
+                        VStack(spacing: .sp2xs) {
                             Text("\(progressedCount)")
-                                .font(.system(size: 72, weight: .thin, design: .rounded))
+                                .font(.system(size: 80, weight: .thin))
+                                .monospacedDigit()
+                                .foregroundStyle(Color.appTextPrimary)
                             if !statusText.isEmpty {
                                 Text(statusText)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .appEyebrow()
+                                    .foregroundStyle(Color.appTextTertiary)
                             }
                         }
                     }
 
                     convertAllButton
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, .spMD)
                 }
 
                 Spacer()
 
                 actionsCard
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, .spMD)
 
                 Spacer()
 
                 bottomBar
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 8)
+                    .padding(.horizontal, .spMD)
+                    .padding(.bottom, .spXS)
 
                 BannerAdView(unitName: .homeBanner)
             }
@@ -190,12 +191,12 @@ struct MainScreen: View {
     // MARK: - Subviews
 
     private var headerBar: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: .spSM) {
             if let icon = Bundle.main.appIcon {
                 Image(uiImage: icon)
                     .resizable()
                     .frame(width: 36, height: 36)
-                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: .radiusSM, style: .continuous))
             }
             Text("MAIN_APP_TITLE")
                 .font(.title3.bold())
@@ -211,7 +212,7 @@ struct MainScreen: View {
                     .background(.regularMaterial)
                     .clipShape(Capsule())
             }
-            .foregroundStyle(.primary)
+            .foregroundStyle(Color.appTextPrimary)
         }
     }
 
@@ -223,31 +224,21 @@ struct MainScreen: View {
                 showConvertConfirm = true
             }
         } label: {
-            HStack(spacing: 8) {
+            HStack(spacing: .spXS) {
                 Image(systemName: isRunning ? "stop.fill" : "arrow.2.squarepath")
                     .font(.body.weight(.semibold))
                 Text(isRunning ? NSLocalizedString("STOP", comment: "") : NSLocalizedString("MAIN_CONVERT", comment: ""))
-                    .font(.title3.weight(.semibold))
+                    .appBody()
+                    .fontWeight(.semibold)
             }
-            .foregroundStyle(.white)
-            .frame(maxWidth: .infinity, minHeight: 56)
-            .background(
-                LinearGradient(
-                    colors: isRunning
-                        ? [Color(red: 1.0, green: 0.22, blue: 0.22), Color(red: 0.85, green: 0.10, blue: 0.10)]
-                        : [Color.appOrange, Color(red: 1.0, green: 0.45, blue: 0.0)],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .shadow(
-                color: (isRunning ? Color.red : Color.appOrange).opacity(0.35),
-                radius: 12,
-                y: 6
-            )
         }
-        .animation(.easeInOut(duration: 0.2), value: isRunning)
+        .buttonStyle(
+            AppCapsuleButtonStyle(
+                tone: isRunning ? .destructive : .primary,
+                foreground: isRunning ? .appNightText : .appInk
+            )
+        )
+        .animation(.appEase, value: isRunning)
     }
 
     private var actionsCard: some View {
@@ -256,65 +247,31 @@ struct MainScreen: View {
                 contactPickerMode = .convertOne
                 isShowingContactPicker = true
             } label: {
-                HStack(spacing: 14) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(LinearGradient(
-                                colors: [Color.appOrange, Color(red: 1.0, green: 0.45, blue: 0.0)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ))
-                            .frame(width: 32, height: 32)
-                        Image(systemName: "arrow.2.squarepath")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundStyle(.white)
-                    }
-                    Text("MAIN_CONVERT_ONE")
-                        .font(.body)
-                        .foregroundStyle(.primary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color(.tertiaryLabel))
-                }
-                .padding(.horizontal, 16)
-                .frame(height: 52)
+                AppActionRow(title: "MAIN_CONVERT_ONE", icon: "arrow.2.squarepath")
             }
             .disabled(isRunning)
 
             Divider()
                 .padding(.leading, 62)
+                .foregroundStyle(Color.appSeparator)
 
             NavigationLink(destination: SettingsScreen()) {
-                HStack(spacing: 14) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(Color(.systemGray))
-                            .frame(width: 32, height: 32)
-                        Image(systemName: "gearshape.fill")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundStyle(.white)
-                    }
-                    Text("SETTINGS_TITLE")
-                        .font(.body)
-                        .foregroundStyle(.primary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color(.tertiaryLabel))
-                }
-                .padding(.horizontal, 16)
-                .frame(height: 52)
+                AppActionRow(
+                    title: "SETTINGS_TITLE",
+                    icon: "gearshape.fill",
+                    iconBackgroundColor: .appTextSecondary,
+                    iconForeground: .appBackground
+                )
             }
         }
-        .background(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(Color(.secondarySystemGroupedBackground))
-        )
+        .appCard()
     }
 
     private var bottomBar: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: .spSM) {
+            let restoreDisabled = isRunning && mode != .restoreAll
+            let clearDisabled = isRunning && mode != .clearAll
+
             Button {
                 if isRunning && mode == .restoreAll {
                     operationState = .stopped
@@ -326,16 +283,21 @@ struct MainScreen: View {
                     Image(systemName: "arrow.uturn.backward")
                         .font(.title3)
                     Text("MAIN_RESTORE")
-                        .font(.caption.weight(.semibold))
+                        .appCaption()
+                        .fontWeight(.semibold)
                 }
-                .foregroundStyle(Color.appTeal)
+                .foregroundStyle(restoreDisabled ? Color.appDisabled : Color.appSuccess)
                 .frame(maxWidth: .infinity, minHeight: 60)
                 .background(
-                    RoundedRectangle(cornerRadius: 14, style: .continuous)
-                        .fill(Color.appTeal.opacity(0.12))
+                    RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
+                        .fill(Color.appSurface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
+                                .stroke(Color.appBorder, lineWidth: 1)
+                        )
                 )
             }
-            .disabled(isRunning && mode != .restoreAll)
+            .disabled(restoreDisabled)
 
             Button {
                 if isRunning && mode == .clearAll {
@@ -348,16 +310,21 @@ struct MainScreen: View {
                     Image(systemName: "trash")
                         .font(.title3)
                     Text("MAIN_CLEAR_PHOTOS")
-                        .font(.caption.weight(.semibold))
+                        .appCaption()
+                        .fontWeight(.semibold)
                 }
-                .foregroundStyle(Color(.secondaryLabel))
+                .foregroundStyle(clearDisabled ? Color.appDisabled : Color.appTextSecondary)
                 .frame(maxWidth: .infinity, minHeight: 60)
                 .background(
-                    RoundedRectangle(cornerRadius: 14, style: .continuous)
-                        .fill(Color(.secondarySystemGroupedBackground))
+                    RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
+                        .fill(Color.appSurface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
+                                .stroke(Color.appBorder, lineWidth: 1)
+                        )
                 )
             }
-            .disabled(isRunning && mode != .clearAll)
+            .disabled(clearDisabled)
         }
     }
 
@@ -472,23 +439,23 @@ private struct RingProgressView: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color(.systemFill), lineWidth: 20)
+                .stroke(Color.appSurface2, lineWidth: 20)
 
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
                     LinearGradient(
-                        colors: [Color.appRingStart, Color.appRingEnd],
+                        colors: [Color.appAmber, Color.appAmberDeep],
                         startPoint: .leading,
                         endPoint: .trailing
                     ),
                     style: StrokeStyle(lineWidth: 20, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
-                .animation(.easeInOut(duration: 0.4), value: progress)
+                .animation(.appRing, value: progress)
 
             Circle()
-                .fill(Color(.systemGroupedBackground))
+                .fill(Color.appBackground)
                 .padding(11)
         }
     }
@@ -506,13 +473,4 @@ private extension Bundle {
         else { return nil }
         return UIImage(named: name)
     }
-}
-
-// MARK: - App Colors
-
-extension Color {
-    static let appOrange = Color(red: 1.0, green: 0.72, blue: 0.0)
-    static let appTeal = Color(red: 0.13, green: 0.70, blue: 0.67)
-    static let appRingStart = Color(red: 0.10, green: 0.35, blue: 0.85)
-    static let appRingEnd = Color(red: 0.40, green: 0.65, blue: 1.0)
 }
