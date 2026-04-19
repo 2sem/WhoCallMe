@@ -56,7 +56,7 @@ struct MainScreen: View {
 
     var body: some View {
         ZStack {
-            Color.appPaper
+            Color.appBackground
                 .ignoresSafeArea()
 
             RadialGradient(
@@ -86,11 +86,11 @@ struct MainScreen: View {
                             Text("\(progressedCount)")
                                 .font(.system(size: 80, weight: .thin))
                                 .monospacedDigit()
-                                .foregroundStyle(Color.appInk)
+                                .foregroundStyle(Color.appTextPrimary)
                             if !statusText.isEmpty {
                                 Text(statusText)
                                     .appEyebrow()
-                                    .foregroundStyle(Color.appInk40)
+                                    .foregroundStyle(Color.appTextTertiary)
                             }
                         }
                     }
@@ -268,11 +268,11 @@ struct MainScreen: View {
                     }
                     Text("MAIN_CONVERT_ONE")
                         .appBody()
-                        .foregroundStyle(Color.appInk)
+                        .foregroundStyle(Color.appTextPrimary)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color.appInk40)
+                        .foregroundStyle(Color.appTextTertiary)
                 }
                 .padding(.horizontal, .spMD)
                 .frame(height: 52)
@@ -287,19 +287,19 @@ struct MainScreen: View {
                 HStack(spacing: .spMD) {
                     ZStack {
                         RoundedRectangle(cornerRadius: .radiusSM, style: .continuous)
-                            .fill(Color.appInk60)
+                            .fill(Color.appTextSecondary)
                             .frame(width: 32, height: 32)
                         Image(systemName: "gearshape.fill")
                             .font(.system(size: 14, weight: .semibold))
-                            .foregroundStyle(Color.appPaper)
+                            .foregroundStyle(Color.appBackground)
                     }
                     Text("SETTINGS_TITLE")
                         .appBody()
-                        .foregroundStyle(Color.appInk)
+                        .foregroundStyle(Color.appTextPrimary)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color.appInk40)
+                        .foregroundStyle(Color.appTextTertiary)
                 }
                 .padding(.horizontal, .spMD)
                 .frame(height: 52)
@@ -307,7 +307,7 @@ struct MainScreen: View {
         }
         .background(
             RoundedRectangle(cornerRadius: .radiusLG, style: .continuous)
-                .fill(Color.white)
+                .fill(Color.appSurface)
                 .shadow(color: Color.appInk.opacity(0.06), radius: 12, y: 4)
         )
     }
@@ -332,7 +332,7 @@ struct MainScreen: View {
                 .frame(maxWidth: .infinity, minHeight: 60)
                 .background(
                     RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
-                        .fill(Color.appMint.opacity(0.10))
+                        .fill(Color.appSurface)
                 )
             }
             .disabled(isRunning && mode != .restoreAll)
@@ -351,11 +351,11 @@ struct MainScreen: View {
                         .appCaption()
                         .fontWeight(.semibold)
                 }
-                .foregroundStyle(Color.appInk60)
+                .foregroundStyle(Color.appTextSecondary)
                 .frame(maxWidth: .infinity, minHeight: 60)
                 .background(
                     RoundedRectangle(cornerRadius: .radiusMD, style: .continuous)
-                        .fill(Color.white.opacity(0.7))
+                        .fill(Color.appSurface)
                 )
             }
             .disabled(isRunning && mode != .clearAll)
@@ -473,7 +473,7 @@ private struct RingProgressView: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.appPaper2, lineWidth: 20)
+                .stroke(Color.appSurface2, lineWidth: 20)
 
             Circle()
                 .trim(from: 0, to: progress)
@@ -489,7 +489,7 @@ private struct RingProgressView: View {
                 .animation(.appRing, value: progress)
 
             Circle()
-                .fill(Color.appPaper)
+                .fill(Color.appBackground)
                 .padding(11)
         }
     }
