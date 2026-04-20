@@ -98,20 +98,12 @@ platform :ios do
 
     changelog = options[:description] || 'build from fastlane'
     isReleasing = options[:isReleasing].to_s == 'true'
-    release_notes_path = './fastlane/metadata/ko/release_notes.txt'
-
     if isReleasing
       puts "iOS 심사 업로드 시작"
-      release_notes = if File.exist?(release_notes_path)
-                        File.read(release_notes_path).strip
-                      else
-                        changelog
-                      end
 
       upload_to_app_store(
         ipa: @ipa_path,
         api_key_path: @api_key_path,
-        release_notes: release_notes,
         app_identifier: @package_name,
         submit_for_review: true,
         force: true,
