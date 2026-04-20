@@ -67,7 +67,15 @@ struct WhoCallMeApp: App {
                 LSDefaults.increaseLaunchCount()
                 isLaunched = true
                 if LSDefaults.LaunchCount > 0 && LSDefaults.LaunchCount % 30 == 0 {
-                    SKStoreReviewController.requestReview()
+                    if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        if #available(iOS 18.0, *) {
+                            AppStore.requestReview(in: scene)
+                        } else if #available(iOS 14.0, *) {
+                            SKStoreReviewController.requestReview(in: scene)
+                        } else {
+                            SKStoreReviewController.requestReview()
+                        }
+                    }
                 }
             }
 
