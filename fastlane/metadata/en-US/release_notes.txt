@@ -1,3 +1,3 @@
-Introduced a refreshed design system for a cleaner and more consistent app experience.
-Improved the usability and visual polish of the main and settings screens.
-Enhanced stability around preview and internal convert/restore flows.
+Refreshed the app with a cleaner and more consistent look.
+Improved the usability of the main and settings screens.
+Enhanced stability for preview and contact update flows.
