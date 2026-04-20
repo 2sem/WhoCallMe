@@ -44,6 +44,10 @@ jobs:
         run: |
           tuist install
 
+      - name: Log in Tuist
+        run: |
+          tuist auth login
+
       - name: Generate Xcode Project
         run: |
           tuist generate --no-open
