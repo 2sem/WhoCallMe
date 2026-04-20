@@ -1,0 +1,3 @@
+Refreshed the app with a cleaner and more consistent look.
+Improved the usability of the main and settings screens.
+Enhanced stability for preview and contact update flows.
