@@ -44,6 +44,10 @@ jobs:
         run: |
           tuist install
 
+      - name: Log in Tuist
+        run: |
+          tuist auth login
+
       - name: Generate Xcode Project
         run: |
           tuist generate --no-open
@@ -74,6 +78,14 @@ jobs:
           base64 --decode -i $API_KEY_PATH_BASE64 -o $IOS_KEY_PATH
           rm $API_KEY_PATH_BASE64
 
+      - name: Prepare App Store release notes metadata
+        if: ${{ github.event.inputs.isReleasing == 'true' }}
+        run: |
+          mkdir -p ./fastlane/metadata/ko
+          cat > ./fastlane/metadata/ko/release_notes.txt <<'EOF'
+          ${{ github.event.inputs.body }}
+          EOF
+
       - name: Setup Certificates and Increment Version
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
@@ -82,7 +94,7 @@ jobs:
           IOS_KEYCHAIN_PWD: ${{ secrets.IOS_KEYCHAIN_PWD }}
           IOS_KEY_PATH: ${{ env.IOS_KEY_PATH }}
         run: |
-          fastlane ios setup
+          fastlane ios setup apiKeyPath:$IOS_KEY_PATH
 
       - name: Create export options plist
         env:
@@ -142,4 +154,4 @@ jobs:
           IOS_KEY_PATH: ${{ env.IOS_KEY_PATH }}
           IOS_IPA_PATH: ${{ env.IOS_IPA_PATH }}
         run: |
-          fastlane ios upload description:'${{ github.event.inputs.body }}' isReleasing:${{ github.event.inputs.isReleasing }}
+          fastlane ios upload apiKeyPath:$IOS_KEY_PATH description:'${{ github.event.inputs.body }}' isReleasing:${{ github.event.inputs.isReleasing }}

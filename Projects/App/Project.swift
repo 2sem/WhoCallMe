@@ -75,7 +75,21 @@ let project = Project(
             entitlements: .file(path: .relativeToCurrentFile("Sources/App.entitlements")),
             scripts: [
                 .post(
-                    script: "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run",
+                    script: """
+                    FIREBASE_SOURCEPACKAGES_ROOT="${BUILD_DIR%/Build/*}/SourcePackages"
+                    CRASHLYTICS_RUN_SCRIPT=$(ls "$FIREBASE_SOURCEPACKAGES_ROOT"/registry/downloads/firebase/firebase-ios-sdk/*/Crashlytics/run 2>/dev/null | sort -V | tail -n 1)
+
+                    if [ -z "$CRASHLYTICS_RUN_SCRIPT" ]; then
+                      CRASHLYTICS_RUN_SCRIPT="$FIREBASE_SOURCEPACKAGES_ROOT/checkouts/firebase-ios-sdk/Crashlytics/run"
+                    fi
+
+                    if [ ! -f "$CRASHLYTICS_RUN_SCRIPT" ]; then
+                      echo "error: Firebase Crashlytics run script not found at $CRASHLYTICS_RUN_SCRIPT"
+                      exit 1
+                    fi
+
+                    "$CRASHLYTICS_RUN_SCRIPT"
+                    """,
                     name: "Upload dSYM for Crashlytics",
                     inputPaths: [
                         "${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",

@@ -4,7 +4,7 @@
 ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 
 platform :ios do
-  def loadiOSConfigs()
+  def loadiOSConfigs(api_key_path = nil)
     @package_name = ENV["PACKAGE_NAME"]
     @workspace_name = ENV["PRODUCT_NAME"]
     @project_name = "App"
@@ -14,7 +14,7 @@ platform :ios do
     @certificate_password = ENV["IOS_CERT_PWD"]
     @provisioning_profile_path = ENV["IOS_PROFILE_PATH"]
     @team_id = ENV["APPLE_TEAM_ID"]
-    @api_key_path = ENV["IOS_KEY_PATH"]
+    @api_key_path = api_key_path || ENV["IOS_KEY_PATH"]
     @xcodeproj = "./Projects/App/App.xcodeproj"
     @profile_name = @workspace_name
     @ipa_path = ENV["IOS_IPA_PATH"]
@@ -85,8 +85,8 @@ platform :ios do
     @full_app_verion = "#{@app_version}(#{@new_build_version})"
   end
 
-  lane :setup do
-    loadiOSConfigs()
+  lane :setup do |options|
+    loadiOSConfigs(options[:apiKeyPath])
     readySigning()
     setiOSVersions()
 
@@ -94,19 +94,29 @@ platform :ios do
   end
 
   lane :upload do |options|
-    loadiOSConfigs()
+    loadiOSConfigs(options[:apiKeyPath])
 
     changelog = options[:description] || 'build from fastlane'
-    isReleasing = options[:isReleasing] || false
+    isReleasing = options[:isReleasing].to_s == 'true'
+    release_notes_path = './fastlane/metadata/ko/release_notes.txt'
 
     if isReleasing
       puts "iOS 심사 업로드 시작"
+      release_notes = if File.exist?(release_notes_path)
+                        File.read(release_notes_path).strip
+                      else
+                        changelog
+                      end
+
       upload_to_app_store(
         ipa: @ipa_path,
         api_key_path: @api_key_path,
-        release_notes: changelog,
+        release_notes: release_notes,
         app_identifier: @package_name,
         submit_for_review: true,
+        force: true,
+        skip_screenshots: true,
+        run_precheck_before_submit: false,
       )
       puts "iOS 심사 제출 완료"
     else
