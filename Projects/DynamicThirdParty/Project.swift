@@ -14,7 +14,8 @@ let project = Project(
                            .package(product: "FirebaseAnalytics", type: .runtime),
                            .package(product: "FirebaseMessaging", type: .runtime),
                            .package(product: "FirebaseRemoteConfig", type: .runtime)
-            ]
+            ],
+            settings: .settings(base: ["DEFINES_MODULE": "NO"])
         ),
     ]
 )
