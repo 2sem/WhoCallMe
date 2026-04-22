@@ -76,15 +76,22 @@ let project = Project(
             scripts: [
                 .post(
                     script: """
-                    FIREBASE_SOURCEPACKAGES_ROOT="${BUILD_DIR%/Build/*}/SourcePackages"
-                    CRASHLYTICS_RUN_SCRIPT=$(ls "$FIREBASE_SOURCEPACKAGES_ROOT"/registry/downloads/firebase/firebase-ios-sdk/*/Crashlytics/run 2>/dev/null | sort -V | tail -n 1)
+                    SOURCE_PACKAGES_ROOT="${SOURCE_PACKAGES_DIR_PATH:-${BUILD_DIR%/Build/*}/SourcePackages}"
+                    CRASHLYTICS_RUN_SCRIPT=""
+
+                    for candidate in \
+                      "$SOURCE_PACKAGES_ROOT/checkouts/firebase-ios-sdk/Crashlytics/run" \
+                      "$SOURCE_PACKAGES_ROOT/registry/downloads/firebase/firebase-ios-sdk/Crashlytics/run" \
+                      "$SOURCE_PACKAGES_ROOT"/registry/downloads/firebase/firebase-ios-sdk/*/Crashlytics/run
+                    do
+                      if [ -f "$candidate" ]; then
+                        CRASHLYTICS_RUN_SCRIPT="$candidate"
+                        break
+                      fi
+                    done
 
                     if [ -z "$CRASHLYTICS_RUN_SCRIPT" ]; then
-                      CRASHLYTICS_RUN_SCRIPT="$FIREBASE_SOURCEPACKAGES_ROOT/checkouts/firebase-ios-sdk/Crashlytics/run"
-                    fi
-
-                    if [ ! -f "$CRASHLYTICS_RUN_SCRIPT" ]; then
-                      echo "error: Firebase Crashlytics run script not found at $CRASHLYTICS_RUN_SCRIPT"
+                      echo "error: Firebase Crashlytics run script not found under $SOURCE_PACKAGES_ROOT"
                       exit 1
                     fi
 
