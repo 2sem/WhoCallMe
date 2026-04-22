@@ -9,12 +9,6 @@
 import UIKit
 import FirebaseAnalytics
 
-extension UIViewController{
-    func setAnalyticScreenName(){
-        Analytics.setScreenName(for: self);
-    }
-}
-
 extension Analytics{
     static func setScreenName(for viewController: UIViewController){
         var name : String?;
@@ -45,15 +39,6 @@ extension Analytics{
         case finishRestore = "복원완료"
         case startClear = "사진삭제시작"
         case finishClear = "사진삭제완료"
-    }
-    
-    class LeesamEventProperty{
-        static let autoPlay = "자동재생"
-        static let course = "강좌번호"
-        static let lecture = "강의번호"
-        static let lectureTitle = "강의제목"
-        static let lectureUrl = "강의파일"
-        static let speed = "재생속도"
     }
     
     /*static func logSiwonEvent(_ event: SiwonEvent, parameters: [String : Any]? = nil){

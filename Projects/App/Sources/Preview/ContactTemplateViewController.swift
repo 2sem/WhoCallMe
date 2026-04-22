@@ -91,14 +91,6 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
         self.useThumbNail = Bool(self.useThumbNail);
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         Analytics.setScreenName(for: self);
     }
@@ -296,14 +288,4 @@ class ContactTemplateViewController: UIViewController, UITableViewDataSource, UI
         self.useThumbNail = Bool(self.useThumbNail);
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
