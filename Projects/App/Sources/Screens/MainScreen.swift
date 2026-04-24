@@ -115,7 +115,16 @@ struct MainScreen: View {
         }
         .navigationBarHidden(true)
         .navigationDestination(item: $previewContact) { contact in
-            PreviewScreen(contact: contact)
+            PreviewScreen(
+                contact: contact,
+                originalImage: backups
+                    .first { $0.id == contact.identifier }
+                    .flatMap { $0.imageData }
+                    .flatMap(UIImage.init(data:)),
+                generatedImageData: backups
+                    .first { $0.id == contact.identifier }
+                    .flatMap { $0.generatedImage }
+            )
         }
         .onAppear {
             contactService = ContactService(modelContext: modelContext)

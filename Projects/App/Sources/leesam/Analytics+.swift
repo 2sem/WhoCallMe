@@ -11,24 +11,30 @@ import FirebaseAnalytics
 
 extension Analytics{
     static func setScreenName(for viewController: UIViewController){
-        var name : String?;
-        let className : String? = viewController.classForCoder.description().components(separatedBy: ".").last;
-        
-        if viewController is ContactTemplateViewController{
-            name = "미리보기";
+        let className : String? = viewController.classForCoder.description().components(separatedBy: ".").last
+        let name: String? = nil
+
+        var params : [String : Any] = [AnalyticsParameterScreenClass : type(of: self)]
+
+        if let name {
+            params[AnalyticsParameterScreenName] = name
         }
-        
-        var params : [String : Any] = [AnalyticsParameterScreenClass : type(of: self)];
-        
-        if let name = name{
-            params[AnalyticsParameterScreenName] = name;
-        }
-        
+
         FirebaseAnalytics.Analytics.logEvent(AnalyticsEventScreenView,
-                                             parameters: params);
-        print("[\(#function)] set screen name for firebase analytics. name[\(name ?? "")] screen[\(className ?? "")]");
+                                             parameters: params)
+        print("[\(#function)] set screen name for firebase analytics. name[\(name ?? "")] screen[\(className ?? "")]")
     }
-    
+
+    static func logPreviewScreen() {
+        FirebaseAnalytics.Analytics.logEvent(
+            AnalyticsEventScreenView,
+            parameters: [
+                AnalyticsParameterScreenName: "미리보기",
+                AnalyticsParameterScreenClass: "PreviewScreen"
+            ]
+        )
+    }
+
     enum LeesamEvent : String{
         case previewCall = "수신화면 미리보기"
         case startConvertAll = "전체변환시작"
@@ -40,13 +46,13 @@ extension Analytics{
         case startClear = "사진삭제시작"
         case finishClear = "사진삭제완료"
     }
-    
+
     /*static func logSiwonEvent(_ event: SiwonEvent, parameters: [String : Any]? = nil){
      self.logEvent(event.rawValue, parameters: parameters);
      }*/
-    
+
     static func logLeesamEvent(_ event: LeesamEvent, parameters: [String : Any] = [:]){
-        let params : [String : Any] = [:];
+        let params : [String : Any] = [:]
         /*if let lecture = lecture{
          params[SiwonEventProperty.course] = lecture.course?.no ?? lecture.courseNo;
          params[SiwonEventProperty.lecture] = lecture.no;
@@ -57,7 +63,7 @@ extension Analytics{
          if let autoPlay = autoPlay{
          params[SiwonEventProperty.autoPlay] = autoPlay.description;
          }*/
-        
-        self.logEvent(event.rawValue, parameters: params);
+
+        self.logEvent(event.rawValue, parameters: params)
     }
 }

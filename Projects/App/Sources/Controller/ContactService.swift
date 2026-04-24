@@ -122,7 +122,7 @@ final class ContactService: ObservableObject {
 
         ContactConverter.generateIndex(target, backup: backup)
 
-        // Image generation via ContactTemplateViewController
+        // Image generation via SwiftUI contact template
         if LSDefaults.needMakeIncomingPhoto {
             let originalImage = backup?.imageData.flatMap { UIImage(data: $0) }
             if let rendered = ContactImageRenderer.render(contact: target, originalImage: originalImage) {
