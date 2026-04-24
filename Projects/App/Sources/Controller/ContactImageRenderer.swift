@@ -1,32 +1,39 @@
 import UIKit
 import Contacts
+import SwiftUI
 
 @MainActor
 struct ContactImageRenderer {
     static func render(contact: CNContact, originalImage: UIImage?) -> UIImage? {
         guard LSDefaults.needMakeIncomingPhoto else { return nil }
 
-        guard let vc = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "ContactTemplateViewController")
-            as? ContactTemplateViewController
-        else { return nil }
+        let size = CGSize(width: 375, height: 667)
 
-        let frame = CGRect(x: 0, y: 0, width: 375, height: 667)
-        let window = UIWindow(frame: frame)
-        window.rootViewController = vc
+        let view = ContactTemplateView(
+            contact: contact,
+            originalImage: originalImage,
+            generatedImageData: nil,
+            isPreviewMode: false
+        )
+        .ignoresSafeArea()
+
+        let host = UIHostingController(rootView: view)
+        host.view.frame = CGRect(origin: .zero, size: size)
+        host.view.backgroundColor = .clear
+
+        let window = UIWindow(frame: host.view.bounds)
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            window.windowScene = scene
+        }
+        window.rootViewController = host
         window.makeKeyAndVisible()
 
-        vc.isPreviewMode = false
-        vc.useThumbNail = !LSDefaults.needFullscreenPhoto
-        vc.contact = contact
-        vc.originalImage = originalImage
-        vc.showAllInfos()
-        vc.refresh()
-        vc.view.layoutIfNeeded()
+        host.view.setNeedsLayout()
+        host.view.layoutIfNeeded()
 
-        let renderer = UIGraphicsImageRenderer(bounds: vc.view.bounds)
+        let renderer = UIGraphicsImageRenderer(size: size)
         let image = renderer.image { ctx in
-            vc.view.layer.render(in: ctx.cgContext)
+            host.view.layer.render(in: ctx.cgContext)
         }
 
         window.isHidden = true
