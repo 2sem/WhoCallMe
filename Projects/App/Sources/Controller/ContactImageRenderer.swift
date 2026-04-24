@@ -9,34 +9,19 @@ struct ContactImageRenderer {
 
         let size = CGSize(width: 375, height: 667)
 
-        let view = ContactTemplateView(
+        let content = ContactTemplateView(
             contact: contact,
             originalImage: originalImage,
             generatedImageData: nil,
             isPreviewMode: false
         )
         .ignoresSafeArea()
+        .frame(width: size.width, height: size.height)
 
-        let host = UIHostingController(rootView: view)
-        host.view.frame = CGRect(origin: .zero, size: size)
-        host.view.backgroundColor = .clear
+        let renderer = ImageRenderer(content: content)
+        renderer.proposedSize = ProposedViewSize(size)
+        renderer.scale = UIScreen.main.scale
 
-        let window = UIWindow(frame: host.view.bounds)
-        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            window.windowScene = scene
-        }
-        window.rootViewController = host
-        window.makeKeyAndVisible()
-
-        host.view.setNeedsLayout()
-        host.view.layoutIfNeeded()
-
-        let renderer = UIGraphicsImageRenderer(size: size)
-        let image = renderer.image { ctx in
-            host.view.layer.render(in: ctx.cgContext)
-        }
-
-        window.isHidden = true
-        return image
+        return renderer.uiImage
     }
 }
