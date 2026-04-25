@@ -1,19 +1,21 @@
-import XCTest
+import Testing
 import UIKit
 @testable import App
 
-final class GeneratedImageDetectorTests: XCTestCase {
-    func testIsLikelySameImageData_whenEncodingDiffers_returnsTrue() {
+struct GeneratedImageDetectorTests {
+    @Test
+    func isLikelySameImageData_whenEncodingDiffers_returnsTrue() {
         let image = makePatternImage(isFlipped: false)
         let pngData = image.pngData()
         let jpegData = image.jpegData(compressionQuality: 0.6)
 
         let result = GeneratedImageDetector.isLikelySameImageData(pngData, jpegData)
 
-        XCTAssertTrue(result)
+        #expect(result)
     }
 
-    func testIsGeneratedImage_whenDifferentImage_returnsFalse() {
+    @Test
+    func isGeneratedImage_whenDifferentImage_returnsFalse() {
         let generated = makePatternImage(isFlipped: false).pngData()
         let manual = makePatternImage(isFlipped: true).pngData()
 
@@ -22,10 +24,11 @@ final class GeneratedImageDetectorTests: XCTestCase {
             generatedImageData: generated
         )
 
-        XCTAssertFalse(result)
+        #expect(!result)
     }
 
-    func testIsGeneratedImage_whenCurrentMatchesGeneratedVisually_returnsTrue() {
+    @Test
+    func isGeneratedImage_whenCurrentMatchesGeneratedVisually_returnsTrue() {
         let baseImage = makePatternImage(isFlipped: false)
         let generated = baseImage.pngData()
         let rewritten = baseImage.jpegData(compressionQuality: 0.7)
@@ -35,7 +38,7 @@ final class GeneratedImageDetectorTests: XCTestCase {
             generatedImageData: generated
         )
 
-        XCTAssertTrue(result)
+        #expect(result)
     }
 
     private func makePatternImage(isFlipped: Bool, size: CGSize = CGSize(width: 64, height: 64)) -> UIImage {
@@ -53,3 +56,4 @@ final class GeneratedImageDetectorTests: XCTestCase {
         }
     }
 }
+
