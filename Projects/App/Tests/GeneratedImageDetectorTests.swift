@@ -5,7 +5,7 @@ import UIKit
 struct GeneratedImageDetectorTests {
     @Test
     func isLikelySameImageData_whenEncodingDiffers_returnsTrue() {
-        let image = makePatternImage(isFlipped: false)
+        let image = makeTestImage(isFlipped: false)
         let pngData = image.pngData()
         let jpegData = image.jpegData(compressionQuality: 0.6)
 
@@ -16,8 +16,8 @@ struct GeneratedImageDetectorTests {
 
     @Test
     func isGeneratedImage_whenDifferentImage_returnsFalse() {
-        let generated = makePatternImage(isFlipped: false).pngData()
-        let manual = makePatternImage(isFlipped: true).pngData()
+        let generated = makeTestImage(isFlipped: false).pngData()
+        let manual = makeTestImage(isFlipped: true).pngData()
 
         let result = GeneratedImageDetector.isGeneratedImage(
             currentImageData: manual,
@@ -29,7 +29,7 @@ struct GeneratedImageDetectorTests {
 
     @Test
     func isGeneratedImage_whenCurrentMatchesGeneratedVisually_returnsTrue() {
-        let baseImage = makePatternImage(isFlipped: false)
+        let baseImage = makeTestImage(isFlipped: false)
         let generated = baseImage.pngData()
         let rewritten = baseImage.jpegData(compressionQuality: 0.7)
 
@@ -41,7 +41,7 @@ struct GeneratedImageDetectorTests {
         #expect(result)
     }
 
-    private func makePatternImage(isFlipped: Bool, size: CGSize = CGSize(width: 64, height: 64)) -> UIImage {
+    private func makeTestImage(isFlipped: Bool, size: CGSize = CGSize(width: 64, height: 64)) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { context in
             UIColor.black.setFill()
