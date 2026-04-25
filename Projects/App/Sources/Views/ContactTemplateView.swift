@@ -16,7 +16,11 @@ struct ContactTemplateView: View {
 
         guard let data = contact.imageData else { return nil }
 
-        if isPreviewMode, let generatedImageData, data == generatedImageData {
+        if isPreviewMode,
+           GeneratedImageDetector.isGeneratedImage(
+               currentImageData: data,
+               generatedImageData: generatedImageData
+           ) {
             return nil
         }
 
