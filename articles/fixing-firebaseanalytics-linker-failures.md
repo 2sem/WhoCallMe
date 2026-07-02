@@ -90,18 +90,17 @@ In this project, linking Firebase only through the dynamic wrapper target was no
 
 The investigation path was:
 
-```mermaid
-flowchart TD
-    A[Upgrade Firebase to 12.15.0] --> B[App link fails with undefined APM symbols]
-    B --> C[Try Firebase 12.14, 12.13, 12.12, 12.11]
-    C --> D[Same linker failure]
-    D --> E[Rollback Firebase]
-    E --> F[Same linker pattern remains]
-    F --> G[Inspect Firebase Package.swift]
-    G --> H[FirebaseAnalytics depends on GoogleAppMeasurement + support products]
-    H --> I[Add explicit App target dependencies and linker flags]
-    I --> J[Build succeeds with latest Firebase 12.15.0]
-```
+![FirebaseAnalytics linker failure investigation flow](assets/firebase-linker-investigation.png)
+
+1. Upgrade Firebase to `12.15.0`.
+2. App link fails with undefined `APM*` symbols.
+3. Try Firebase `12.14`, `12.13`, `12.12`, and `12.11`.
+4. The same linker failure appears.
+5. Roll Firebase back and observe the same linker pattern.
+6. Inspect Firebase `Package.swift`.
+7. Confirm `FirebaseAnalytics` depends on GoogleAppMeasurement and support products.
+8. Add explicit app target dependencies and linker flags.
+9. Build succeeds with latest Firebase `12.15.0`.
 
 ## Fix
 
