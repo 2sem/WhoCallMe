@@ -1,8 +1,8 @@
-# Fixing FirebaseAnalytics Linker Failures After a Firebase / Tuist Upgrade
+# Fixing FirebaseAnalytics Linker Failures After a Firebase Upgrade
 
 ## Problem
 
-After upgrading the build stack and then trying to upgrade Firebase iOS SDK, the app failed at link time with errors like:
+After upgrading Firebase iOS SDK, the app failed at link time with errors like:
 
 ```text
 Undefined symbols for architecture arm64:
@@ -18,15 +18,9 @@ The failure happened while linking the `App` target, even though Firebase packag
 
 The first suspicion was that Firebase `12.15.0` introduced a breaking linker change. That was not the full story.
 
-After rolling Firebase back, the same linker failure still reproduced on `main`. That meant the build was already broken under the newer project generation / Xcode environment, and the Firebase upgrade only made the issue visible while we were testing it.
+After rolling Firebase back, the same linker failure still reproduced on `main`. That meant the initial failure was not enough evidence to blame Firebase `12.15.0` itself.
 
-The important project changes before this failure were:
-
-- Tuist was upgraded from `4.155.1` to `4.200.5`.
-- CI/Xcode selection was moved to Xcode `26.5`.
-- The app still linked Firebase through a `DynamicThirdParty` wrapper using runtime-style package dependencies.
-
-That combination exposed an incomplete link graph: `FirebaseAnalytics` was present, but the final `App` link step did not get all binary and support products that `FirebaseAnalytics` needs.
+The important project detail was that the app linked Firebase through a `DynamicThirdParty` wrapper using runtime-style package dependencies. That structure left the final `App` link step without all binary and support products that `FirebaseAnalytics` needs.
 
 The symptom was a classic transitive binary dependency problem. `FirebaseAnalytics` references `APM*` symbols, which are implemented by GoogleAppMeasurement. If GoogleAppMeasurement is not linked into the final app link command, the app fails with undefined `APM*` symbols.
 
@@ -92,7 +86,7 @@ In short:
 
 `FirebaseAnalytics` depends on GoogleAppMeasurement and related support libraries.
 
-With the current Tuist + Xcode setup, linking Firebase only through the dynamic wrapper target was not enough for the final app link step. The app target also needed explicit package linkage for FirebaseAnalytics' transitive dependencies.
+In this project, linking Firebase only through the dynamic wrapper target was not enough for the final app link step. The app target also needed explicit package linkage for FirebaseAnalytics' transitive dependencies.
 
 The investigation path was:
 
@@ -102,7 +96,7 @@ flowchart TD
     B --> C[Try Firebase 12.14, 12.13, 12.12, 12.11]
     C --> D[Same linker failure]
     D --> E[Rollback Firebase]
-    E --> F[main still fails under current Tuist/Xcode]
+    E --> F[Same linker pattern remains]
     F --> G[Inspect Firebase Package.swift]
     G --> H[FirebaseAnalytics depends on GoogleAppMeasurement + support products]
     H --> I[Add explicit App target dependencies and linker flags]
