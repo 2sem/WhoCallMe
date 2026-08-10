@@ -92,33 +92,14 @@ final class ContactService: ObservableObject {
     ) async throws {
         try await ContactStore.shared.requestAccess()
         let contacts = try await ContactStore.shared.fetchAll(keys: ContactStore.keysForClear)
-        let backupByID = Dictionary(uniqueKeysWithValues: fetchAllBackups().map { ($0.id, $0) })
-        var didUpdateBackup = false
         let total = contacts.count
 
         for (i, contact) in contacts.enumerated() {
             guard !isCancelled() else { return }
             guard let target = contact.mutableCopy() as? CNMutableContact else { continue }
-
-            // Mark generated image as cleared so Restore can safely recover original photo.
-            let backup = backupByID[contact.identifier]
-            let shouldClearBackupImage = backup != nil
-                && contact.imageData == backup?.generatedImage
-                && backup?.generatedImage != nil
-
             target.imageData = nil
             try await ContactStore.shared.save(target)
-
-            if shouldClearBackupImage {
-                backup?.generatedImage = nil
-                didUpdateBackup = true
-            }
-
             onProgress(i + 1, total)
-        }
-
-        if didUpdateBackup {
-            try modelContext.save()
         }
     }
 
@@ -134,7 +115,7 @@ final class ContactService: ObservableObject {
                 backup?.imageData = imageData
             }
             if let backup { modelContext.insert(backup) }
-        } else if contact.imageData != backup?.generatedImage {
+        } else if contact.imageData != backup?.generatedImage, contact.imageData != nil {
             // User manually changed their photo since last conversion — track new original
             backup?.imageData = contact.imageData
         }
@@ -173,4 +154,5 @@ final class ContactService: ObservableObject {
         return (try? modelContext.fetchCount(descriptor)) ?? 0
     }
 }
+
 
