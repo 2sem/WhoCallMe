@@ -152,13 +152,15 @@ struct MainScreen: View {
             }
         }
         .confirmationDialog(
-            NSLocalizedString("WARN_CLEAR_PHOTOS_MSG", comment: ""),
+            NSLocalizedString("WARN_CLEAR_PHOTOS_TITLE", comment: ""),
             isPresented: $showClearConfirm,
             titleVisibility: .visible
         ) {
             Button(NSLocalizedString("WARN_CLEAR_PHOTOS_CLEAR", comment: ""), role: .destructive) {
                 Task { await runClearPhotos() }
             }
+        } message: {
+            Text(NSLocalizedString("WARN_CLEAR_PHOTOS_MSG", comment: ""))
         }
         .confirmationDialog(
             NSLocalizedString("WARN_CONVERT_ALL_MSG", comment: ""),

@@ -28,7 +28,8 @@ STATUS_STOPPED="중단됨";
 
 WARN="경고";
 
-WARN_CLEAR_PHOTOS_MSG="모든 연락처의 사진을 삭제합니다.";
+WARN_CLEAR_PHOTOS_TITLE="모든 연락처의 사진을 삭제할까요?";
+WARN_CLEAR_PHOTOS_MSG="변환하지 않은 연락처를 포함해 모든 연락처의 사진이 삭제됩니다. 삭제된 사진은 이 앱에서 복원할 수 없습니다.";
 WARN_CLEAR_PHOTOS_CLEAR="삭제 진행";
 
 WARN_CONVERT_ALL_MSG="모든 연락처를 변환합니다. 진행하시겠습니까?";
