@@ -101,15 +101,19 @@ final class ContactService: ObservableObject {
             guard let target = contact.mutableCopy() as? CNMutableContact else { continue }
 
             // Mark generated image as cleared so Restore can safely recover original photo.
-            if let backup = backupByID[contact.identifier],
-               contact.imageData == backup.generatedImage,
-               backup.generatedImage != nil {
-                backup.generatedImage = nil
-                didUpdateBackup = true
-            }
+            let backup = backupByID[contact.identifier]
+            let shouldClearBackupImage = backup != nil
+                && contact.imageData == backup?.generatedImage
+                && backup?.generatedImage != nil
 
             target.imageData = nil
             try await ContactStore.shared.save(target)
+
+            if shouldClearBackupImage {
+                backup?.generatedImage = nil
+                didUpdateBackup = true
+            }
+
             onProgress(i + 1, total)
         }
 
