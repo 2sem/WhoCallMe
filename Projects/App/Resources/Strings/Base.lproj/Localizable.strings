@@ -28,7 +28,8 @@ STATUS_STOPPED="Stopped";
 
 WARN="Warning";
 
-WARN_CLEAR_PHOTOS_MSG="Clear photos for your all contacts";
+WARN_CLEAR_PHOTOS_TITLE="Delete all contact photos?";
+WARN_CLEAR_PHOTOS_MSG="This deletes photos from every contact, including ones WhoCallMe never converted. Deleted photos cannot be restored by this app.";
 WARN_CLEAR_PHOTOS_CLEAR="Clear";
 
 WARN_CONVERT_ALL_MSG="Convert all contacts?";
