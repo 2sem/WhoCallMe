@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build Commands
 
-This project uses **Tuist 4.38.2** (managed via `mise`) as the project generator. The Xcode project files are generated — do not edit `.xcodeproj` files directly.
+This project uses **Tuist 4.203.4** (managed via `mise`) as the project generator. The Xcode project files are generated — do not edit `.xcodeproj` files directly.
 
 ```bash
 # Install Tuist via mise
