@@ -63,7 +63,10 @@ final class ContactService: ObservableObject {
             ContactConverter.restoreIndex(target, backup: backup)
 
             // Only restore original if user hasn't manually changed the photo since conversion
-            if contact.imageData == backup?.generatedImage {
+            if GeneratedImageDetector.isGeneratedImage(
+                currentImageData: contact.imageData,
+                generatedImageData: backup?.generatedImage
+            ) {
                 target.imageData = backup?.imageData
             }
 
@@ -115,7 +118,11 @@ final class ContactService: ObservableObject {
                 backup?.imageData = imageData
             }
             if let backup { modelContext.insert(backup) }
-        } else if contact.imageData != backup?.generatedImage, contact.imageData != nil {
+        } else if contact.imageData != nil,
+                  !GeneratedImageDetector.isGeneratedImage(
+                      currentImageData: contact.imageData,
+                      generatedImageData: backup?.generatedImage
+                  ) {
             // User manually changed their photo since last conversion — track new original
             backup?.imageData = contact.imageData
         }
@@ -154,5 +161,4 @@ final class ContactService: ObservableObject {
         return (try? modelContext.fetchCount(descriptor)) ?? 0
     }
 }
-
 
