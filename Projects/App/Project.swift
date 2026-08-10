@@ -42,8 +42,7 @@ let project = Project(
     packages: [
         .remote(url: "https://github.com/2sem/GADManager",
                 requirement: .upToNextMajor(from: "1.3.8")),
-        .package(id: "firebase.firebase-ios-sdk", from: "12.15.0"),
-        .package(id: "google.googleappmeasurement", from: "12.15.0"),
+        .package(id: "firebase.firebase-ios-sdk", from: "12.17.0"),
         // .remote(url: "https://github.com/firebase/firebase-ios-sdk",
         //        requirement: .upToNextMajor(from: "10.4.0")),
         

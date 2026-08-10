@@ -2,8 +2,7 @@ import ProjectDescription
 
 let project = Project(
     name: "DynamicThirdParty",
-    packages: [.package(id: "firebase.firebase-ios-sdk", from: "12.15.0"),
-               .package(id: "google.googleappmeasurement", from: "12.15.0"),
+    packages: [.package(id: "firebase.firebase-ios-sdk", from: "12.17.0"),
     ],
     targets: [
         .target(
