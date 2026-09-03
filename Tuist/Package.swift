@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
 //        .package(url: "https://github.com/2sem/GADManager",
 //                 from: "1.3.3"),
-//        .package(url: "https://github.com/firebase/firebase-ios-sdk",
-//                from: "10.4.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk",
+                 .upToNextMinor(from: "12.18.0")),
     ]
 )
