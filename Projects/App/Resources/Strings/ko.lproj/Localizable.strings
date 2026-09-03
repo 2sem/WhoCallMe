@@ -34,6 +34,9 @@ WARN_CLEAR_PHOTOS_CLEAR="삭제 진행";
 
 WARN_CONVERT_ALL_MSG="모든 연락처를 변환합니다. 진행하시겠습니까?";
 WARN_CONVERT_ALL_CONVERT="변환";
+WARN_CONVERT_ALL_AD_MSG="짧은 광고로 앱을 응원해 주시면 모든 연락처를 변환해 드려요 🙌";
+WARN_CONVERT_ALL_AD_CONVERT="광고 보고 변환";
+WARN_CONVERT_ALL_LATER="다음에 할게요";
 
 WARN_RESTORE_CONTACTS_MSG="변환전 상태로 복원합니다.";
 WARN_RESTORE_CONTACTS_RESTORE="복원";

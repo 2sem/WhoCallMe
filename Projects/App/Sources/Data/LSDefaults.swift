@@ -54,7 +54,8 @@ class LSDefaults{
         static let needPhotoContainsJob = "needPhotoContainsJob";
 
         static let LaunchCount = "LaunchCount";
-        
+        static let ConvertAllCount = "ConvertAllCount";
+
         static let AdsTrackingRequested = "AdsTrackingRequested";
     }
     
@@ -129,9 +130,24 @@ class LSDefaults{
             //UIApplication.shared.version
             return Defaults.integer(forKey: Keys.LaunchCount);
         }
-        
+
         set(value){
             Defaults.set(value, forKey: Keys.LaunchCount);
+        }
+    }
+
+    /// Lifetime count of confirmed "Convert All" runs (incremented on confirm, not completion).
+    /// The first run (count == 0) is free; every subsequent run is gated behind the full ad.
+    static func increaseConvertAllCount(){
+        self.ConvertAllCount = self.ConvertAllCount.advanced(by: 1);
+    }
+    static var ConvertAllCount : Int{
+        get{
+            return Defaults.integer(forKey: Keys.ConvertAllCount);
+        }
+
+        set(value){
+            Defaults.set(value, forKey: Keys.ConvertAllCount);
         }
     }
     
