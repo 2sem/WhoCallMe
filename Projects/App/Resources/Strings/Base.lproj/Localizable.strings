@@ -34,6 +34,9 @@ WARN_CLEAR_PHOTOS_CLEAR="Clear";
 
 WARN_CONVERT_ALL_MSG="Convert all contacts?";
 WARN_CONVERT_ALL_CONVERT="Convert";
+WARN_CONVERT_ALL_AD_MSG="Support the app with a short ad and we'll convert all your contacts 🙌";
+WARN_CONVERT_ALL_AD_CONVERT="Watch & Convert";
+WARN_CONVERT_ALL_LATER="Maybe later";
 
 WARN_RESTORE_CONTACTS_MSG="Restore all contacts to before converting";
 WARN_RESTORE_CONTACTS_RESTORE="Restore";

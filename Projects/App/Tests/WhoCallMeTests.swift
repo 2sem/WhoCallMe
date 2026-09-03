@@ -25,6 +25,31 @@ class WhoCallMeTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+
+    // MARK: - Convert All ad-gating counter
+
+    func testConvertAllCountGating() {
+        let key = LSDefaults.Keys.ConvertAllCount
+        let saved = LSDefaults.Defaults.object(forKey: key)
+        defer {
+            if let saved {
+                LSDefaults.Defaults.set(saved, forKey: key)
+            } else {
+                LSDefaults.Defaults.removeObject(forKey: key)
+            }
+        }
+
+        LSDefaults.ConvertAllCount = 0
+        // First Convert All ever is free.
+        XCTAssertEqual(LSDefaults.ConvertAllCount, 0)
+
+        LSDefaults.increaseConvertAllCount()
+        // Second and every subsequent run is ad-gated.
+        XCTAssertEqual(LSDefaults.ConvertAllCount, 1)
+
+        LSDefaults.increaseConvertAllCount()
+        XCTAssertEqual(LSDefaults.ConvertAllCount, 2)
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

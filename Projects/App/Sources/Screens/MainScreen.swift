@@ -18,7 +18,7 @@ struct MainScreen: View {
     @State private var previewContact: CNContact?
 
     @EnvironmentObject private var adManager: SwiftUIAdManager
-    @AppStorage(LSDefaults.Keys.LaunchCount) private var launchCount: Int = 0
+    @AppStorage(LSDefaults.Keys.ConvertAllCount) private var convertAllCount: Int = 0
 
     @Environment(\.modelContext) private var modelContext
     @Query private var backups: [ContactBackup]
@@ -163,13 +163,14 @@ struct MainScreen: View {
             Text(NSLocalizedString("WARN_CLEAR_PHOTOS_MSG", comment: ""))
         }
         .confirmationDialog(
-            NSLocalizedString("WARN_CONVERT_ALL_MSG", comment: ""),
+            convertConfirmTitle,
             isPresented: $showConvertConfirm,
             titleVisibility: .visible
         ) {
-            Button(NSLocalizedString("WARN_CONVERT_ALL_CONVERT", comment: "")) {
+            Button(convertConfirmButtonTitle) {
                 presentFullAdThen { await startConvertAll() }
             }
+            Button(NSLocalizedString("WARN_CONVERT_ALL_LATER", comment: ""), role: .cancel) {}
         }
         .sheet(isPresented: $isShowingContactPicker) {
             ContactPickerView { contact in
@@ -339,13 +340,44 @@ struct MainScreen: View {
         }
     }
 
+    // MARK: - Convert All Confirmation Copy
+
+    /// The very first Convert All (lifetime) runs free, so it uses the plain copy.
+    /// Every subsequent run is ad-gated, so the dialog says so up front.
+    /// `convertAllCount` is `@AppStorage`, and the dialog is shown before
+    /// `presentFullAdThen` increments it, so `== 0` here means "first run".
+    private var convertConfirmTitle: String {
+        convertAllCount == 0
+            ? NSLocalizedString("WARN_CONVERT_ALL_MSG", comment: "")
+            : NSLocalizedString("WARN_CONVERT_ALL_AD_MSG", comment: "")
+    }
+
+    private var convertConfirmButtonTitle: String {
+        convertAllCount == 0
+            ? NSLocalizedString("WARN_CONVERT_ALL_CONVERT", comment: "")
+            : NSLocalizedString("WARN_CONVERT_ALL_AD_CONVERT", comment: "")
+    }
+
     // MARK: - Ad Helper
 
+    /// Runs `action` for a confirmed "Convert All".
+    ///
+    /// The first Convert All ever (lifetime, persisted) is free — no ATT prompt, no ad.
+    /// Every subsequent run requests App Tracking, then presents the full interstitial,
+    /// then runs the action regardless of whether the ad actually showed (soft fail —
+    /// no-fill / offline / not-ready still proceeds to the conversion).
+    ///
+    /// The counter is consumed on confirm, not on completion: a cancelled or failed
+    /// run still uses up the free slot.
     private func presentFullAdThen(_ action: @escaping @Sendable () async -> Void) {
-        guard launchCount > 1 else {
+        let isFirstConvertAll = convertAllCount == 0
+        LSDefaults.increaseConvertAllCount()
+
+        guard !isFirstConvertAll else {
             Task { await action() }
             return
         }
+
         Task {
             await adManager.requestAppTrackingIfNeed()
             await adManager.show(unit: .full)
