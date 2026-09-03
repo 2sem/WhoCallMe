@@ -73,13 +73,25 @@ let project = Project(
             scripts: [
                 .post(
                     script: """
+                    # Firebase moved from a target-level registry package (PR pre-#64) to an SCM URL
+                    # dependency in Tuist/Package.swift (PR #64). Tuist's SwiftPM integration now
+                    # resolves it into <repo-root>/Tuist/.build/checkouts/ instead of the app's
+                    # DerivedData SourcePackages/checkouts/. $SRCROOT for the App target is
+                    # <repo-root>/Projects/App (Tuist generates every other Firebase path the same
+                    # "$(SRCROOT)/../../Tuist/.build/checkouts/firebase-ios-sdk" way), so repo root
+                    # is "$SRCROOT/../..". Keep the SourcePackages candidates first for backward
+                    # safety and for any future registry-style packages.
                     SOURCE_PACKAGES_ROOT="${SOURCE_PACKAGES_DIR_PATH:-${BUILD_DIR%/Build/*}/SourcePackages}"
+                    TUIST_BUILD_ROOT="$SRCROOT/../../Tuist/.build"
                     CRASHLYTICS_RUN_SCRIPT=""
 
                     for candidate in \
                       "$SOURCE_PACKAGES_ROOT/checkouts/firebase-ios-sdk/Crashlytics/run" \
                       "$SOURCE_PACKAGES_ROOT/registry/downloads/firebase/firebase-ios-sdk/Crashlytics/run" \
-                      "$SOURCE_PACKAGES_ROOT"/registry/downloads/firebase/firebase-ios-sdk/*/Crashlytics/run
+                      "$SOURCE_PACKAGES_ROOT"/registry/downloads/firebase/firebase-ios-sdk/*/Crashlytics/run \
+                      "$TUIST_BUILD_ROOT/checkouts/firebase-ios-sdk/Crashlytics/run" \
+                      "$TUIST_BUILD_ROOT/index-build/checkouts/firebase-ios-sdk/Crashlytics/run" \
+                      "$TUIST_BUILD_ROOT"/*/checkouts/firebase-ios-sdk/Crashlytics/run
                     do
                       if [ -f "$candidate" ]; then
                         CRASHLYTICS_RUN_SCRIPT="$candidate"
@@ -88,10 +100,13 @@ let project = Project(
                     done
 
                     if [ -z "$CRASHLYTICS_RUN_SCRIPT" ]; then
-                      echo "error: Firebase Crashlytics run script not found under $SOURCE_PACKAGES_ROOT"
+                      echo "error: Firebase Crashlytics run script not found. Searched under:"
+                      echo "  $SOURCE_PACKAGES_ROOT"
+                      echo "  $TUIST_BUILD_ROOT (resolved: $(cd "$TUIST_BUILD_ROOT" 2>/dev/null && pwd || echo missing))"
                       exit 1
                     fi
 
+                    echo "note: Firebase Crashlytics run script: $CRASHLYTICS_RUN_SCRIPT"
                     "$CRASHLYTICS_RUN_SCRIPT"
                     """,
                     name: "Upload dSYM for Crashlytics",
