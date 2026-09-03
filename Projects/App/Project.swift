@@ -42,10 +42,6 @@ let project = Project(
     packages: [
         .remote(url: "https://github.com/2sem/GADManager",
                 requirement: .upToNextMajor(from: "1.3.8")),
-        .package(id: "firebase.firebase-ios-sdk", from: "12.17.0"),
-        // .remote(url: "https://github.com/firebase/firebase-ios-sdk",
-        //        requirement: .upToNextMajor(from: "10.4.0")),
-        
     ],
     targets: [
         .target(
@@ -111,24 +107,14 @@ let project = Project(
             ],
             dependencies: [
                             .Projects.ThirdParty,
-                            .Projects.DynamicThirdParty,
                             .package(product: "GADManager", type: .runtime),
-                            .package(product: "FirebaseCore"),
-                            .package(product: "FirebaseCrashlytics"),
-                            .package(product: "FirebaseAnalytics"),
-                            .package(product: "GoogleAppMeasurement"),
-                            .package(product: "GoogleAppMeasurementCore"),
-                            .package(product: "GoogleAppMeasurementIdentitySupport"),
-                            .package(product: "FirebaseInstallations"),
-                            .package(product: "GULAppDelegateSwizzler"),
-                            .package(product: "GULMethodSwizzler"),
-                            .package(product: "GULNSData"),
-                            .package(product: "GULNetwork"),
-                            .package(product: "nanopb")
+                            // Firebase — declared in Tuist/Package.swift (SCM URL), wired in via
+                            // .Externals.Firebase.*. SwiftPM resolves the rest transitively
+                            // (FirebaseCore, GoogleAppMeasurement*, GUL*, nanopb, FirebaseInstallations).
+                            .Externals.Firebase.crashlytics,
+                            .Externals.Firebase.analytics
             ],
-            settings: .settings(base: [
-                "OTHER_LDFLAGS": "$(inherited) -framework GoogleAppMeasurement -framework GoogleAppMeasurementIdentitySupport"
-            ], configurations: [
+            settings: .settings(configurations: [
                 .debug(name: "Debug", xcconfig: "Configs/app.debug.xcconfig"),
                 .release(name: "Release", xcconfig: "Configs/app.release.xcconfig")
             ])
