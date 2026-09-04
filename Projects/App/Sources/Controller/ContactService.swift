@@ -24,6 +24,11 @@ final class ContactService: ObservableObject {
             guard !isCancelled() else { return }
             try await convertContact(contact)
             onProgress(i + 1, total)
+            // Give the main run loop a turn between contacts so touches,
+            // CADisplayLink, and an interstitial's countdown timer (this
+            // conversion can now run *under* a fire-and-forget FullAd) stay
+            // responsive instead of being starved by back-to-back rendering.
+            await Task.yield()
         }
     }
 
@@ -132,8 +137,15 @@ final class ContactService: ObservableObject {
         if LSDefaults.needMakeIncomingPhoto {
             let originalImage = backup?.imageData.flatMap { UIImage(data: $0) }
             if let rendered = ContactImageRenderer.render(contact: target, originalImage: originalImage) {
-                target.imageData = rendered.pngData()
-                backup?.generatedImage = target.imageData
+                // PNG encoding is pure CPU and needs no main-actor state, so
+                // push it off the main actor. `render` itself stays on main
+                // (it drives a UIKit renderer). `UIImage.pngData()` is
+                // thread-safe and the image is never mutated after render.
+                let data = await Task.detached(priority: .userInitiated) {
+                    rendered.pngData()
+                }.value
+                target.imageData = data
+                backup?.generatedImage = data
             }
         } else {
             target.imageData = backup?.imageData
