@@ -30,19 +30,18 @@ class SwiftUIAdManager: NSObject, ObservableObject {
         gadManager?.prepare(interstitialUnit: unit, isTesting: self.isTesting(unit: unit), interval: interval)
     }
 
-    @MainActor
-    @discardableResult
-    func show(unit: GADUnitName) async -> Bool {
-        await withCheckedContinuation { continuation in
-            guard let gadManager else {
-                continuation.resume(returning: false)
-                return
-            }
-
-            gadManager.show(unit: unit, isTesting: self.isTesting(unit: unit)) { _, _, result in
-                continuation.resume(returning: result)
-            }
-        }
+    /// Presents the interstitial for `unit` if one is loaded, then returns
+    /// immediately — it does **not** wait for the ad to be dismissed.
+    ///
+    /// `force: true` bypasses `GADManager`'s frequency-cap interval (300 s in
+    /// Release / 60 s in DEBUG) and the first-time gate, so a confirmed
+    /// 2nd-or-later Convert All always shows the ad it promised the user.
+    /// Still a silent no-op if no ad is loaded, there is no root view
+    /// controller, or an alert is already presented.
+    /// Callers use this to play the ad *over* other work rather than blocking
+    /// on its dismissal.
+    func showInterstitial(unit: GADUnitName) {
+        gadManager?.show(unit: unit, force: true, isTesting: self.isTesting(unit: unit)) { _, _, _ in }
     }
 
     func isTesting(unit: GADUnitName) -> Bool {

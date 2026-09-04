@@ -168,7 +168,7 @@ struct MainScreen: View {
             titleVisibility: .visible
         ) {
             Button(convertConfirmButtonTitle) {
-                presentFullAdThen { await startConvertAll() }
+                confirmConvertAll()
             }
             Button(NSLocalizedString("WARN_CONVERT_ALL_LATER", comment: ""), role: .cancel) {}
         }
@@ -345,7 +345,7 @@ struct MainScreen: View {
     /// The very first Convert All (lifetime) runs free, so it uses the plain copy.
     /// Every subsequent run is ad-gated, so the dialog says so up front.
     /// `convertAllCount` is `@AppStorage`, and the dialog is shown before
-    /// `presentFullAdThen` increments it, so `== 0` here means "first run".
+    /// `confirmConvertAll` increments it, so `== 0` here means "first run".
     private var convertConfirmTitle: String {
         convertAllCount == 0
             ? NSLocalizedString("WARN_CONVERT_ALL_MSG", comment: "")
@@ -360,28 +360,33 @@ struct MainScreen: View {
 
     // MARK: - Ad Helper
 
-    /// Runs `action` for a confirmed "Convert All".
+    /// Starts a confirmed "Convert All".
     ///
-    /// The first Convert All ever (lifetime, persisted) is free — no ATT prompt, no ad.
-    /// Every subsequent run requests App Tracking, then presents the full interstitial,
-    /// then runs the action regardless of whether the ad actually showed (soft fail —
-    /// no-fill / offline / not-ready still proceeds to the conversion).
+    /// The first Convert All ever (lifetime, persisted) is free — no ATT prompt, no ad —
+    /// and just starts the conversion.
+    ///
+    /// Every subsequent run requests App Tracking, then fires the full interstitial
+    /// *fire-and-forget* — it plays **over** the conversion, which starts immediately
+    /// and is the only awaited work. The ad's dismissal gates nothing: skip it and the
+    /// progress ring is already advancing behind it; if the conversion finishes first,
+    /// the ad simply dismisses onto the completed state. A soft ad failure (no-fill /
+    /// frequency cap / offline / not-ready) is a silent no-op — the conversion still runs.
     ///
     /// The counter is consumed on confirm, not on completion: a cancelled or failed
     /// run still uses up the free slot.
-    private func presentFullAdThen(_ action: @escaping @Sendable () async -> Void) {
+    private func confirmConvertAll() {
         let isFirstConvertAll = convertAllCount == 0
         LSDefaults.increaseConvertAllCount()
 
         guard !isFirstConvertAll else {
-            Task { await action() }
+            Task { await startConvertAll() }
             return
         }
 
         Task {
             await adManager.requestAppTrackingIfNeed()
-            await adManager.show(unit: .full)
-            await action()
+            adManager.showInterstitial(unit: .full)
+            await startConvertAll()
         }
     }
 

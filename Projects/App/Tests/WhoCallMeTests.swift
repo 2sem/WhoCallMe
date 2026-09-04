@@ -51,6 +51,18 @@ class WhoCallMeTests: XCTestCase {
         XCTAssertEqual(LSDefaults.ConvertAllCount, 2)
     }
     
+    // MARK: - Fire-and-forget interstitial
+
+    /// `showInterstitial` must be a safe no-op before `setup()` has wired a
+    /// `GADManager` — the `gadManager?` optional-chain should simply do nothing.
+    @MainActor
+    func testShowInterstitialDoesNotThrowWhenUnprepared() {
+        let manager = SwiftUIAdManager()
+        manager.showInterstitial(unit: .full)
+        // No crash, no GADManager touched — reaching here is the assertion.
+        XCTAssertFalse(manager.isReady)
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
