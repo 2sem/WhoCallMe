@@ -73,11 +73,20 @@ struct WhoCallMeApp: App {
                 }
             }
 
-            // Request ATT only when returning from true background
             if isFromBackground {
-                await mgr.requestAppTrackingIfNeed()
                 isFromBackground = false
             }
+        }
+
+        // Request App Tracking Transparency on every activation once the scene
+        // is active. Apple requires `UIApplication.State.active` when asking —
+        // the `.active` scene phase satisfies that — but on a first cold launch
+        // the splash is still settling, so wait a short beat before prompting.
+        // `requestAppTrackingIfNeed()` guards on `.notDetermined`, so any call
+        // after the user has answered is a cheap no-op (no double prompt).
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(0.5))
+            await mgr.requestAppTrackingIfNeed()
         }
     }
 }

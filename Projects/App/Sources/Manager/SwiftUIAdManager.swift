@@ -1,6 +1,7 @@
 import UIKit
 import GADManager
 import GoogleMobileAds
+import AppTrackingTransparency
 
 class SwiftUIAdManager: NSObject, ObservableObject {
     private var gadManager: GADManager<GADUnitName>!
@@ -48,28 +49,22 @@ class SwiftUIAdManager: NSObject, ObservableObject {
         return testUnits.contains(unit)
     }
 
-    func requestPermission(completion: @escaping (Bool) -> Void) {
-        guard let gadManager else {
-            completion(false)
-            return
-        }
-
-        gadManager.requestPermission { status in
-            completion(status == .authorized)
-        }
-    }
-
     @discardableResult
     func requestAppTrackingIfNeed() async -> Bool {
-        guard !LSDefaults.AdsTrackingRequested else { return false }
-        guard LSDefaults.LaunchCount > 1 else { return false }
+        // Only `.notDetermined` can still show the system prompt. Any other
+        // status means the user already answered (or tracking is restricted),
+        // so calling again would be a no-op. Gating on the real ATT status —
+        // instead of the `AdsTrackingRequested` UserDefaults proxy — guarantees
+        // a fresh install (reviewer included) always sees the prompt.
+        guard ATTrackingManager.trackingAuthorizationStatus == .notDetermined else { return false }
 
-        return await withCheckedContinuation { continuation in
-            self.requestPermission { granted in
-                LSDefaults.AdsTrackingRequested = true
-                continuation.resume(returning: granted)
-            }
-        }
+        // Ask AppTrackingTransparency directly. Routing through GADManager tied
+        // the prompt to the Mobile Ads SDK finishing `start(...)`, which on a
+        // cold launch has not happened yet — that dependency is exactly what
+        // hid the prompt from App Review.
+        let status = await ATTrackingManager.requestTrackingAuthorization()
+        LSDefaults.AdsTrackingRequested = true
+        return status == .authorized
     }
 }
 
