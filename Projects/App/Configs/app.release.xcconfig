@@ -18,6 +18,8 @@ SWIFT_SWIFT3_OBJC_INFERENCE=Default
 SWIFT_VERSION=5.0
 TARGETED_DEVICE_FAMILY=1
 
+OTHER_LDFLAGS=$(inherited) -ObjC
+
 CODE_SIGN_IDENTITY[config=Debug]=Apple Development
 CODE_SIGN_IDENTITY[config=Release]=iPhone Developer
 CODE_SIGN_IDENTITY[sdk=iphoneos*][config=Release]=iPhone Distribution
