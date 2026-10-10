@@ -38,7 +38,7 @@ xcodebuild -workspace WhoCallMe.xcworkspace -scheme App -destination 'platform=i
 
 ```
 Workspace.swift            # Declares App + ThirdParty modules
-Tuist.swift                # Tuist config (Xcode compat up to 16.x)
+Tuist.swift                # Tuist config (Xcode compat 26.x–27.x)
 Tuist/
   Package.swift            # Root SPM manifest — declares firebase-ios-sdk (SCM URL)
   ProjectDescriptionHelpers/
