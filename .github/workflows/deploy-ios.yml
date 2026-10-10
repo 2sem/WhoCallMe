@@ -31,10 +31,10 @@ jobs:
         IOS_IPA_PATH: './Output/IPA/App.ipa'
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Mise
-        uses: jdx/mise-action@v2
+        uses: jdx/mise-action@v5
 
       - name: Cache Tuist dependencies
         uses: actions/cache@v6
