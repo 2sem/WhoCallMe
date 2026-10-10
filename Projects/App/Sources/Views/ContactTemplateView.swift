@@ -63,6 +63,13 @@ struct ContactTemplateView: View {
             ZStack {
                 Color.appNight
                     .ignoresSafeArea()
+                
+                if !useThumbnail, let photo {
+                    Image(uiImage: photo)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
 
                 templateBody(size: templateSize)
             }
@@ -73,13 +80,6 @@ struct ContactTemplateView: View {
     @ViewBuilder
     private func templateBody(size: CGSize) -> some View {
         ZStack {
-            if !useThumbnail, let photo {
-                Image(uiImage: photo)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-
             if isPreviewMode {
                 Color.appNight.opacity(0.20)
             }
