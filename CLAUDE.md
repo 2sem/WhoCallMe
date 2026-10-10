@@ -81,7 +81,7 @@ The app uses a `<WhoCallMe>...</WhoCallMe>` tag in contact notes to store Korean
 
 Package sources:
 - GADManager (Google Ads interstitial/banner/reward management), StringLogger, LSExtensions: all declared as external SPM dependencies in the root `Tuist/Package.swift` and wired into targets via `.Externals.*` (`.external(name:)`) — no `packages:` arrays in any `Project.swift`
-- Firebase 12.18.x: declared as an external SPM dependency in the root `Tuist/Package.swift` via SCM URL (`github.com/firebase/firebase-ios-sdk`, `.upToNextMinor(from: "12.18.0")`). The App target declares only `FirebaseCrashlytics` + `FirebaseAnalytics` via `.external(name:)`; `FirebaseCore` and the rest resolve transitively. See "Firebase linking" above for why URL and not the registry `id` form.
+- Firebase 12.18.x: declared as an external SPM dependency in the root `Tuist/Package.swift` via registry id (`.package(id: "firebase.firebase-ios-sdk", .upToNextMinor(from: "12.18.0"))`). The App target declares only `FirebaseCrashlytics` + `FirebaseAnalytics` via `.external(name:)`; `FirebaseCore` and the rest resolve transitively. See "Firebase linking" above.
 
 ## Important Constraints
 
