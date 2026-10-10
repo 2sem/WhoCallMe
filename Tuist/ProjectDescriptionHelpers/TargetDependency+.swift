@@ -15,7 +15,7 @@ public extension TargetDependency {
     }
 }
 
-// MARK: Firebase external SPM products
+// MARK: External SPM products
 // `firebase-ios-sdk` is declared as an external dependency in the root
 // `Tuist/Package.swift` (SCM URL form), so its products are wired into targets
 // with `.external(name:)`. Only the two top-level products are declared;
@@ -23,6 +23,11 @@ public extension TargetDependency {
 // GUL*, nanopb, FirebaseInstallations), and their modules stay importable.
 public extension TargetDependency {
     enum Externals {
+        // Declared in the root `Tuist/Package.swift`.
+        public static let GADManager: TargetDependency = .external(name: "GADManager")
+        public static let StringLogger: TargetDependency = .external(name: "StringLogger")
+        public static let LSExtensions: TargetDependency = .external(name: "LSExtensions")
+
         public enum Firebase {
             public static let crashlytics: TargetDependency = .external(name: "FirebaseCrashlytics")
             public static let analytics: TargetDependency = .external(name: "FirebaseAnalytics")

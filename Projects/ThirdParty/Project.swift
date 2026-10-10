@@ -1,12 +1,8 @@
 import ProjectDescription
+import ProjectDescriptionHelpers
 
 let project = Project(
     name: "ThirdParty",
-    packages: [.remote(url: "https://github.com/2sem/StringLogger",
-                       requirement: .upToNextMajor(from: "0.7.0")),
-               .remote(url: "https://github.com/2sem/LSExtensions",
-                       requirement: .exact("0.1.23")),
-    ],
     targets: [
         .target(
             name: "ThirdParty",
@@ -15,8 +11,8 @@ let project = Project(
             bundleId: "com.credif.who.thirdparty",
             sources: ["Sources/**"],
             resources: ["Resources/**"],
-            dependencies: [.package(product: "StringLogger", type: .runtime),
-                           .package(product: "LSExtensions", type: .runtime),
+            dependencies: [.Externals.StringLogger,
+                           .Externals.LSExtensions,
             ]
         ),
         .target(
