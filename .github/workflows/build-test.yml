@@ -35,6 +35,7 @@ jobs:
       uses: jdx/mise-action@v5
 
     - name: Cache Tuist dependencies
+      id: tuist-cache
       uses: actions/cache@v6
       with:
         path: |
@@ -44,6 +45,7 @@ jobs:
         key: tuist-build-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Tuist/Package.resolved') }}
 
     - name: Log in Tuist
+      if: steps.tuist-cache.outputs.cache-hit == 'true'
       run: |
         tuist auth login
 
@@ -52,11 +54,14 @@ jobs:
         tuist install
 
     - name: Setup Tuist Cache Service
+      if: steps.tuist-cache.outputs.cache-hit == 'true'
       run: |
         tuist setup cache
 
     - name: Test App
       env:
         SCHEME: App
+        # Build from sources when the GitHub dependency cache missed (no Tuist login / cache service).
+        TUIST_TEST_BINARY_CACHE: ${{ steps.tuist-cache.outputs.cache-hit == 'true' && 'true' || 'false' }}
       run: |
         tuist test
