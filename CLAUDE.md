@@ -32,7 +32,7 @@ xcodebuild -workspace WhoCallMe.xcworkspace -scheme App -destination 'platform=i
 
 - GitHub Actions: `.github/workflows/deploy-ios.yml` — manually triggered, deploys to TestFlight or App Store via Fastlane
 - Fastlane lane: `fastlane ios release [isReleasing:true|false] [description:"..."]`
-- Xcode 16.2 on macOS 15 in CI
+- `xcode-27` runner image (Xcode 27 is the image default; no `xcode-select` step)
 
 ## Project Structure
 
