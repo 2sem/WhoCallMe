@@ -37,21 +37,19 @@ xcodebuild -workspace WhoCallMe.xcworkspace -scheme App -destination 'platform=i
 ## Project Structure
 
 ```
-Workspace.swift            # Declares App + ThirdParty modules
+Workspace.swift            # Declares the App module
 Tuist.swift                # Tuist config (Xcode compat 26.x–27.x)
 Tuist/
   Package.swift            # Root SPM manifest — declares firebase-ios-sdk (SCM URL)
   ProjectDescriptionHelpers/
     Path+.swift            # projects("Name") helper -> Projects/Name
-    TargetDependency+.swift # .Projects.ThirdParty + .Externals.Firebase.* helpers
+    TargetDependency+.swift # .Externals.* helpers (Firebase, GADManager, StringLogger, LSExtensions)
 Projects/
   App/                     # Main app target (UIKit, iPhone only, iOS 13+)
-    Project.swift          # Depends on ThirdParty, GADManager; Firebase products via .external(name:)
+    Project.swift          # External SPM products via .external(name:)
     Sources/               # All Swift source files
     Resources/             # Assets, storyboards, strings, Core Data model
     Configs/               # Debug/Release xcconfig files
-  ThirdParty/              # Static framework: RxSwift, KakaoSDK, LSExtensions, etc.
-    Project.swift
 ```
 
 **Firebase linking:** `firebase-ios-sdk` is declared as an external SPM dependency in the root `Tuist/Package.swift` — via the **SCM URL** form (`.package(url: "https://github.com/firebase/firebase-ios-sdk", .upToNextMinor(from: "12.18.0"))`), *not* the registry `.package(id: "firebase.firebase-ios-sdk", ...)` form: the root manifest is resolved by raw SwiftPM, which has no registry scope configured for the `firebase` id, so `tuist install` fails on the id form there. The `App` target declares only the two top-level products — `.external(name: "FirebaseCrashlytics")` and `FirebaseAnalytics` (via the `.Externals.Firebase.*` helpers). SwiftPM resolves everything else transitively — `FirebaseCore` (still `import`-able in `AppDelegate.swift` without a direct dep), `GoogleAppMeasurement*`, `GUL*`, `nanopb`, `FirebaseInstallations` — now that Firebase is a direct external dependency. The old explicit product list and the `OTHER_LDFLAGS -framework` workaround were needed only for the removed `DynamicThirdParty` dynamic wrapper and are gone (verified: wiped-DerivedData clean build compiles `import FirebaseCore` and links with zero undefined symbols without them). Products declared in a `Project.swift` `packages:` array are referenced with `.package(product:)`; products from the root manifest use `.external(name:)`. Trade-off: the SCM form makes Tuist build the open-source Firebase modules (FirebaseCore, Crashlytics, Installations, GoogleUtilities, nanopb) from source rather than pulling registry binaries — slower cold resolve/compile, mitigated by Tuist binary caching. GoogleAppMeasurement / FirebaseAnalytics stay binary (closed-source `.binaryTarget`). The Crashlytics dSYM upload post-script stays on the App target. `Tuist/Package.resolved` is committed to lock the transitive graph.
@@ -82,7 +80,6 @@ The app uses a `<WhoCallMe>...</WhoCallMe>` tag in contact notes to store Korean
 ## Dependencies
 
 Package sources:
-- `ThirdParty` (`Projects/ThirdParty/Project.swift`): static framework wrapping `.Externals.StringLogger` and `.Externals.LSExtensions`
 - GADManager (Google Ads interstitial/banner/reward management), StringLogger, LSExtensions: all declared as external SPM dependencies in the root `Tuist/Package.swift` and wired into targets via `.Externals.*` (`.external(name:)`) — no `packages:` arrays in any `Project.swift`
 - Firebase 12.18.x: declared as an external SPM dependency in the root `Tuist/Package.swift` via SCM URL (`github.com/firebase/firebase-ios-sdk`, `.upToNextMinor(from: "12.18.0")`). The App target declares only `FirebaseCrashlytics` + `FirebaseAnalytics` via `.external(name:)`; `FirebaseCore` and the rest resolve transitively. See "Firebase linking" above for why URL and not the registry `id` form.
 
@@ -90,6 +87,6 @@ Package sources:
 
 - **Tuist-managed project**: Modify `Project.swift` files to add/remove targets, sources, or dependencies — not the `.xcodeproj`. After any `Project.swift` change, regenerate: `mise x -- tuist generate`
 - **iOS 13.0 minimum deployment target**; iPhone only (`destinations: [.iPhone]`)
-- **Bundle ID**: `com.credif.who` (App), `com.credif.who.thirdparty` (ThirdParty)
+- **Bundle ID**: `com.credif.who` (App)
 - Ads are disabled in `#if DEBUG` builds (`enableAds = false`)
 - The current branch `swift-ui` is for incremental SwiftUI migration

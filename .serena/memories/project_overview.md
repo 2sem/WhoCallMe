@@ -17,8 +17,7 @@ iOS app that enriches incoming call screens by embedding contact info (org, dept
 
 ## Module Structure (Tuist Workspace)
 - `Projects/App` – Main app target (SwiftUI, iPhone only)
-- `Projects/ThirdParty` – Static framework: LSExtensions, LSCircleProgressView, StringLogger
-  (the former `Projects/DynamicThirdParty` Firebase wrapper framework was removed — Firebase is now an external SPM dependency of the App target, see Tech Stack)
+- Third-party packages (Firebase, GADManager, StringLogger, LSExtensions) are external SPM deps in `Tuist/Package.swift`, wired directly into the App target. The former `Projects/ThirdParty` and `Projects/DynamicThirdParty` wrapper modules were removed.
 
 ## Key Architecture
 - **ContactService** (@MainActor): orchestrates SwiftData + CNContact operations
