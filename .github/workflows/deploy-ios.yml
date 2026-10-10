@@ -36,6 +36,15 @@ jobs:
       - name: Install Mise
         uses: jdx/mise-action@v2
 
+      - name: Cache Tuist dependencies
+        uses: actions/cache@v6
+        with:
+          path: |
+            Tuist/.build
+            ~/.cache/swifterpm
+            ~/.cache/tuist
+          key: tuist-build-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Tuist/Package.resolved') }}
+
       - name: Install Dependencies
         run: |
           tuist install
