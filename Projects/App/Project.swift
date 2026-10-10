@@ -39,10 +39,6 @@ let skAdNetworks: [Plist.Value] = ["cstr6suwn9",
 
 let project = Project(
     name: "App",
-    packages: [
-        .remote(url: "https://github.com/2sem/GADManager",
-                requirement: .upToNextMajor(from: "1.3.8")),
-    ],
     targets: [
         .target(
             name: "App",
@@ -122,7 +118,7 @@ let project = Project(
             ],
             dependencies: [
                             .Projects.ThirdParty,
-                            .package(product: "GADManager", type: .runtime),
+                            .Externals.GADManager,
                             // Firebase — declared in Tuist/Package.swift (SCM URL), wired in via
                             // .Externals.Firebase.*. SwiftPM resolves the rest transitively
                             // (FirebaseCore, GoogleAppMeasurement*, GUL*, nanopb, FirebaseInstallations).

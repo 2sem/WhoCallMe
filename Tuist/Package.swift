@@ -16,8 +16,12 @@ import PackageDescription
 let package = Package(
     name: "WhoCallMe",
     dependencies: [
-//        .package(url: "https://github.com/2sem/GADManager",
-//                 from: "1.3.3"),
+        .package(url: "https://github.com/2sem/GADManager",
+                 .upToNextMajor(from: "1.3.8")),
+        .package(url: "https://github.com/2sem/StringLogger",
+                 .upToNextMajor(from: "0.7.0")),
+        .package(url: "https://github.com/2sem/LSExtensions",
+                 exact: "0.1.23"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk",
                  .upToNextMinor(from: "12.18.0")),
     ]
