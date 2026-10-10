@@ -117,7 +117,8 @@ let project = Project(
                 )
             ],
             dependencies: [
-                            .Projects.ThirdParty,
+                            .Externals.StringLogger,
+                            .Externals.LSExtensions,
                             .Externals.GADManager,
                             // Firebase — declared in Tuist/Package.swift (SCM URL), wired in via
                             // .Externals.Firebase.*. SwiftPM resolves the rest transitively

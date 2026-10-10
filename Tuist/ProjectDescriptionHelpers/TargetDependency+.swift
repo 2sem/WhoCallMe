@@ -7,14 +7,6 @@
 
 import ProjectDescription
 
-// MARK: Store Projects
-public extension TargetDependency {
-    class Projects {
-        public static let ThirdParty: TargetDependency = .project(target: "ThirdParty",
-                                               path: .projects("ThirdParty"))
-    }
-}
-
 // MARK: External SPM products
 // `firebase-ios-sdk` is declared as an external dependency in the root
 // `Tuist/Package.swift` (SCM URL form), so its products are wired into targets
