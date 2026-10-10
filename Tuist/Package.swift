@@ -22,7 +22,7 @@ let package = Package(
                  .upToNextMajor(from: "0.7.0")),
         .package(url: "https://github.com/2sem/LSExtensions",
                  exact: "0.1.23"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk",
+        .package(id: "firebase.firebase-ios-sdk",
                  .upToNextMinor(from: "12.18.0")),
     ]
 )
