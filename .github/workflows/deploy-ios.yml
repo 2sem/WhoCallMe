@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   deploy:
-    runs-on: macos-26
+    runs-on: xcode-27
     env:
         PRODUCT_NAME: 'WhoCallMe'
         PACKAGE_NAME: 'com.credif.who'
@@ -32,10 +32,6 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-
-      - name: Select Xcode
-        run: |
-          sudo xcode-select -s /Applications/Xcode_26.5.app
 
       - name: Install Mise
         uses: jdx/mise-action@v2
