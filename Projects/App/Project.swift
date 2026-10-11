@@ -86,6 +86,7 @@ let project = Project(
                       "$SOURCE_PACKAGES_ROOT/registry/downloads/firebase/firebase-ios-sdk/Crashlytics/run" \
                       "$SOURCE_PACKAGES_ROOT"/registry/downloads/firebase/firebase-ios-sdk/*/Crashlytics/run \
                       "$TUIST_BUILD_ROOT/checkouts/firebase-ios-sdk/Crashlytics/run" \
+                      "$TUIST_BUILD_ROOT"/registry/downloads/firebase/firebase-ios-sdk/*/Crashlytics/run \
                       "$TUIST_BUILD_ROOT/index-build/checkouts/firebase-ios-sdk/Crashlytics/run" \
                       "$TUIST_BUILD_ROOT"/*/checkouts/firebase-ios-sdk/Crashlytics/run
                     do
